@@ -8,6 +8,10 @@ public class DockingStation {
 	protected Coordinates coordinatesStation;
 	protected String status; //online or offline
 	protected String type; // plus or null
+	protected int numberOfMecanicalBicycle;
+	protected int numberOfElectricalBicycle;
+	
+
 	protected int numberOfSlots;
 	protected int numberOfSlotsOccupied;
 	protected ArrayList<ParkingSlot> parkingSlotList;
@@ -24,15 +28,25 @@ public class DockingStation {
 		this.parkingSlotList = parkingSlotList;
 		this.dockingStationBalance = dockingStationBalance;
 		numberOfSlotsOccupied = 0;
+		numberOfElectricalBicycle = 0;
+		numberOfMecanicalBicycle = 0;
 	}
 
 	@Override
 	public String toString() {
-		return "DockingStation [uniqIDStation=" + uniqIDStation + ", coordinatesStation=" + coordinatesStation
-				+ ", status=" + status + ", numberOfSlots=" + numberOfSlots + ", dockingStationBalance="
+		return "\n[ID=" + uniqIDStation + ", GPS=" + coordinatesStation
+				+ ", STATUS=" + status + ", SLOTS=" + numberOfSlots + ", BALANCE="
 				+ dockingStationBalance + "]";
 	}
 
+	public int getNumberOfMecanicalBicycle() {
+		return numberOfMecanicalBicycle;
+	}
+
+	public int getNumberOfElectricalBicycle() {
+		return numberOfElectricalBicycle;
+	}
+	
 	public String getStatus() {
 		return status;
 	}

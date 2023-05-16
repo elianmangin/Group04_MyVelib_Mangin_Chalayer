@@ -9,8 +9,8 @@ public class Bicycle {
 	
 	@Override
 	public String toString() {
-		return "Bicycle [uniqIDBicycle=" + uniqIDBicycle + ", coordinatesBicycle=" + coordinatesBicycle + ", type="
-				+ type + ", currentlyRentedBicycle=" + currentlyRentedBicycle + "]";
+		return "\n[ ID=" + uniqIDBicycle + ", GPS=" + coordinatesBicycle + ", TYPE="
+				+ type + ", RENTED=" + currentlyRentedBicycle + "]";
 	}
 
 	public Bicycle(Coordinates coordinates, String type) {

@@ -19,7 +19,7 @@ public class DockingStationBalance {
 	}
 	@Override
 	public String toString() {
-		return "DockingStationBalance [totalNumberOfRent=" + totalNumberOfRent + ", totalNumberOfReturn="
+		return "[RENTS=" + totalNumberOfRent + ", RETURNS="
 				+ totalNumberOfReturn + "]";
 	}
 	public int getTotalNumberOfRent() {

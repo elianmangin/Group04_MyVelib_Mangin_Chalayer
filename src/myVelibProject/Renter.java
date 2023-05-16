@@ -38,7 +38,10 @@ public class Renter {
 		}
 		if (endingParkingSlot != null) {endingParkingSlot.addBicycle(bicycleUsed,endingDockingStation);}
 		Ride ride = new Ride(user,user.ridestart.startingCoordinates,endingCoordinates,user.ridestart.startTime,endTime,user.ridestart.startingDockingStation,endingDockingStation,bicycleUsed);
-		if (endingDockingStation.getType() == "plus" && user.registrationCard !=null){user.addTimeCredit(5);}
+		if (endingDockingStation.getType() == "plus" && user.registrationCard !=null){
+			user.addTimeCredit(5);
+			user.balance.addTotalTimeCredit(5);
+			}
 		System.out.print("\n" + user.getName() +" has to be billed "+ride.cost);
 		user.balance.addRide(ride);
 		myVelib.addRide(ride);

@@ -30,6 +30,8 @@ public class ParkingSlot {
 			status = true;
 			parkedBicycle = bicycle;
 			dockingStation.numberOfSlotsOccupied++;
+			if(parkedBicycle.getType() == "mecanical") {dockingStation.numberOfMecanicalBicycle++;}
+			if(parkedBicycle.getType() == "electrical") {dockingStation.numberOfElectricalBicycle++;}
 		}
 	}
 	
@@ -39,8 +41,10 @@ public class ParkingSlot {
 		}
 		else{
 			status = false;
-			parkedBicycle = null;	
 			dockingStation.numberOfSlotsOccupied--;
+			if(parkedBicycle.getType() == "mecanical") {dockingStation.numberOfMecanicalBicycle--;}
+			if(parkedBicycle.getType() == "electrical") {dockingStation.numberOfElectricalBicycle--;}
+			parkedBicycle = null;
 		}
 	}
 	

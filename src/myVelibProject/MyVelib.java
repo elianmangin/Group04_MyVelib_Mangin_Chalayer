@@ -17,6 +17,52 @@ public class MyVelib {
 		rideList = new ArrayList<Ride>();
 	}
 	
+	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion) {
+		super();
+		bicycleList = new ArrayList<Bicycle>();
+		userList = new ArrayList<User>();
+		stationList = new ArrayList<DockingStation>();
+		rideList = new ArrayList<Ride>();
+		
+		//Création des DockingStations
+		for (int k = 0; k <numberOfDockingStation; k++) {
+			ArrayList<ParkingSlot> parkingSlotList = new ArrayList<ParkingSlot>();
+			for (int i = 0; i <numberOfParkingSlotByStation; i++) {
+				parkingSlotList.add(new ParkingSlot());
+			}
+			DockingStationBalance dockingStationBalance = new DockingStationBalance();
+			Coordinates dockingStationCoordinates = new Coordinates(Math.random()*10,Math.random()*10);
+			String dockingStationType = null;
+			if(k>=(int)Math.round(plusStationProportion*numberOfDockingStation)) {dockingStationType ="plus";}
+			DockingStation dockingStation = new DockingStation(dockingStationCoordinates,"online",dockingStationType,numberOfParkingSlotByStation,parkingSlotList,dockingStationBalance);
+			stationList.add(dockingStation);
+		}
+		//Création des bicycles et remplissage des Stations
+		int numberOfBicycles =(int)Math.round(initialPopulationProportion*numberOfDockingStation*numberOfParkingSlotByStation);
+		int numberOfMecanicalBicycles = (int)Math.round(mecanicalBicycleProportion*numberOfBicycles);
+		int numberOfElectricalBicycles = numberOfBicycles-numberOfMecanicalBicycles;
+		
+		
+		//On rempli en partant du début pour les mecanical
+		for( int k = 0 ; k<numberOfMecanicalBicycles; k++) {
+			DockingStation dockingstation = stationList.get(k%numberOfDockingStation);
+			ParkingSlot parkingSlot = dockingstation.parkingSlotList.get(k/numberOfDockingStation);
+			Bicycle bicycle = new Bicycle(dockingstation.getCoordinatesStation(), "mecanical");
+			parkingSlot.addBicycle(bicycle, dockingstation);
+			bicycleList.add(bicycle);
+		}
+		//Pour les electrical on part de la fin
+		
+		for( int k= 0; k<numberOfElectricalBicycles; k++) {
+			DockingStation dockingstation = stationList.get(numberOfDockingStation-k%numberOfDockingStation-1);
+			ParkingSlot parkingSlot = dockingstation.parkingSlotList.get(numberOfParkingSlotByStation-k/numberOfDockingStation-1);
+			Bicycle bicycle = new Bicycle(dockingstation.getCoordinatesStation(), "electrical");
+			parkingSlot.addBicycle(bicycle, dockingstation);
+			bicycleList.add(bicycle);
+		}
+			
+		}
+	
 	public void addBicycle(Bicycle bicycle) {
 		bicycleList.add(bicycle);
 	}
@@ -46,8 +92,8 @@ public class MyVelib {
 	
 	@Override
 	public String toString() {
-		return "MyVelib [bicycleList=" + bicycleList + ", userList=" + userList + ", stationList=" + stationList
-				+ ", rideList=" + rideList + "]";
+		return "Report on the actual state of the system \n Here are the bicycles :" + bicycleList + "\n Here are the Users :" + userList + "\n Here are the Stations :" + stationList
+				+ "\n Here are the Rides :" + rideList;
 	}
 	public ArrayList<Bicycle> getBicycleList() {
 		return bicycleList;
