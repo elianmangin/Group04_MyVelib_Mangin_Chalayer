@@ -49,6 +49,7 @@ public class Ride {
 				if (bicycleUsed.getType()=="mecanical") { cost = duration/60;}
 				if (bicycleUsed.getType()=="electrical") {cost = 1+2*duration/60;}
 			}
+		}
 		if(user.getRegistrationCard() == null) {
 			if (bicycleUsed.getType()=="mecanical") {cost = duration/60;}
 			if (bicycleUsed.getType()=="electrical") {cost = 2*duration/60;}
@@ -58,7 +59,6 @@ public class Ride {
 			duration = duration-60;
 			if(duration <0) {return 0;}
 			else {cost = duration/60;}
-		}
 		}
 		if(startingDockingStation == null && endingDockingStation !=null) {return 0.9*cost;}
 		if(startingDockingStation != null && endingDockingStation ==null) {return 1.1*cost;}

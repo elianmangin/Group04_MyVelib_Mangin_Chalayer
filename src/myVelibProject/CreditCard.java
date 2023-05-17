@@ -1,12 +1,19 @@
 package myVelibProject;
 
 public class CreditCard {
-	protected double bill;
+	protected double balance;
 
-	public CreditCard() {
+	public CreditCard(double balance) {
 		super();
-		bill = 0;
+		this.balance = balance;
 	}
+	
+	public void charge(double amount) throws GeneralException {
+		if (balance >amount) {balance -= amount;}
+		else throw new GeneralException("Balance Insufficient");
+	}
+
+	
 	
 
 }

@@ -54,7 +54,7 @@ public class ParkingSlot {
 	public void setUniqIDParkingSlot(int uniqIDParkingSlot) {
 		this.uniqIDParkingSlot = uniqIDParkingSlot;
 	}
-	public boolean isStatus() {
+	public boolean isOccupied() {
 		return status;
 	}
 	public void setStatus(boolean status) {

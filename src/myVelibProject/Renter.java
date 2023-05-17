@@ -14,7 +14,7 @@ public class Renter {
 	public void rentBicycle(User user, Coordinates startingCoordinates, LocalTime startTime,
 			DockingStation startingDockingStation,ParkingSlot startingParkingSlot, Bicycle bicycleUsed) {
 		if (user.currentlyRenting==true || bicycleUsed.isCurrentlyRentedBicycle()==true ) {
-			System.out.print("throw exception");
+			System.out.print("throw exception rent");
 		}
 		user.setCurrentlyRenting(true);
 		bicycleUsed.setCurrentlyRentedBicycle(true);
@@ -27,9 +27,9 @@ public class Renter {
 	
 	
 	public void returnBicycle(User user, Coordinates endingCoordinates, LocalTime endTime,
-			DockingStation endingDockingStation,ParkingSlot endingParkingSlot, Bicycle bicycleUsed) {
+			DockingStation endingDockingStation,ParkingSlot endingParkingSlot, Bicycle bicycleUsed) throws GeneralException {
 		if (user.currentlyRenting==false || bicycleUsed.isCurrentlyRentedBicycle()==false ) {
-			System.out.print("throw exception");
+			System.out.print("throw exception return");
 		}
 		user.setCurrentlyRenting(false);
 		bicycleUsed.setCurrentlyRentedBicycle(false);
@@ -42,7 +42,7 @@ public class Renter {
 			user.addTimeCredit(5);
 			user.balance.addTotalTimeCredit(5);
 			}
-		System.out.print("\n" + user.getName() +" has to be billed "+ride.cost);
+		user.getCreditCard().charge(ride.cost);
 		user.balance.addRide(ride);
 		myVelib.addRide(ride);
 		
