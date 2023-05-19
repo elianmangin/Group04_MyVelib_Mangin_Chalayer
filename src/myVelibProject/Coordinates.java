@@ -1,38 +1,51 @@
 package myVelibProject;
 
 public class Coordinates {
-	protected double latitude;
-	protected double longitude;
+	protected double x;
+	protected double y;
 	
-	public Coordinates(double latitude, double longitude) {
+	public Coordinates(double x, double y) {
 		super();
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.x = x;
+		this.y = y;
 	}
 
-	public double getLatitude() {
-		return latitude;
-	}
-
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+	public double getX() {
+		return x;
 	}
 
 
-	public double getLongitude() {
-		return longitude;
+	public void setX(double x) {
+		this.x = x;
 	}
 
 
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+	public double getY() {
+		return y;
+	}
+
+
+	public void setY(double y) {
+		this.y = y;
 	}
 
 
 	@Override
 	public String toString() {
-		return "["+ latitude + ", " + longitude + "]";
+		return "["+ x + ", " + y + "]";
+	}
+	
+	public boolean equals(Coordinates c) {
+		if (this.x == c.x && this.y == c.y) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public double distance(Coordinates c) {
+		return Math.sqrt(Math.pow(x - c.x, 2)+Math.pow(y - c.y, 2));
 	}
 	
 }

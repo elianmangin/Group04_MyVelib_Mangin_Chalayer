@@ -51,8 +51,8 @@ class TestDrivenDevelopmentMyVelib {
 	@Test
 	void testInitStationInSquare() {
 		for (DockingStation s : system.getStationList()) {
-			assertTrue(s.getGps().getLatitude() >= 0 && s.getGps().getLatitude() <= 10);
-			assertTrue(s.getGps().getLongitude() >= 0 && s.getGps().getLongitude() <= 10);
+			assertTrue(s.getGps().getX() >= 0 && s.getGps().getX() <= 10);
+			assertTrue(s.getGps().getY() >= 0 && s.getGps().getY() <= 10);
 		}
 	}
 	

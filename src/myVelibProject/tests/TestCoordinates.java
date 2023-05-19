@@ -17,13 +17,13 @@ class TestCoordinates {
 
 	@Test
 	void testLatitude() {
-		assertEquals(coord.getLatitude(),48.7102069003148);
+		assertEquals(coord.getX(),48.7102069003148);
 		
 	}
 	
 	@Test
 	void testLongitude() {
-		assertEquals(coord.getLongitude(),2.1662276002460428);
+		assertEquals(coord.getY(),2.1662276002460428);
 		
 	}
 	
