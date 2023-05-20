@@ -4,6 +4,12 @@ public class DockingStationBalance {
 	protected int totalNumberOfRent;
 	protected int totalNumberOfReturn;
 	
+	public DockingStationBalance() {
+		super();
+		totalNumberOfRent=0;
+		totalNumberOfReturn=0;
+	}
+	
 	public void addrent() {
 		totalNumberOfRent++;
 	}
@@ -12,11 +18,7 @@ public class DockingStationBalance {
 		totalNumberOfReturn++;
 	}
 	
-	public DockingStationBalance() {
-		super();
-		totalNumberOfRent=0;
-		totalNumberOfReturn=0;
-	}
+	
 	@Override
 	public String toString() {
 		return "[RENTS=" + totalNumberOfRent + ", RETURNS="

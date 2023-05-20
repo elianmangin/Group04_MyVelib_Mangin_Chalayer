@@ -18,10 +18,10 @@ class TestDrivenDevelopmentMyVelib {
 	
 	@BeforeEach
 	void setUp() {
-		system = new MyVelib(10, 100);
-		system.addUser(new User("Jean", new Coordinates(1,1), "Vlibre"));
-		system.addUser(new User("Alex", new Coordinates(2,2), "Vmax"));
-		system.addUser(new User("Clara", new Coordinates(7,8));
+		system = new MyVelib(10, 10, 0.7, 0.7, 0.5);
+		system.addUser(new User("Jean", new Coordinates(1,1), "Vlibre", 100));
+		system.addUser(new User("Alex", new Coordinates(2,2), "Vmax", 100));
+		system.addUser(new User("Clara", new Coordinates(7,8), null, 100));
 	}
 
 	@Test
@@ -70,22 +70,22 @@ class TestDrivenDevelopmentMyVelib {
 		assertEquals(S.getNumberOfSlotsOccupied(), 0);
 		assertEquals(S.getNumberOfSlots(), 2);
 		
-		S.recieiveBicycle(new Bicycle(new Coordinates(1,1), "mecanical"));
+		Bicycle meca = S.takeBicycle("mecanical");
 		assertEquals(S.getNumberOfSlotsOccupied(), 1);
 		assertEquals(S.getNumberOfMecanicalBicycle(), 1);
 		assertEquals(S.getNumberOfElectricalBicycle(), 0);
 		
-		S.recieiveBicycle(new Bicycle(new Coordinates(1,1), "electrical"));
+		Bicycle elec = S.takeBicycle("electrical");
 		assertEquals(S.getNumberOfSlotsOccupied(), 2);
 		assertEquals(S.getNumberOfMecanicalBicycle(), 1);
 		assertEquals(S.getNumberOfElectricalBicycle(), 1);
 		
 		assertThrows(Exception.class, () -> {
-			S.recieiveBicycle(new Bicycle(new Coordinates(1,1), "mecanical"));
+			S.takeBicycle("mecanical");
 		});
 		
-		assertEquals(S.find("mecanical").getType(), "mecanical");
-		assertEquals(S.find("electrical").getType(), "electrical");
+		assertEquals(meca.getType(), "mecanical");
+		assertEquals(elec.getType(), "electrical");
 		
 	}
 	

@@ -1,65 +1,62 @@
 package myVelibProject;
 
 public class ParkingSlot {
-	protected static int uniqIDCounterParkingSlot;
-	protected int uniqIDParkingSlot;
+	protected static int uniqIDCounter = 0;
+	protected int uniqID;
 	protected boolean status; //True if occupied False if empty
 	protected Bicycle parkedBicycle;
 	
-	public ParkingSlot(Bicycle parkedBicycle) {
-		super();
-		this.status = true;
-		this.parkedBicycle = parkedBicycle;
-		uniqIDCounterParkingSlot++;
-		uniqIDParkingSlot = uniqIDCounterParkingSlot;
-	}
-	
 	public ParkingSlot() {
 		super();
+		uniqIDCounter++;
+		uniqID = uniqIDCounter;
 		this.status = false;
 		this.parkedBicycle = null;
-		uniqIDCounterParkingSlot++;
-		uniqIDParkingSlot = uniqIDCounterParkingSlot;
+		
 	}
 	
-	void addBicycle(Bicycle bicycle,DockingStation dockingStation) {
+	public ParkingSlot(Bicycle parkedBicycle) {
+		super();
+		uniqIDCounter++;
+		uniqID = uniqIDCounter;
+		this.status = true;
+		this.parkedBicycle = parkedBicycle;
+	}
+	
+	
+	
+	void addBicycle(Bicycle bicycle) {
 		if (status) {
 			System.out.print("Warning this slot is already occupied");
 		}
 		else{
 			status = true;
 			parkedBicycle = bicycle;
-			dockingStation.numberOfSlotsOccupied++;
-			if(parkedBicycle.getType() == "mecanical") {dockingStation.numberOfMecanicalBicycle++;}
-			if(parkedBicycle.getType() == "electrical") {dockingStation.numberOfElectricalBicycle++;}
 		}
 	}
 	
-	void removeBicycle(DockingStation dockingStation) {
+	void removeBicycle() {
 		if (!status) {
 			System.out.print("Warning this slot is not occupied");
 		}
 		else{
 			status = false;
-			dockingStation.numberOfSlotsOccupied--;
-			if(parkedBicycle.getType() == "mecanical") {dockingStation.numberOfMecanicalBicycle--;}
-			if(parkedBicycle.getType() == "electrical") {dockingStation.numberOfElectricalBicycle--;}
 			parkedBicycle = null;
 		}
 	}
 	
-	public int getUniqIDParkingSlot() {
-		return uniqIDParkingSlot;
+	public int getUniqID() {
+		return uniqID;
 	}
-	public void setUniqIDParkingSlot(int uniqIDParkingSlot) {
-		this.uniqIDParkingSlot = uniqIDParkingSlot;
-	}
+	
 	public boolean isOccupied() {
 		return status;
 	}
+	
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
 	public Bicycle getParkedBicycle() {
 		return parkedBicycle;
 	}
@@ -69,8 +66,8 @@ public class ParkingSlot {
 	
 	@Override
 	public String toString() {
-		return "ParkingSlot [uniqIDParkingSlot=" + uniqIDParkingSlot + ", Slot is occupied =" + status + ", parkedBicycle="
-				+ parkedBicycle + "]";
+		return "\t\tParkingSlot number " + uniqID + "\nSlot is occupied : " + status + "\nParked Bicycle : "
+				+ parkedBicycle;
 	}
 	
 }

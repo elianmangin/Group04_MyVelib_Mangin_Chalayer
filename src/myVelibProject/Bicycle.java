@@ -1,33 +1,27 @@
 package myVelibProject;
 
 public class Bicycle {
-	protected static int idCounterBicycle=0;
-	protected int uniqIDBicycle;
-	protected Coordinates coordinatesBicycle;
+	protected static int idCounter=0;
+	protected int uniqID;
+	protected Coordinates gps;
 	protected String type;
 	protected boolean currentlyRentedBicycle;
 	
-	@Override
-	public String toString() {
-		return "\n[ ID=" + uniqIDBicycle + ", GPS=" + coordinatesBicycle + ", TYPE="
-				+ type + ", RENTED=" + currentlyRentedBicycle + "]";
-	}
-
-	public Bicycle(Coordinates coordinates, String type) {
+	public Bicycle(Coordinates gps, String type) {
 		super();
-		this.coordinatesBicycle = coordinates;
+		this.idCounter++;
+		this.uniqID = idCounter;
+		this.gps = gps;
 		this.type = type;
-		idCounterBicycle++;
-		uniqIDBicycle =idCounterBicycle;
-		currentlyRentedBicycle = false;
-	}
-	
-	public Coordinates getCoordinatesBicycle() {
-		return coordinatesBicycle;
+		this.currentlyRentedBicycle = false;
 	}
 
-	public void setCoordinatesBicycle(Coordinates coordinatesBicycle) {
-		this.coordinatesBicycle = coordinatesBicycle;
+	public Coordinates getGps() {
+		return gps;
+	}
+
+	public void setGps(Coordinates gps) {
+		this.gps = gps;
 	}
 
 	public boolean isCurrentlyRentedBicycle() {
@@ -39,18 +33,23 @@ public class Bicycle {
 	}
 
 	public int getUniqID() {
-		return uniqIDBicycle;
-	}
-	public void setUniqID(int uniqID) {
-		this.uniqIDBicycle = uniqID;
+		return uniqID;
 	}
 
 	public String getType() {
 		return type;
 	}
-	public void setType(String type) {
-		this.type = type;
+
+	@Override
+	public String toString() {
+		return "\t\tBicycle number " + uniqID + "\nCoordinates : " + gps + "\nType : " + type + "\nCurrently rented : "
+				+ currentlyRentedBicycle;
 	}
+	
+	
+	
+	
+	
 	
 	
 	

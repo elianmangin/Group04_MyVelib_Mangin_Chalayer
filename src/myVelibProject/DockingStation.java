@@ -3,40 +3,101 @@ package myVelibProject;
 import java.util.ArrayList;
 
 public class DockingStation {
-	protected static int idCounterStation;
-	protected int uniqIDStation;
-	protected Coordinates coordinatesStation;
+	protected static int idCounter = 0;
+	protected int uniqID;
+	protected Coordinates gps;
 	protected String status; //online or offline
 	protected String type; // plus or null
-	protected int numberOfMecanicalBicycle;
-	protected int numberOfElectricalBicycle;
-	
-
 	protected int numberOfSlots;
 	protected int numberOfSlotsOccupied;
 	protected ArrayList<ParkingSlot> parkingSlotList;
 	protected DockingStationBalance dockingStationBalance;
+	protected int numberOfMecanicalBicycle;
+	protected int numberOfElectricalBicycle;
+	
+
 	
 	
-	public DockingStation(Coordinates coordinatesStation, String status, String type, int numberOfSlots,
-			ArrayList<ParkingSlot> parkingSlotList, DockingStationBalance dockingStationBalance) {
+	
+	public DockingStation(Coordinates coordinatesStation, String type, int numberOfSlots) {
 		super();
-		this.coordinatesStation = coordinatesStation;
-		this.status = status;
+		idCounter++;
+		this.uniqID = idCounter;
+		this.gps = coordinatesStation;
+		this.status = "online";
 		this.type = type;
 		this.numberOfSlots = numberOfSlots;
-		this.parkingSlotList = parkingSlotList;
-		this.dockingStationBalance = dockingStationBalance;
-		numberOfSlotsOccupied = 0;
-		numberOfElectricalBicycle = 0;
-		numberOfMecanicalBicycle = 0;
+		this.numberOfSlotsOccupied = 0;
+		this.parkingSlotList = new ArrayList<ParkingSlot>();
+		this.dockingStationBalance = new DockingStationBalance();
+		this.numberOfElectricalBicycle = 0;
+		this.numberOfMecanicalBicycle = 0;
+		
+		for (int i = 0; i < numberOfSlots; i++) {
+			this.parkingSlotList.add(new ParkingSlot());
+		}
+		
+	}
+	
+	public boolean addBicycle(Bicycle B) {
+		if (this.numberOfSlotsOccupied < this.numberOfSlots) {
+			for (ParkingSlot parkingSlot : parkingSlotList) {
+				if (!parkingSlot.isOccupied()) {
+					B.setGps(this.gps);
+					B.setCurrentlyRentedBicycle(false);
+					parkingSlot.addBicycle(B);
+					this.numberOfSlotsOccupied++;
+					if(B.getType() == "mecanical") {this.numberOfMecanicalBicycle++;}
+					if(B.getType() == "electrical") {this.numberOfElectricalBicycle++;}
+					return true;	
+				}
+			}
+			System.out.println("Error adding bicycle");
+			return false;
+		}
+		else {
+			System.out.println("Warning : this station is full");
+			return false;
+		}
+	}
+	
+	public Bicycle takeBicycle(String type) {
+		if (type == "mecanical" && this.numberOfMecanicalBicycle > 0) {
+			for (ParkingSlot parkingSlot : parkingSlotList) {
+				if (parkingSlot.parkedBicycle.getType() == "mecanical") {
+					Bicycle B = parkingSlot.parkedBicycle;
+					parkingSlot.removeBicycle();
+					this.numberOfSlotsOccupied--;
+					this.numberOfMecanicalBicycle--;
+					return B;
+				}
+			}
+			System.out.println("Error taking bicycle");
+			return null;
+		}
+		else if (type == "electrical" && this.numberOfElectricalBicycle > 0) {
+			for (ParkingSlot parkingSlot : parkingSlotList) {
+				if (parkingSlot.parkedBicycle.getType() == "electrical") {
+					Bicycle B = parkingSlot.parkedBicycle;
+					parkingSlot.removeBicycle();
+					this.numberOfSlotsOccupied--;
+					this.numberOfElectricalBicycle--;
+					return B;
+				}
+			}
+			System.out.println("Error taking bicycle");
+			return null;
+		}
+		else {
+			System.out.println("No bicycle of the required type in this station");
+			return null;
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "\n[ID=" + uniqIDStation + ", GPS=" + coordinatesStation
-				+ ", STATUS=" + status + ", SLOTS=" + numberOfSlots + ", BALANCE="
-				+ dockingStationBalance + "]";
+		return "\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\n STATUS :" + status + "\nSLOTS : " + numberOfSlots 
+				+ "\nBALANCE :"+ dockingStationBalance;
 	}
 
 	public int getNumberOfMecanicalBicycle() {
@@ -59,10 +120,6 @@ public class DockingStation {
 		return type;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public int getNumberOfSlotsOccupied() {
 		return numberOfSlotsOccupied;
 	}
@@ -75,16 +132,12 @@ public class DockingStation {
 		return parkingSlotList;
 	}
 
-	public void setParkingSlotList(ArrayList<ParkingSlot> parkingSlotList) {
-		this.parkingSlotList = parkingSlotList;
+	public int getUniqID() {
+		return uniqID;
 	}
 
-	public int getUniqIDStation() {
-		return uniqIDStation;
-	}
-
-	public Coordinates getCoordinatesStation() {
-		return coordinatesStation;
+	public Coordinates getGps() {
+		return gps;
 	}
 
 	public int getNumberOfSlots() {

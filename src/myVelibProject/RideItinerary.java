@@ -1,30 +1,40 @@
 package myVelibProject;
 
-public class RideItinerary {
-	protected DockingStation startingDockingStation;
-	protected DockingStation endingDockingStation;
+public abstract class RideItinerary<S, E> {
+	protected S start;
+	protected E end;
+	protected String type;
 	
-	public RideItinerary(DockingStation startingDockingStation, DockingStation endingDockingStation) {
+	public RideItinerary(S start, E end, String type) {
 		super();
-		this.startingDockingStation = startingDockingStation;
-		this.endingDockingStation = endingDockingStation;
+		this.start = start;
+		this.end = end;
+		this.type = type;
 	}
 	@Override
 	public String toString() {
-		return "RideItinerary [startingDockingStation=" + startingDockingStation + ", endingDockingStation="
-				+ endingDockingStation + "]";
+		return "RideItinerary from" + start + " to "+ end;
 	}
-	public DockingStation getStartingDockingStation() {
-		return startingDockingStation;
+	
+	public S getStart() {
+		return start;
 	}
-	public void setStartingDockingStation(DockingStation startingDockingStation) {
-		this.startingDockingStation = startingDockingStation;
+	public void setStart(S start) {
+		this.start = start;
 	}
-	public DockingStation getEndingDockingStation() {
-		return endingDockingStation;
+	public E getEnd() {
+		return end;
 	}
-	public void setEndingDockingStation(DockingStation endingDockingStation) {
-		this.endingDockingStation = endingDockingStation;
+	public void setEnd(E end) {
+		this.end = end;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 
 }

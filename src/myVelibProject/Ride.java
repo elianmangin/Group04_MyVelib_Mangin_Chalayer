@@ -1,37 +1,98 @@
 package myVelibProject;
+
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 public class Ride {
-	protected User user;
-	protected Coordinates startingCoordinates;//pour initialiser LocalTime time = LocalTime.of(5,15) pour 5h15;
-	protected Coordinates endingCoordinates;
+	protected Coordinates startCoordinates;//pour initialiser LocalTime time = LocalTime.of(5,15) pour 5h15;
+	protected Coordinates endCoordinates;
 	protected LocalTime startTime;
 	protected LocalTime endTime;
-	protected DockingStation startingDockingStation;
-	protected DockingStation endingDockingStation;
+	protected DockingStation startStation;
+	protected DockingStation endStation;
 	protected Bicycle bicycleUsed;
 	protected double cost;
-	
-	
-	
-	public Ride(User user, Coordinates startingCoordinates, Coordinates endingCoordinates, LocalTime startTime,
-			LocalTime endTime, DockingStation startingDockingStation, DockingStation endingDockingStation,
-			Bicycle bicycleUsed) {
+
+	public Ride(Bicycle bicycleUsed, LocalTime startTime) {
 		super();
-		this.user = user;
-		this.startingCoordinates = startingCoordinates;
-		this.endingCoordinates = endingCoordinates;
+		this.startCoordinates = bicycleUsed.getGps();
 		this.startTime = startTime;
-		this.endTime = endTime;
-		this.startingDockingStation = startingDockingStation;
-		this.endingDockingStation = endingDockingStation;
+		this.startStation = null;
 		this.bicycleUsed = bicycleUsed;
-		cost = costComputing(user,bicycleUsed,startTime,endTime,startingDockingStation,endingDockingStation);
+	}
+
+	public Ride(DockingStation startStation, Bicycle bicycleUsed, LocalTime startTime) {
+		super();
+		this.startCoordinates = startStation.getGps();
+		this.startTime = startTime;
+		this.startStation = startStation;
+		this.bicycleUsed = bicycleUsed;
 	}
 
 
+	public void endRide(DockingStation endStation, LocalTime endTime) {
+		this.endCoordinates = endStation.getGps();
+		this.endTime = endTime;
+		this.endStation = endStation;
+	}
+	
+	public void endRide(Coordinates gps, LocalTime endTime) {
+		this.endCoordinates = gps;
+		this.endTime = endTime;
+		this.endStation = null;
+	}
+
+	@Override
+	public String toString() {
+		return "Ride from " +startStation+ "(" + startCoordinates + ") to "+endStation+ "(" + endCoordinates
+				+"\nDeparture : " + startTime + " / Arrival : " + endTime + "\nCost : " + cost;
+	}
+
+	public Coordinates getStartCoordinates() {
+		return startCoordinates;
+	}
+
+	public Coordinates getEndCoordinates() {
+		return endCoordinates;
+	}
+
+	public LocalTime getStartTime() {
+		return startTime;
+	}
+
+	public LocalTime getEndTime() {
+		return endTime;
+	}
+
+	public DockingStation getStartStation() {
+		return startStation;
+	}
+
+	public DockingStation getEndStation() {
+		return endStation;
+	}
+
+	public Bicycle getBicycleUsed() {
+		return bicycleUsed;
+	}
+
+	public double getCost() {
+		return cost;
+	}
+	
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+	
+	
+
+	
+
+
+	
+
 	//Créer une exception au lieu de return 0 à la fin
+	/*
 	protected double costComputing(User user, Bicycle bicycleUsed,LocalTime startTime,LocalTime endTime,DockingStation startingDockingStation,DockingStation endingDockingStation) {
 		double cost = 0;
 		double timeCredit = user.getTimeCredit();
@@ -54,7 +115,7 @@ public class Ride {
 			if (bicycleUsed.getType()=="mecanical") {cost = duration/60;}
 			if (bicycleUsed.getType()=="electrical") {cost = 2*duration/60;}
 		}
-		
+
 		if(user.getRegistrationCard() == "vMax") {
 			duration = duration-60;
 			if(duration <0) {return 0;}
@@ -63,69 +124,7 @@ public class Ride {
 		if(startingDockingStation == null && endingDockingStation !=null) {return 0.9*cost;}
 		if(startingDockingStation != null && endingDockingStation ==null) {return 1.1*cost;}
 		else {return cost;}
-	}
+	}*/
 
-	
-	@Override
-	public String toString() {
-		return "Ride [user=" + user + ", startingCoordinates=" + startingCoordinates + ", endingCoordinates="
-				+ endingCoordinates + ", startTime=" + startTime + ", endTime=" + endTime + ", startingDockingStation="
-				+ startingDockingStation + ", endingDockingStation=" + endingDockingStation + ", bicycleUsed="
-				+ bicycleUsed + ", cost=" + cost + "]";
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Coordinates getStartingCoordinates() {
-		return startingCoordinates;
-	}
-	public void setStartingCoordinates(Coordinates startingCoordinates) {
-		this.startingCoordinates = startingCoordinates;
-	}
-	public Coordinates getEndingCoordinates() {
-		return endingCoordinates;
-	}
-	public void setEndingCoordinates(Coordinates endingCoordinates) {
-		this.endingCoordinates = endingCoordinates;
-	}
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
-	public DockingStation getStartingDockingStation() {
-		return startingDockingStation;
-	}
-	public void setStartingDockingStation(DockingStation startingDockingStation) {
-		this.startingDockingStation = startingDockingStation;
-	}
-	public DockingStation getEndingDockingStation() {
-		return endingDockingStation;
-	}
-	public void setEndingDockingStation(DockingStation endingDockingStation) {
-		this.endingDockingStation = endingDockingStation;
-	}
-	public Bicycle getBicycleUsed() {
-		return bicycleUsed;
-	}
-	public void setBicycleUsed(Bicycle bicycleUsed) {
-		this.bicycleUsed = bicycleUsed;
-	}
-	public double getCost() {
-		return cost;
-	}
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
 
 }
