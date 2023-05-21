@@ -7,6 +7,14 @@ public class Card {
 	protected CostStrategy strategy;
 	protected CostFactory costFactory = new CostFactory();
 	
+	public Card(User user) {
+		super();
+		this.user = user;
+		this.type = null;
+		this.balance = 0;
+		this.strategy = costFactory.create(null);
+	}
+	
 	public Card(User user, String type) {
 		super();
 		this.user = user;

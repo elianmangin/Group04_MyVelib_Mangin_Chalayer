@@ -39,7 +39,7 @@ public class Renter {
 
 			// Change bike status and store start data of the user current ride 
 			bicycle.setCurrentlyRentedBicycle(true);
-			user.setCurrentRide(new Ride(startStation, bicycle, startTime));
+			user.setCurrentRide(new Ride(this.user, startStation, bicycle, startTime));
 		}
 
 		// If the bicycle is taken from the street
@@ -49,7 +49,7 @@ public class Renter {
 			bicycle.setCurrentlyRentedBicycle(true);
 
 			bicycle.setCurrentlyRentedBicycle(true);
-			user.setCurrentRide(new Ride(bicycle, startTime));
+			user.setCurrentRide(new Ride(this.user, bicycle, startTime));
 		}
 
 	}
