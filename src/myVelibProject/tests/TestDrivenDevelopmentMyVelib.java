@@ -21,13 +21,15 @@ class TestDrivenDevelopmentMyVelib {
 
 	@Test
 	void testInitNumber() {
+		// Checking if the system has the correct number of element
 		assertEquals(system.getStationList().size(), 10);
-		assertEquals(system.getBicycleList().size(), 100);
+		assertEquals(system.getBicycleList().size(), 70);
 		assertEquals(system.getUserList().size(), 3);
 	}
 	
 	@Test
 	void testInitRepartition() {
+		// Checking if the system made the bicycle repartition we asked for
 		int nbElec = 0;
 		int nbMeca = 0;
 		for (Bicycle b : system.getBicycleList()) {
@@ -45,6 +47,7 @@ class TestDrivenDevelopmentMyVelib {
 	
 	@Test
 	void testInitStationInSquare() {
+		// Checking if the stations are in the 10x10 square
 		for (DockingStation s : system.getStationList()) {
 			assertTrue(s.getGps().getX() >= 0 && s.getGps().getX() <= 10);
 			assertTrue(s.getGps().getY() >= 0 && s.getGps().getY() <= 10);
@@ -52,35 +55,37 @@ class TestDrivenDevelopmentMyVelib {
 	}
 	
 	@Test
-	void testGetUserFromID() {
-		assertEquals(system.getUserFromID(0).getName(), "Jean");
-		assertEquals(system.getUserFromID(1).getName(), "Alex");
-		assertEquals(system.getUserFromID(1).getName(), "Clara");
+	void testGetUserFromID() throws GeneralException {
+		// Checking if the method works as expected
+		assertEquals(system.getUserFromID(1).getName(), "Jean");
+		assertEquals(system.getUserFromID(2).getName(), "Alex");
+		assertEquals(system.getUserFromID(3).getName(), "Clara");
 	}
 	
 	@Test
 	void testDockingStation() throws GeneralException {
+		// Checking the correct implementation of all the parameters when a bicycle is added
 		S = new DockingStation(new Coordinates(1,1), null, 2);
 		
 		assertEquals(S.getNumberOfSlotsOccupied(), 0);
 		assertEquals(S.getNumberOfSlots(), 2);
 		
-		Bicycle meca = S.takeBicycle("mecanical");
+		S.addBicycle(new Bicycle(new Coordinates(2,4), "mecanical"));
 		assertEquals(S.getNumberOfSlotsOccupied(), 1);
 		assertEquals(S.getNumberOfMecanicalBicycle(), 1);
 		assertEquals(S.getNumberOfElectricalBicycle(), 0);
 		
-		Bicycle elec = S.takeBicycle("electrical");
+		S.addBicycle(new Bicycle(new Coordinates(3,7), "electrical"));
 		assertEquals(S.getNumberOfSlotsOccupied(), 2);
 		assertEquals(S.getNumberOfMecanicalBicycle(), 1);
 		assertEquals(S.getNumberOfElectricalBicycle(), 1);
 		
 		assertThrows(Exception.class, () -> {
-			S.takeBicycle("mecanical");
+			S.addBicycle(new Bicycle(new Coordinates(3,7), "electrical"));
 		});
 		
-		assertEquals(meca.getType(), "mecanical");
-		assertEquals(elec.getType(), "electrical");
+		assertEquals(S.getParkingSlotList().get(0).getParkedBicycle().getType(), "mecanical");
+		assertEquals(S.getParkingSlotList().get(1).getParkedBicycle().getType(), "electrical");
 		
 	}
 	

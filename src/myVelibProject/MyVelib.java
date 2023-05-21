@@ -97,28 +97,25 @@ public class MyVelib {
 	}
 
 	
-	public User getUserFromID(int ID) {
+	public User getUserFromID(int ID) throws GeneralException {
 		for (User U : userList) {
 			if (U.getUniqID()==ID) {return U;}
 		}
-		System.out.println("No user was found with the provided ID");
-		return null;
+		throw new GeneralException("No user found with this ID");
 	}
 	
-	public Bicycle getBicycleFromID(int ID) {
+	public Bicycle getBicycleFromID(int ID) throws GeneralException {
 		for (Bicycle B : bicycleList) {
 			if (B.getUniqID()==ID) {return B;}
 		}
-		System.out.println("No bicycle was found with the provided ID");
-		return null;
+		throw new GeneralException("No bicycle found with this ID");
 	}
 	
-	public DockingStation getStationFromID(int ID) {
+	public DockingStation getStationFromID(int ID) throws GeneralException {
 		for (DockingStation S : stationList) {
 			if (S.getUniqID()==ID) {return S;}
 		}
-		System.out.println("No station was found with the provided ID");
-		return null;
+		throw new GeneralException("No station found with this ID");
 	}
 
 
