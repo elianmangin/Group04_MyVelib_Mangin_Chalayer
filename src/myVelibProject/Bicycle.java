@@ -1,7 +1,7 @@
 package myVelibProject;
 
 public class Bicycle {
-	protected static int idCounter=0;
+	protected static int idCounterBicycle = 0;
 	protected int uniqID;
 	protected Coordinates gps;
 	protected String type;
@@ -9,8 +9,8 @@ public class Bicycle {
 	
 	public Bicycle(Coordinates gps, String type) {
 		super();
-		idCounter++;
-		this.uniqID = idCounter;
+		idCounterBicycle++;
+		this.uniqID = idCounterBicycle;
 		this.gps = gps;
 		this.type = type;
 		this.currentlyRentedBicycle = false;

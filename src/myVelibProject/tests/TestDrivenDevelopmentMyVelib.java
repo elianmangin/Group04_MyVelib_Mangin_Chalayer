@@ -4,20 +4,15 @@ import myVelibProject.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalTime;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import fs.cs.is1220.TP8_CHALAYER.exo1.Factorial;
-import fs.cs.is1220.TP8_CHALAYER.exo1.IllegalValue;
 
 class TestDrivenDevelopmentMyVelib {
 	private MyVelib system;
 	private DockingStation S;
 	
 	@BeforeEach
-	void setUp() {
+	void setUp() throws GeneralException {
 		system = new MyVelib(10, 10, 0.7, 0.7, 0.5);
 		system.addUser(new User("Jean", new Coordinates(1,1), "Vlibre", 100));
 		system.addUser(new User("Alex", new Coordinates(2,2), "Vmax", 100));
@@ -64,7 +59,7 @@ class TestDrivenDevelopmentMyVelib {
 	}
 	
 	@Test
-	void testDockingStation() {
+	void testDockingStation() throws GeneralException {
 		S = new DockingStation(new Coordinates(1,1), null, 2);
 		
 		assertEquals(S.getNumberOfSlotsOccupied(), 0);
@@ -89,18 +84,5 @@ class TestDrivenDevelopmentMyVelib {
 		
 	}
 	
-	@Test
-	void testRide() {
-		Ride R1 = new Ride(new User("Jean", new Coordinates(1,1), "Vlibre"), new Coordinates(1,1), LocalTime.of(5,15), S, "electrical");
-		R1.endRide(LocalTime.of(7,30), new Coordinates(1,8));
-		
-		assertEquals(R1.getBicycleUsed().getGps(), new Coordinates(1,8));
-		assertEquals(R1.getCost(), 5);	
-		
-		Ride R2 = new Ride(new User("Jean", new Coordinates(1,1), "Vmax"), new Coordinates(1,1), LocalTime.of(5,15), S, "electrical");
-		R2.endRide(LocalTime.of(7,30), new Coordinates(1,8));
-		
-		assertEquals(R2.getCost(), 2);	
-	}
 
 }

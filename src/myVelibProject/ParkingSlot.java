@@ -1,15 +1,15 @@
 package myVelibProject;
 
 public class ParkingSlot {
-	protected static int uniqIDCounter = 0;
+	protected static int idCounterParkingSlot = 0;
 	protected int uniqID;
 	protected boolean status; //True if occupied False if empty
 	protected Bicycle parkedBicycle;
 	
 	public ParkingSlot() {
 		super();
-		uniqIDCounter++;
-		uniqID = uniqIDCounter;
+		idCounterParkingSlot++;
+		uniqID = idCounterParkingSlot;
 		this.status = false;
 		this.parkedBicycle = null;
 		
@@ -17,8 +17,8 @@ public class ParkingSlot {
 	
 	public ParkingSlot(Bicycle parkedBicycle) {
 		super();
-		uniqIDCounter++;
-		uniqID = uniqIDCounter;
+		idCounterParkingSlot++;
+		uniqID = idCounterParkingSlot;
 		this.status = true;
 		this.parkedBicycle = parkedBicycle;
 	}

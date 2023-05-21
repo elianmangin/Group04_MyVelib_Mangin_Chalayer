@@ -3,7 +3,7 @@ package myVelibProject;
 import java.util.ArrayList;
 
 public class DockingStation {
-	protected static int idCounter = 0;
+	protected static int idCounterStation = 0;
 	protected int uniqID;
 	protected Coordinates gps;
 	protected String status; //online or offline
@@ -17,8 +17,8 @@ public class DockingStation {
 	
 	public DockingStation(Coordinates coordinatesStation, String type, int numberOfSlots) {
 		super();
-		idCounter++;
-		this.uniqID = idCounter;
+		idCounterStation++;
+		this.uniqID = idCounterStation;
 		this.gps = coordinatesStation;
 		this.status = "online";
 		this.type = type;
@@ -35,7 +35,7 @@ public class DockingStation {
 		
 	}
 	
-	public void addBicycle(Bicycle B) throws GeneralException {
+	public boolean addBicycle(Bicycle B) throws GeneralException {
 		if (this.numberOfSlotsOccupied < this.numberOfSlots) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
 				if (!parkingSlot.isOccupied()) {
@@ -44,7 +44,8 @@ public class DockingStation {
 					parkingSlot.addBicycle(B);
 					this.numberOfSlotsOccupied++;
 					if(B.getType() == "mecanical") {this.numberOfMecanicalBicycle++;}
-					if(B.getType() == "electrical") {this.numberOfElectricalBicycle++;}	
+					if(B.getType() == "electrical") {this.numberOfElectricalBicycle++;}
+					return true;
 				}
 			}
 			throw new GeneralException("Error adding bicycle");

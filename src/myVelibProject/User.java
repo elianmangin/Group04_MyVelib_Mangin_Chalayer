@@ -2,7 +2,7 @@ package myVelibProject;
 
 public class User {
 	protected String name;
-	protected static int idCounter=0;
+	protected static int idCounterUser = 0;
 	protected int uniqID;
 	protected Coordinates gps;
 	protected UserBalance balance;
@@ -12,8 +12,8 @@ public class User {
 
 	public User(String name, Coordinates gps, String cardType, double initialBalance) {
 		super();
-		idCounter++;
-		this.uniqID = idCounter;
+		idCounterUser++;
+		this.uniqID = idCounterUser;
 		this.name = name;
 		this.gps = gps;
 		this.balance = new UserBalance();
