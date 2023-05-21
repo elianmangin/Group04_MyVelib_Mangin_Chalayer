@@ -22,7 +22,17 @@ public class Card {
 		this.balance = 0;
 		this.strategy = costFactory.create(type);
 	}
-
+	
+	public void addCredit(int amount) {
+		this.balance += amount;
+	}
+	
+	public void removeCredit(int amount) {
+		this.balance -= amount;
+	}
+	
+	
+	// Getters, Setters, toString
 	public double getBalance() {
 		return balance;
 	}
@@ -48,13 +58,7 @@ public class Card {
 		return type + " Card owned by " + user.getName() + " (" + user.getUniqID() + "). TimeCredit : " + balance;
 	}
 	
-	public void addCredit(int amount) {
-		this.balance += amount;
-	}
 	
-	public void removeCredit(int amount) {
-		this.balance -= amount;
-	}
 	
 	
 	

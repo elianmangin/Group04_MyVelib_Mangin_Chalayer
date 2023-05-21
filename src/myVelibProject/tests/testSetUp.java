@@ -1,4 +1,4 @@
-package myVelibProject;
+package myVelibProject.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import myVelibProject.*;
 
 class testSetUp {
 	private MyVelib myVelib;
@@ -15,7 +17,7 @@ class testSetUp {
 	private User user3;
 	
 	@BeforeEach
-	void setUp() {
+	void setUp() throws GeneralException {
 		myVelib = new MyVelib(10,10,0.9,0.5,0.5);
 		myVelib2 = new MyVelib(11,9,0.9,0.5,0.5);
 		user1 = new User("John",new Coordinates(0, 0), "Vlibre", 100);

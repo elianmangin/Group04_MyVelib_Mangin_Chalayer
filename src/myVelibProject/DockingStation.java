@@ -15,10 +15,6 @@ public class DockingStation {
 	protected int numberOfMecanicalBicycle;
 	protected int numberOfElectricalBicycle;
 	
-
-	
-	
-	
 	public DockingStation(Coordinates coordinatesStation, String type, int numberOfSlots) {
 		super();
 		idCounter++;
@@ -39,7 +35,7 @@ public class DockingStation {
 		
 	}
 	
-	public boolean addBicycle(Bicycle B) {
+	public void addBicycle(Bicycle B) throws GeneralException {
 		if (this.numberOfSlotsOccupied < this.numberOfSlots) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
 				if (!parkingSlot.isOccupied()) {
@@ -48,20 +44,17 @@ public class DockingStation {
 					parkingSlot.addBicycle(B);
 					this.numberOfSlotsOccupied++;
 					if(B.getType() == "mecanical") {this.numberOfMecanicalBicycle++;}
-					if(B.getType() == "electrical") {this.numberOfElectricalBicycle++;}
-					return true;	
+					if(B.getType() == "electrical") {this.numberOfElectricalBicycle++;}	
 				}
 			}
-			System.out.println("Error adding bicycle");
-			return false;
+			throw new GeneralException("Error adding bicycle");
 		}
 		else {
-			System.out.println("Warning : this station is full");
-			return false;
+			throw new GeneralException("Warning : this station is full");
 		}
 	}
 	
-	public Bicycle takeBicycle(String type) {
+	public Bicycle takeBicycle(String type) throws GeneralException {
 		if (type == "mecanical" && this.numberOfMecanicalBicycle > 0) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
 				if (parkingSlot.parkedBicycle.getType() == "mecanical") {
@@ -72,8 +65,7 @@ public class DockingStation {
 					return B;
 				}
 			}
-			System.out.println("Error taking bicycle");
-			return null;
+			throw new GeneralException("Error taking bicycle");
 		}
 		else if (type == "electrical" && this.numberOfElectricalBicycle > 0) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
@@ -85,15 +77,15 @@ public class DockingStation {
 					return B;
 				}
 			}
-			System.out.println("Error taking bicycle");
-			return null;
+			throw new GeneralException("Error taking bicycle");
 		}
 		else {
-			System.out.println("No bicycle of the required type in this station");
-			return null;
+			throw new GeneralException("No bicycle of the required type in this station");
 		}
 	}
 
+	
+	// Getters, Setters, toString
 	@Override
 	public String toString() {
 		return "\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\n STATUS :" + status + "\nSLOTS : " + numberOfSlots 

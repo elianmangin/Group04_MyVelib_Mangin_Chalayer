@@ -8,8 +8,6 @@ public class UserBalance {
 	protected double totalCharges;
 	protected int totalTimeCredit;
 	
-	
-	
 	public UserBalance() {
 		super();
 		this.numberOfRide = 0;
@@ -17,7 +15,20 @@ public class UserBalance {
 		this.totalCharges = 0;
 		this.totalTimeCredit = 0;	
 	}
+	
+	public void addRide(Ride ride) {
+		numberOfRide++;
+		double duration = ChronoUnit.MINUTES.between(ride.getStartTime(), ride.getEndTime());
+		totalTime += duration;
+		totalCharges+=ride.cost;
+	}
+	
+	public void addTotalTimeCredit(int addedTotalTimeCredit) {
+		totalTimeCredit+=addedTotalTimeCredit;
+	}
 
+	
+	// Getters, Setters, toString
 	public int getNumberOfRide() {
 		return numberOfRide;
 	}
@@ -40,16 +51,7 @@ public class UserBalance {
 				+ totalCharges + " / Time credit : " + totalTimeCredit + ".";
 	}
 	
-	public void addRide(Ride ride) {
-		numberOfRide++;
-		double duration = ChronoUnit.MINUTES.between(ride.getStartTime(), ride.getEndTime());
-		totalTime += duration;
-		totalCharges+=ride.cost;
-	}
 	
-	public void addTotalTimeCredit(int addedTotalTimeCredit) {
-		totalTimeCredit+=addedTotalTimeCredit;
-	}
 
 
 

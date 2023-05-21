@@ -8,7 +8,7 @@ public class MyVelib {
 	protected ArrayList<User> userList;
 	protected ArrayList<DockingStation> stationList;
 
-	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion) {
+	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion) throws GeneralException {
 		super();
 		bicycleList = new ArrayList<Bicycle>();
 		userList = new ArrayList<User>();
@@ -122,7 +122,7 @@ public class MyVelib {
 	}
 
 
-
+	// Getters, Setters, toString
 	@Override
 	public String toString() {
 		return "Report on the actual state of the system \n Here are the bicycles :" + bicycleList + "\n Here are the Users :" + userList + "\n Here are the Stations :" + stationList;

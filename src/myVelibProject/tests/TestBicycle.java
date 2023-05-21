@@ -29,7 +29,7 @@ class TestBicycle {
 
 	@Test
 	void testGetCoord() {
-		assertEquals(bicycle1.getCoordinatesBicycle(), coordCS);
+		assertEquals(bicycle1.getGps(), coordCS);
 	}
 	
 	@Test

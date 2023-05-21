@@ -2,6 +2,8 @@ package myVelibProject;
 
 public class GeneralException extends Exception  {
 
+	private static final long serialVersionUID = -5925653232424960697L;
+
 	public GeneralException() {
 		super();
 		// TODO Auto-generated constructor stub

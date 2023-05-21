@@ -1,7 +1,5 @@
 package myVelibProject;
 
-import java.util.ArrayList;
-
 public class User {
 	protected String name;
 	protected static int idCounter=0;
@@ -28,7 +26,14 @@ public class User {
 		if (creditBalance >amount) {creditBalance -= amount;}
 		else throw new GeneralException("Balance Insufficient");
 	}
-
+	
+	public boolean isCurrentlyRenting() {
+		if (this.currentRide == null) {return true;}
+		else {return false;}
+	}
+	
+	
+	// Getters, Setters, toString
 	public Coordinates getGps() {
 		return gps;
 	}
@@ -43,11 +48,6 @@ public class User {
 
 	public void setCreditBalance(double creditBalance) {
 		this.creditBalance = creditBalance;
-	}
-
-	public boolean isCurrentlyRenting() {
-		if (this.currentRide == null) {return true;}
-		else {return false;}
 	}
 
 	public void setCurrentRide(Ride ride) {

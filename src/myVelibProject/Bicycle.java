@@ -9,13 +9,14 @@ public class Bicycle {
 	
 	public Bicycle(Coordinates gps, String type) {
 		super();
-		this.idCounter++;
+		idCounter++;
 		this.uniqID = idCounter;
 		this.gps = gps;
 		this.type = type;
 		this.currentlyRentedBicycle = false;
 	}
 
+	// Getters, Setters, toString
 	public Coordinates getGps() {
 		return gps;
 	}

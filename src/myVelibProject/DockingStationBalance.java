@@ -19,6 +19,7 @@ public class DockingStationBalance {
 	}
 	
 	
+	// Getters, Setters, toString
 	@Override
 	public String toString() {
 		return "[RENTS=" + totalNumberOfRent + ", RETURNS="

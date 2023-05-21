@@ -25,7 +25,7 @@ public class ParkingSlot {
 	
 	
 	
-	void addBicycle(Bicycle bicycle) {
+	public void addBicycle(Bicycle bicycle) {
 		if (status) {
 			System.out.print("Warning this slot is already occupied");
 		}
@@ -35,7 +35,7 @@ public class ParkingSlot {
 		}
 	}
 	
-	void removeBicycle() {
+	public void removeBicycle() {
 		if (!status) {
 			System.out.print("Warning this slot is not occupied");
 		}
@@ -45,6 +45,8 @@ public class ParkingSlot {
 		}
 	}
 	
+	
+	// Getters, Setters, toString
 	public int getUniqID() {
 		return uniqID;
 	}

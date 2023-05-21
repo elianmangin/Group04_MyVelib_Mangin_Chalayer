@@ -9,7 +9,22 @@ public class Coordinates {
 		this.x = x;
 		this.y = y;
 	}
-
+	
+	public boolean equals(Coordinates c) {
+		if (this.x == c.x && this.y == c.y) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public double distance(Coordinates c) {
+		return Math.sqrt(Math.pow(x - c.x, 2)+Math.pow(y - c.y, 2));
+	}
+	
+	
+	// Getters, Setters, toString
 	public double getX() {
 		return x;
 	}
@@ -35,17 +50,6 @@ public class Coordinates {
 		return "["+ x + ", " + y + "]";
 	}
 	
-	public boolean equals(Coordinates c) {
-		if (this.x == c.x && this.y == c.y) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 	
-	public double distance(Coordinates c) {
-		return Math.sqrt(Math.pow(x - c.x, 2)+Math.pow(y - c.y, 2));
-	}
 	
 }

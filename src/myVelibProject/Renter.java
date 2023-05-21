@@ -5,6 +5,7 @@ import java.time.LocalTime;
 public class Renter {
 	private MyVelib myVelib;
 	private User user;
+	@SuppressWarnings("rawtypes")
 	private RideItinerary itinerary;
 
 	public Renter(MyVelib myVelib) {
@@ -14,6 +15,16 @@ public class Renter {
 		this.itinerary = null;
 
 	}
+	
+	public void connectUser(User U) {
+		this.user = U;
+	}
+
+	public void disconnectUser() {
+		this.user = null;
+		this.itinerary = null;
+	}
+
 
 	public void askPlanning(Coordinates destination, String bicycleType, String planningType) {
 		if (this.user != null) {
@@ -27,7 +38,7 @@ public class Renter {
 
 	}
 
-	public void rentBicycle(LocalTime startTime) {
+	public void rentBicycle(LocalTime startTime) throws GeneralException {
 		// If the bicycle is taken from a Docking Station
 		if (itinerary.start instanceof DockingStation) {
 			DockingStation startStation = (DockingStation) this.itinerary.start;
@@ -118,17 +129,25 @@ public class Renter {
 		}
 
 	}
-
-	public void connectUser(User U) {
-		this.user = U;
+	
+	
+	
+	// Getters, Setters, toString
+	public MyVelib getMyVelib() {
+		return myVelib;
 	}
 
-	public void disconnectUser() {
-		this.user = null;
-		this.itinerary = null;
+	public User getUser() {
+		return user;
 	}
 
+	@SuppressWarnings("rawtypes")
+	public RideItinerary getItinerary() {
+		return itinerary;
+	}
 
+	
+	
 	/*
 	public void rentBicycle(User user, Coordinates startingCoordinates, LocalTime startTime,
 			DockingStation startingDockingStation,ParkingSlot startingParkingSlot, Bicycle bicycleUsed) {

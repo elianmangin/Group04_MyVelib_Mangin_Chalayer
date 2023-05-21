@@ -14,7 +14,7 @@ public class VlibreStrategy implements CostStrategy {
 		duration = duration-60;
 		if(duration <0) {return 0;}
 		else if(timeCredit > duration) {
-			ride.user.registrationCard.addCredit(-(int)duration); // ((int)timeCredit-(int)duration);
+			ride.user.registrationCard.removeCredit((int)duration); // ((int)timeCredit-(int)duration);
 			return 0;
 		}
 		else if(timeCredit <= duration) {

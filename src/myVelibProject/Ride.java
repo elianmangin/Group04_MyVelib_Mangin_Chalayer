@@ -1,7 +1,6 @@
 package myVelibProject;
 
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 
 public class Ride {
 	protected User user;
@@ -45,6 +44,8 @@ public class Ride {
 		this.endStation = null;
 	}
 
+	
+	// Getters, Setters, toString
 	@Override
 	public String toString() {
 		return "Ride from " +startStation+ "(" + startCoordinates + ") to "+endStation+ "(" + endCoordinates
