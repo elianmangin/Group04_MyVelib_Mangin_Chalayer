@@ -3,6 +3,7 @@ package myVelibProject.CLUI;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import org.ini4j.*;
 
@@ -13,6 +14,11 @@ public class MyVelibSystem {
 
 	public static void main(String[] args) {
 		initialization();
+		
+		commandLoop();
+		
+		endProcess();
+		
 	}
 
 	private static void initialization() {
@@ -68,12 +74,8 @@ public class MyVelibSystem {
 			}
 
 			
-			System.out.println("myVelib network from myVelib.ini has been successfully created");
-			System.out.print("Number of station: " + myVelib.getStationList().size() + "\n");
-			System.out.print("Number of parking slot per station: " +  myVelib.getStationList().get(0).getNumberOfSlots() + "\n");
-			System.out.print("Side of the area: " +  s + "\n");
-			System.out.print("Total number of bicycle in the network: " +  myVelib.getBicycleList().size() + "\n");
-			System.out.print("Total number of user in the network: " + myVelib.getUserList().size() + "\n");
+			
+			System.out.print("Total number of user in the network: " + myVelib.getUserList().size() + "\n\n");
 			
 			
 
@@ -83,6 +85,38 @@ public class MyVelibSystem {
 
 		}
 
+	}
+	
+	private static void commandLoop() {
+		try (Scanner scanner = new Scanner(System.in)) {
+			String checkExit = "";
+            while (checkExit != "exit") {
+            	
+            	System.out.println("Please enter a command : ");
+                String commandInput = scanner.nextLine();
+                checkExit = commandInput.intern();
+                ArrayList<String> commandInputSplit = new ArrayList<String>(Arrays.asList(commandInput.split(" ")));
+                
+                String command = commandInputSplit.get(0);
+                
+                commandInputSplit.remove(0);
+                
+                ArrayList<String> arguments = commandInputSplit;
+                
+                MyVelibCommands myVelibLoop = new MyVelibCommands(command, arguments);
+                myVelibLoop.eval();
+                
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+		
+	}
+	
+	private static void endProcess() {
+		myVelib = null;
+		System.out.println("You exited the system");
 	}
 
 

@@ -22,21 +22,28 @@ public class MyVelibCommands {
 		switch (command) {
 		
 		case "setup":
-			int nstations = (int) Double.parseDouble(arguments.get(0));
-			int nslots = (int) Double.parseDouble(arguments.get(1));
+			int nstations = Integer.parseInt(arguments.get(0));
+			int nslots = Integer.parseInt(arguments.get(1));
 			double s = Double.parseDouble(arguments.get(2));
-			int nbikes = (int) Double.parseDouble(arguments.get(3));
+			int nbikes = Integer.parseInt(arguments.get(3));
 			
 			double initialProportion = ((double) nbikes)/((double)(nstations*nslots));
 			
 			try {
+				if (nbikes>nstations*nslots) {throw new GeneralException("Warning : more bicycle than slots");}
 				MyVelibSystem.myVelib = new MyVelib(nstations, nslots, initialProportion, 0.7, 0.5, s);
+				System.out.println("MyVelib set with "+ MyVelibSystem.myVelib.getStationList().size()
+						+" station, "+MyVelibSystem.myVelib.getStationList().get(0).getNumberOfSlots()
+						+" slots per station and "+MyVelibSystem.myVelib.getBicycleList().size()
+						+" bicycles in a square with a side of "+s+"\n\n");
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println(e.getMessage());
+				System.out.println("MyVelib has not been set\n\n");
 			}
 		
 		case "addUser":
+			int userID = Integer.parseInt(arguments.get(0));
 			
 		case "offline":
 			
