@@ -9,7 +9,7 @@ public class MyVelib {
 	protected ArrayList<DockingStation> stationList;
 	protected Renter renter = new Renter(this);
 
-	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion) throws GeneralException {
+	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion,double s) throws GeneralException {
 		super();
 		bicycleList = new ArrayList<Bicycle>();
 		userList = new ArrayList<User>();
@@ -18,7 +18,7 @@ public class MyVelib {
 		//Création des DockingStations
 
 		for (int k = 0; k <numberOfDockingStation; k++) {
-			Coordinates dockingStationCoordinates = new Coordinates(Math.random()*10,Math.random()*10);
+			Coordinates dockingStationCoordinates = new Coordinates(Math.random()*s,Math.random()*s);
 
 			String dockingStationType = null;
 			if(k>=(int)Math.round(plusStationProportion*numberOfDockingStation)) {dockingStationType ="plus";}

@@ -18,8 +18,8 @@ class testSetUp {
 	
 	@BeforeEach
 	void setUp() throws GeneralException {
-		myVelib = new MyVelib(10,10,0.9,0.5,0.5);
-		myVelib2 = new MyVelib(11,9,0.9,0.5,0.5);
+		myVelib = new MyVelib(10,10,0.9,0.5,0.5, 10);
+		myVelib2 = new MyVelib(11,9,0.9,0.5,0.5, 10);
 		user1 = new User("John",new Coordinates(0, 0), "Vlibre", 100);
 		user2 = new User("Artur",new Coordinates(0, 0), "Vmax",100);
 		user3 = new User("Paul",new Coordinates(0, 0), null, 100);

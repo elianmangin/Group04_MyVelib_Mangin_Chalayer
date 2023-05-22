@@ -1,7 +1,7 @@
 package myVelibProject;
 
 public class CostFactory {
-	public CostStrategy create(String cardType){
+	public CostStrategy create(String cardType) throws GeneralException{
 		if(cardType == null){
 			return new NoCardStrategy();
 		}
@@ -15,8 +15,7 @@ public class CostFactory {
 		}
 		
 		else {
-			System.out.println("Warning : Unsupported card type");
-			return null;
+			throw new GeneralException("Warning : Unsupported card type ("+cardType+")");
 		}
 	}
 }

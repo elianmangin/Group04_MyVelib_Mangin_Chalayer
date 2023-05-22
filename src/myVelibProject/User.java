@@ -10,7 +10,7 @@ public class User {
 	protected Card registrationCard; 
 	protected Ride currentRide;
 
-	public User(String name, Coordinates gps, String cardType, double initialBalance) {
+	public User(String name, Coordinates gps, String cardType, double initialBalance) throws GeneralException {
 		super();
 		idCounterUser++;
 		this.uniqID = idCounterUser;

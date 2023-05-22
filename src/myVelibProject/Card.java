@@ -7,7 +7,7 @@ public class Card {
 	protected CostStrategy strategy;
 	protected CostFactory costFactory = new CostFactory();
 	
-	public Card(User user) {
+	public Card(User user) throws GeneralException {
 		super();
 		this.user = user;
 		this.type = null;
@@ -15,7 +15,7 @@ public class Card {
 		this.strategy = costFactory.create(null);
 	}
 	
-	public Card(User user, String type) {
+	public Card(User user, String type) throws GeneralException {
 		super();
 		this.user = user;
 		this.type = type;

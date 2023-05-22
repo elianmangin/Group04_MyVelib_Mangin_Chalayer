@@ -13,7 +13,7 @@ class TestDrivenDevelopmentMyVelib {
 	
 	@BeforeEach
 	void setUp() throws GeneralException {
-		system = new MyVelib(10, 10, 0.7, 0.7, 0.5);
+		system = new MyVelib(10, 10, 0.7, 0.7, 0.5, 10);
 		system.addUser(new User("Jean", new Coordinates(1,1), "Vlibre", 100));
 		system.addUser(new User("Alex", new Coordinates(2,2), "Vmax", 100));
 		system.addUser(new User("Clara", new Coordinates(7,8), null, 100));
