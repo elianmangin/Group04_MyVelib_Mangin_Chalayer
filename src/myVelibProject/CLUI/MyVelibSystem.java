@@ -11,11 +11,11 @@ import myVelibProject.*;
 public class MyVelibSystem {
 	public static MyVelib myVelib;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		initialization();
 	}
 
-	private static void initialization() throws Exception {
+	private static void initialization() {
 		// Code for Loading my_velib.ini
 		try{
 			Wini ini = new Wini(new File("src/myVelibProject/CLUI/tests/myVelib.ini"));
@@ -79,8 +79,6 @@ public class MyVelibSystem {
 
 
 		}catch(Exception e){
-			// To catch basically any error related to finding the file e.g
-			// (The system cannot find the file specified)
 			System.err.println(e.getMessage());
 
 		}

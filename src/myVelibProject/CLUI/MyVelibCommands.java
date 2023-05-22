@@ -20,6 +20,7 @@ public class MyVelibCommands {
 	public void eval() {
 		// TODO Auto-generated method stub
 		switch (command) {
+		
 		case "setup":
 			int nstations = (int) Double.parseDouble(arguments.get(0));
 			int nslots = (int) Double.parseDouble(arguments.get(1));
@@ -34,7 +35,24 @@ public class MyVelibCommands {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+		
+		case "addUser":
+			
+		case "offline":
+			
+		case "online":
+			
+		case "rentBike":
+		
+		case "returnBike":
+		
+		case "displayStation":
+		
+		case "displayUser":
+			
+		case "sortStation":
+			
+		case "display":
 		}
 
 	}
