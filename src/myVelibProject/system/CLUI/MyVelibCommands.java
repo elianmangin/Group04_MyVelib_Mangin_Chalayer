@@ -2,17 +2,12 @@ package myVelibProject.system.CLUI;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
-import myVelibProject.*;
-import myVelibProject.system.core.Bicycle;
-import myVelibProject.system.core.Coordinates;
-import myVelibProject.system.core.DockingStation;
-import myVelibProject.system.core.GeneralException;
-import myVelibProject.system.core.MyVelib;
-import myVelibProject.system.core.StationToStationItinerary;
-import myVelibProject.system.core.StationToStreetItinerary;
-import myVelibProject.system.core.StreetToStationItinerary;
-import myVelibProject.system.core.User;
+import myVelibProject.system.core.*;
 
 
 public class MyVelibCommands {
@@ -80,6 +75,49 @@ public class MyVelibCommands {
 
 			System.out.println(help);
 			break;
+			
+		case "readScen":
+			try {
+				// online <stationID>
+				if (arguments.size() == 1) {
+					String testName = arguments.get(0);
+					File testFile = new File("src/myVelibProject/eval/"+testName+".txt");
+					
+					try (Scanner scanner = new Scanner(testFile)) {
+						while (scanner.hasNextLine()) {
+							String commandInput = scanner.nextLine();
+						    ArrayList<String> commandInputSplit = new ArrayList<String>(Arrays.asList(commandInput.split(" ")));
+						    
+						    String command = commandInputSplit.get(0);
+						    
+						    commandInputSplit.remove(0);
+						    
+						    ArrayList<String> arguments = commandInputSplit;
+						    
+						    MyVelibCommands myVelibLoop = new MyVelibCommands(command, arguments);
+						    myVelibLoop.eval();
+						}
+					}
+					
+					
+
+
+				}
+				else {throw new GeneralException("Warning : Wrong argument size");}
+
+
+
+			} catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mStation status has not changed\u001B[0m\n\n");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+			}
+			break;
+
+			
 
 		case "setup":
 			try {
