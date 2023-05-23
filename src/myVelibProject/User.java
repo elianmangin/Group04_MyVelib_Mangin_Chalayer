@@ -28,8 +28,8 @@ public class User {
 	}
 	
 	public boolean isCurrentlyRenting() {
-		if (this.currentRide == null) {return true;}
-		else {return false;}
+		if (this.currentRide == null) {return false;}
+		else {return true;}
 	}
 	
 	
@@ -76,8 +76,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "\t\t\n" + name + ", (" + uniqID + ")\nCurrent position : " + gps + "\nBalance :\n" + balance
-				+ "\n---\nCredit : " + creditBalance + " euros\n Registration Card : " + registrationCard + "\nCurrently on ride : "
+		return "\t\t" + name + ", (" + uniqID + ")\nCurrent position : " + gps + "\nBalance : " + balance
+				+ "\nCredit : " + creditBalance + " euros\nRegistration Card : " + registrationCard + "\nCurrently on ride : "
 				+ this.isCurrentlyRenting();
 	}
 

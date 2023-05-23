@@ -34,8 +34,10 @@ public class MyVelibSystem {
 
 			
 			
-			String namesString = ini.get("users", "names", String.class);
-			ArrayList<String> names = new ArrayList<String>(Arrays.asList(namesString.split(",")));
+			String firstNamesString = ini.get("users", "firstNames", String.class);
+			ArrayList<String> firstNames = new ArrayList<String>(Arrays.asList(firstNamesString.split(",")));
+			String lastNamesString = ini.get("users", "lastNames", String.class);
+			ArrayList<String> lastNames = new ArrayList<String>(Arrays.asList(lastNamesString.split(",")));
 			String xString = ini.get("users", "x", String.class);
 			ArrayList<String> x = new ArrayList<String>(Arrays.asList(xString.split(",")));
 			String yString = ini.get("users", "y", String.class);
@@ -60,22 +62,19 @@ public class MyVelibSystem {
 
 			
 			
-			for (int i = 0; i < names.size(); i++) {
-				Coordinates userGps = new Coordinates(Double.parseDouble(x.get(i)),  Double.parseDouble(y.get(i)));
-				User user;
-				if (!cardTypes.get(i).equals("null")) {
-					user = new User(names.get(i), userGps, cardTypes.get(i), Double.parseDouble(initBalances.get(i)));
-				}
-				else {
-					user = new User(names.get(i), userGps, null, Double.parseDouble(initBalances.get(i)));
-				}
+			for (int i = 0; i < firstNames.size(); i++) {
+				arguments =  new ArrayList<String>();
+				arguments.add(firstNames.get(i));
+				arguments.add(lastNames.get(i));
+				arguments.add(cardTypes.get(i));
+				arguments.add(initBalances.get(i));
+				arguments.add(x.get(i));
+				arguments.add(y.get(i));
 				
-				MyVelibSystem.myVelib.addUser(user);
+				myVelibSetup = new MyVelibCommands("addUser", arguments);
+				myVelibSetup.eval();
 			}
 
-			
-			
-			System.out.print("Total number of user in the network: " + myVelib.getUserList().size() + "\n\n");
 			
 			
 
@@ -92,7 +91,7 @@ public class MyVelibSystem {
 			String checkExit = "";
             while (checkExit != "exit") {
             	
-            	System.out.println("Please enter a command : ");
+            	System.out.println("\u001B[36mPlease enter a command : \u001B[0m");
                 String commandInput = scanner.nextLine();
                 checkExit = commandInput.intern();
                 ArrayList<String> commandInputSplit = new ArrayList<String>(Arrays.asList(commandInput.split(" ")));
