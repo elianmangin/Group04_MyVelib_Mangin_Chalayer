@@ -14,7 +14,7 @@ public class DockingStation {
 	protected DockingStationBalance dockingStationBalance;
 	protected int numberOfMecanicalBicycle;
 	protected int numberOfElectricalBicycle;
-	
+
 	public DockingStation(Coordinates coordinatesStation, String type, int numberOfSlots) {
 		super();
 		idCounterStation++;
@@ -28,13 +28,13 @@ public class DockingStation {
 		this.dockingStationBalance = new DockingStationBalance();
 		this.numberOfElectricalBicycle = 0;
 		this.numberOfMecanicalBicycle = 0;
-		
+
 		for (int i = 0; i < numberOfSlots; i++) {
 			this.parkingSlotList.add(new ParkingSlot());
 		}
-		
+
 	}
-	
+
 	public boolean addBicycle(Bicycle B) throws GeneralException {
 		if (this.numberOfSlotsOccupied < this.numberOfSlots) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
@@ -54,28 +54,32 @@ public class DockingStation {
 			throw new GeneralException("Warning : this station is full");
 		}
 	}
-	
+
 	public Bicycle takeBicycle(String type) throws GeneralException {
 		if (type.equals("mecanical") && this.numberOfMecanicalBicycle > 0) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
-				if (parkingSlot.parkedBicycle.getType() == "mecanical") {
-					Bicycle B = parkingSlot.parkedBicycle;
-					parkingSlot.removeBicycle();
-					this.numberOfSlotsOccupied--;
-					this.numberOfMecanicalBicycle--;
-					return B;
+				if (parkingSlot.status) {
+					if (parkingSlot.parkedBicycle.getType() == "mecanical") {
+						Bicycle B = parkingSlot.parkedBicycle;
+						parkingSlot.removeBicycle();
+						this.numberOfSlotsOccupied--;
+						this.numberOfMecanicalBicycle--;
+						return B;
+					}
 				}
 			}
 			throw new GeneralException("Error taking bicycle");
 		}
 		else if (type.equals("electrical") && this.numberOfElectricalBicycle > 0) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
-				if (parkingSlot.parkedBicycle.getType() == "electrical") {
-					Bicycle B = parkingSlot.parkedBicycle;
-					parkingSlot.removeBicycle();
-					this.numberOfSlotsOccupied--;
-					this.numberOfElectricalBicycle--;
-					return B;
+				if (parkingSlot.status) {
+					if (parkingSlot.parkedBicycle.getType() == "electrical") {
+						Bicycle B = parkingSlot.parkedBicycle;
+						parkingSlot.removeBicycle();
+						this.numberOfSlotsOccupied--;
+						this.numberOfElectricalBicycle--;
+						return B;
+					}
 				}
 			}
 			throw new GeneralException("Error taking bicycle");
@@ -85,7 +89,7 @@ public class DockingStation {
 		}
 	}
 
-	
+
 	// Getters, Setters, toString
 	@Override
 	public String toString() {
@@ -100,7 +104,7 @@ public class DockingStation {
 	public int getNumberOfElectricalBicycle() {
 		return numberOfElectricalBicycle;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -140,7 +144,7 @@ public class DockingStation {
 	public DockingStationBalance getDockingStationBalance() {
 		return dockingStationBalance;
 	}
-	
+
 	public ArrayList<Integer> getBicycleIDList(){
 		ArrayList<Integer> idList = new ArrayList<Integer>();
 		for (ParkingSlot PS : parkingSlotList) {
@@ -150,13 +154,13 @@ public class DockingStation {
 			else {
 				idList.add(0);
 			}
-			
+
 		}
 		return idList;
-		
-	}
-	
 
-	
+	}
+
+
+
 
 }
