@@ -8,6 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import myVelibProject.*;
+import myVelibProject.system.core.Bicycle;
+import myVelibProject.system.core.Coordinates;
+import myVelibProject.system.core.DockingStation;
+import myVelibProject.system.core.GeneralException;
+import myVelibProject.system.core.MyVelib;
+import myVelibProject.system.core.User;
 
 class testSetUp {
 	private MyVelib myVelib;

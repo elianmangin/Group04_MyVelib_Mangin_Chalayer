@@ -1,6 +1,12 @@
 package myVelibProject.tests;
 
 import myVelibProject.*;
+import myVelibProject.system.core.Bicycle;
+import myVelibProject.system.core.Coordinates;
+import myVelibProject.system.core.DockingStation;
+import myVelibProject.system.core.GeneralException;
+import myVelibProject.system.core.MyVelib;
+import myVelibProject.system.core.User;
 
 import static org.junit.jupiter.api.Assertions.*;
 

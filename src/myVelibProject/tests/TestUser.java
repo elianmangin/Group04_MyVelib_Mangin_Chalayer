@@ -1,8 +1,8 @@
 package myVelibProject.tests;
 
-import myVelibProject.User;
 import myVelibProject.CreditCard;
-import myVelibProject.Coordinates;
+import myVelibProject.system.core.Coordinates;
+import myVelibProject.system.core.User;
 
 import static org.junit.jupiter.api.Assertions.*;
 

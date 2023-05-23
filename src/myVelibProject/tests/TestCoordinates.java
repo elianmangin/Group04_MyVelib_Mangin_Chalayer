@@ -1,11 +1,11 @@
 package myVelibProject.tests;
 
-import myVelibProject.Coordinates;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import myVelibProject.system.core.Coordinates;
 
 class TestCoordinates {
 	private Coordinates coord;

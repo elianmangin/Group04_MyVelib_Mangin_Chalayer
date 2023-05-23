@@ -1,12 +1,12 @@
 package myVelibProject.tests;
 
-import myVelibProject.Coordinates;
-import myVelibProject.Bicycle;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import myVelibProject.system.core.Bicycle;
+import myVelibProject.system.core.Coordinates;
 
 class TestBicycle {
 	private Bicycle bicycle1;

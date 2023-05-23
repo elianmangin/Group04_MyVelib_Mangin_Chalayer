@@ -6,10 +6,10 @@ import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
-import myVelibProject.Bicycle;
-import myVelibProject.Coordinates;
-import myVelibProject.DockingStation;
-import myVelibProject.User;
+import myVelibProject.system.core.Bicycle;
+import myVelibProject.system.core.Coordinates;
+import myVelibProject.system.core.DockingStation;
+import myVelibProject.system.core.User;
 
 class TestRide {
 	private User u;
