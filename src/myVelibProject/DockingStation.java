@@ -89,8 +89,8 @@ public class DockingStation {
 	// Getters, Setters, toString
 	@Override
 	public String toString() {
-		return "\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\n STATUS :" + status + "\nSLOTS : " + numberOfSlots 
-				+ "\nBALANCE :"+ dockingStationBalance;
+		return "\n\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\nSTATUS :" + status + "\nSLOTS : " + numberOfSlots 
+				+ "\nBALANCE :"+ dockingStationBalance + "\nBicycles parked here : " + this.getBicycleIDList();
 	}
 
 	public int getNumberOfMecanicalBicycle() {
@@ -139,6 +139,21 @@ public class DockingStation {
 
 	public DockingStationBalance getDockingStationBalance() {
 		return dockingStationBalance;
+	}
+	
+	public ArrayList<Integer> getBicycleIDList(){
+		ArrayList<Integer> idList = new ArrayList<Integer>();
+		for (ParkingSlot PS : parkingSlotList) {
+			if (PS.isOccupied()) {
+				idList.add(PS.parkedBicycle.getUniqID());
+			}
+			else {
+				idList.add(0);
+			}
+			
+		}
+		return idList;
+		
 	}
 	
 

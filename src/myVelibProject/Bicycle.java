@@ -43,7 +43,7 @@ public class Bicycle {
 
 	@Override
 	public String toString() {
-		return "\t\tBicycle number " + uniqID + "\nCoordinates : " + gps + "\nType : " + type + "\nCurrently rented : "
+		return "\n\t\tBicycle number " + uniqID + "\nCoordinates : " + gps + "\nType : " + type + "\nCurrently rented : "
 				+ currentlyRentedBicycle;
 	}
 	

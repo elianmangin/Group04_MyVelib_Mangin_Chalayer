@@ -116,9 +116,9 @@ public class MyVelibCommands {
 			try {
 				// offline <stationID>
 				if (arguments.size() == 1) {
-					throw new GeneralException("Warning : This function is not implemented yet");
-
-
+					int stationID = Integer.parseInt(arguments.get(0));
+					MyVelibSystem.myVelib.setOfflineStation(stationID);
+					System.out.println("\u001B[32mStation number "+stationID+" went offline\u001B[0m\n\n");
 
 				}
 				else {throw new GeneralException("Warning : Wrong argument size");}
@@ -128,7 +128,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\u001B[33mStation status has not changed\u001B[0m\n\n");
 			}
 			break;
 
@@ -136,7 +136,9 @@ public class MyVelibCommands {
 			try {
 				// online <stationID>
 				if (arguments.size() == 1) {
-					throw new GeneralException("Warning : This function is not implemented yet");
+					int stationID = Integer.parseInt(arguments.get(0));
+					MyVelibSystem.myVelib.setOnlineStation(stationID);
+					System.out.println("\u001B[32mStation number "+stationID+" went online\u001B[0m\n\n");
 
 
 				}
@@ -147,7 +149,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\u001B[33mStation status has not changed\u001B[0m\n\n");
 			}
 			break;
 
@@ -166,7 +168,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\u001B[33mThe bike has not been rented\u001B[0m\n\n");
 			}
 			break;
 
@@ -185,7 +187,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\u001B[33mThe bike has not been returned\u001B[0m\n\n");
 			}
 			break;
 
@@ -193,7 +195,9 @@ public class MyVelibCommands {
 			try {
 				// displayStation <stationID>
 				if (arguments.size() == 1) {
-					throw new GeneralException("Warning : This function is not implemented yet");
+					int stationID = Integer.parseInt(arguments.get(0));
+					System.out.println(MyVelibSystem.myVelib.getStationFromID(stationID)+"\n\n");
+					
 
 
 				}
@@ -204,7 +208,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\u001B[33mCan't display this station\u001B[0m\n\n");
 			}
 			break;
 
@@ -212,7 +216,8 @@ public class MyVelibCommands {
 			try {
 				// displayUser <userID>
 				if (arguments.size() == 1) {
-					throw new GeneralException("Warning : This function is not implemented yet");
+					int userID = Integer.parseInt(arguments.get(0));
+					System.out.println(MyVelibSystem.myVelib.getUserFromID(userID)+"\n\n");
 
 
 				}
@@ -223,7 +228,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\\u001B[33mUser has not been added to the system\\u001B[0m\\n\\n");
 			}
 			break;
 
@@ -231,7 +236,27 @@ public class MyVelibCommands {
 			try {
 				// sortStation <sortPolicy>
 				if (arguments.size() == 1) {
-					throw new GeneralException("Warning : This function is not implemented yet");
+					String sortPolicy = arguments.get(0);
+					switch(sortPolicy) {
+					case "ID":
+						MyVelibSystem.myVelib.SortByIDStation();
+						System.out.println("\u001B[32mStations have been sorted by ID\u001B[0m\n\n");
+						break;
+					
+					case "leastOccupied":
+						MyVelibSystem.myVelib.SortByLeastOccupiedStation();
+						System.out.println("\u001B[32mStations have been sorted by least occupied\u001B[0m\n\n");
+						break;
+						
+					case "mostUsed":
+						MyVelibSystem.myVelib.SortByMostUsedStation();
+						System.out.println("\u001B[32mStations have been sorted by most used\u001B[0m\n\n");
+						break;
+					
+					default:
+						throw new GeneralException("This sorting policy isn't handled by the system");
+					
+					}
 
 
 				}
@@ -242,7 +267,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\\u001B[33mUser has not been added to the system\\u001B[0m\\n\\n");
 			}
 			break;
 
@@ -250,7 +275,7 @@ public class MyVelibCommands {
 			try {
 				// display <>
 				if (arguments.size() == 0) {
-					throw new GeneralException("Warning : This function is not implemented yet");
+					System.out.println(MyVelibSystem.myVelib);
 
 
 				}
@@ -261,7 +286,7 @@ public class MyVelibCommands {
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
-				System.out.println("User has not been added to the system\n\n");
+				System.out.println("\\u001B[33mUser has not been added to the system\\u001B[0m\\n\\n");
 			}
 			break;
 

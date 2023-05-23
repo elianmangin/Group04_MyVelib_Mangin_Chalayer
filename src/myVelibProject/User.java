@@ -76,7 +76,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "\t\t" + name + ", (" + uniqID + ")\nCurrent position : " + gps + "\nBalance : " + balance
+		return "\n\t\t" + name + ", (" + uniqID + ")\nCurrent position : " + gps + "\nBalance : " + balance
 				+ "\nCredit : " + creditBalance + " euros\nRegistration Card : " + registrationCard + "\nCurrently on ride : "
 				+ this.isCurrentlyRenting();
 	}

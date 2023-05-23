@@ -75,8 +75,13 @@ public class MyVelib {
 	}
 
 	public void SortByLeastOccupiedStation(){
-		ComparatorByLeastOccupiedStation comparatorByMostUsedStation = new ComparatorByLeastOccupiedStation();
-		Collections.sort(this.stationList,comparatorByMostUsedStation);
+		ComparatorByLeastOccupiedStation comparatorByLeastOccupiedStation = new ComparatorByLeastOccupiedStation();
+		Collections.sort(this.stationList,comparatorByLeastOccupiedStation);
+	}
+	
+	public void SortByIDStation(){
+		ComparatorByIDStation comparatorByIDStation = new ComparatorByIDStation();
+		Collections.sort(this.stationList,comparatorByIDStation);
 	}
 
 	public void displayStations() {
@@ -118,12 +123,56 @@ public class MyVelib {
 		}
 		throw new GeneralException("No station found with this ID");
 	}
+	
+	public boolean setOfflineStation(int ID) throws GeneralException {
+		for (DockingStation S : stationList) {
+			if (S.getUniqID()==ID) {
+				if (S.getStatus().equals("online")) {
+					S.setStatus("offline");
+					return true;
+				}
+				else if(S.getStatus().equals("offline")) {
+					throw new GeneralException("Station already offline");
+				}
+				
+				else {
+					S.setStatus("offline");
+					System.out.println("Warning : Current station's status doesn't correspond to any known status");
+				}
+				
+			}
+		}
+		throw new GeneralException("No station found with this ID");
+		
+	}
+	
+	public boolean setOnlineStation(int ID) throws GeneralException {
+		for (DockingStation S : stationList) {
+			if (S.getUniqID()==ID) {
+				if (S.getStatus().equals("offline")) {
+					S.setStatus("online");
+					return true;
+				}
+				else if(S.getStatus().equals("online")) {
+					throw new GeneralException("Station already online");
+				}
+				
+				else {
+					S.setStatus("offline");
+					System.out.println("Warning : Current station's status doesn't correspond to any known status");
+				}
+				
+			}
+		}
+		throw new GeneralException("No station found with this ID");
+		
+	}
 
 
 	// Getters, Setters, toString
 	@Override
 	public String toString() {
-		return "Report on the actual state of the system \n Here are the bicycles :" + bicycleList + "\n Here are the Users :" + userList + "\n Here are the Stations :" + stationList;
+		return "\u001B[32mReport on the actual state of the system\u001B[0m \n\u001B[32mHere are the bicycles :\u001B[0m" + bicycleList + "\n\u001B[32mHere are the Users :\u001B[0m" + userList + "\n\u001B[32mHere are the Stations :\u001B[0m" + stationList;
 	}
 	public ArrayList<Bicycle> getBicycleList() {
 		return bicycleList;
