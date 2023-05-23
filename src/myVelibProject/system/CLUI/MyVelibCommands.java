@@ -29,6 +29,10 @@ public class MyVelibCommands {
 		case "help":
 			String help;
 			help = "Here are the different commands that you can use on the myVelib system : \n\n"
+					+"-  readScen <testScenario>\n"
+					+ "Execute all the commands of testScenario.\n"
+					+ "testScenario : name of a test in the 'eval' floder without .txt\n\n"
+					
 					+"-  setup <>\n"
 					+ "Creates a myVelib network consisting of 10 stations each of which has\n"
 					+ "10 parking slots and such that stations are arranged on a square grid whose of\n"
