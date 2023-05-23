@@ -145,6 +145,10 @@ public class Renter {
 	public RideItinerary getItinerary() {
 		return itinerary;
 	}
+	
+	public void setItinerary(@SuppressWarnings("rawtypes") RideItinerary itinerary) {
+		this.itinerary = itinerary;
+	}
 
 	
 	

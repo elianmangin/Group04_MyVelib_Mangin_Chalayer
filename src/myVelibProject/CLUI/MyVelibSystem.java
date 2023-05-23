@@ -74,6 +74,8 @@ public class MyVelibSystem {
 				myVelibSetup = new MyVelibCommands("addUser", arguments);
 				myVelibSetup.eval();
 			}
+			
+			System.out.println("\u001B[36mWelcome to the myVelib system CLUI !\nYou can use the 'help' command to see all the available commands.\n\u001B[0m");
 
 			
 			

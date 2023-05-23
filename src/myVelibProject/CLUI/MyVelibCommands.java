@@ -1,5 +1,6 @@
 package myVelibProject.CLUI;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import myVelibProject.*;
@@ -20,6 +21,35 @@ public class MyVelibCommands {
 	public void eval() {
 		// TODO Auto-generated method stub
 		switch (command) {
+
+		case "help":
+			String help;
+			help = "Here are the different commands that you can use on the myVelib system : \n\n"
+					+"-  setup <>\n"
+					+ "Creates a myVelib network consisting of 10 stations each of which has\n"
+					+ "10 parking slots and such that stations are arranged on a square grid whose of\n"
+					+ "side 4km and initially populated with a 75% bikes randomly distributed over "
+					+ "the 10 stations.\n\n"
+
+			+ "-  setup <nstations> <nslots> <s> <nbikes>\n"
+			+ "Creates a myVelib network consisting of nstations stations each of which has\n"
+			+ "nslots parking slots and such that stations are arranged on a square grid whose of\n"
+			+ "side s km and initially populated with a nbikes bikes randomly distributed over "
+			+ "the stations.\n\n"
+
+			+ "-  addUser <name> <cardType> <initBalance> <x> <y>\n"
+			+ "-  addUser <firstName> <lastName> <cardType> <initBalance> <x> <y>\n"
+			+ "Adds a user with a specified name, card type, credit balance, and initial\n"
+			+ "position to the system.\n\n"
+
+			+ "-  offline <stationID>\n"
+			+ "Put a station status on offline.\n\n"
+
+			+ "-  online <stationID>\n"
+			+ "Put a station status on online.\n\n";
+
+			System.out.println(help);
+			break;
 
 		case "setup":
 			try {
@@ -100,7 +130,7 @@ public class MyVelibCommands {
 				user = new User(userName, new Coordinates(initX, initY), cardType, initBalance);
 				MyVelibSystem.myVelib.addUser(user);
 				System.out.print("\u001B[32mSuccessfully added user to the system :\u001B[0m" + MyVelibSystem.myVelib.getUserList().get(MyVelibSystem.myVelib.getUserList().size()-1) + "\n\n");
-				
+
 
 
 
@@ -155,11 +185,23 @@ public class MyVelibCommands {
 
 		case "rentBike":
 			try {
-				// rentBike <userID> <depart> (depart : Coordinates ou int)
-				if (arguments.size() == 2) {
-					throw new GeneralException("Warning : This function is not implemented yet");
+				// rentBike <userID> <stationID> <type>
+				if (arguments.size() == 3) {
+					int userID = Integer.parseInt(arguments.get(0));
+					int stationID = Integer.parseInt(arguments.get(1));
+					String type = arguments.get(2);
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					DockingStation station = MyVelibSystem.myVelib.getStationFromID(stationID);
+					MyVelibSystem.myVelib.renter.connectUser(user);
+					MyVelibSystem.myVelib.renter.setItinerary(new StationToStationItinerary(station, null, type));
+					MyVelibSystem.myVelib.renter.rentBicycle(LocalTime.of(0, 0));
+					MyVelibSystem.myVelib.renter.disconnectUser();
 
 
+				}
+				// rentBike <userID> <bicycleID> 
+				else if(arguments.size() == 2) {
+					
 				}
 				else {throw new GeneralException("Warning : Wrong argument size");}
 
@@ -174,11 +216,15 @@ public class MyVelibCommands {
 
 		case "returnBike":
 			try {
-				// return <userID> <arrivée> <duration> (arrivée : Coordinates ou int(stationID))
+				// return <userID> <idStation> <duration>
 				if (arguments.size() == 3) {
 					throw new GeneralException("Warning : This function is not implemented yet");
 
 
+				}
+				// returnBike <userID> <x> <y> <duration> 
+				else if(arguments.size() == 4) {
+					
 				}
 				else {throw new GeneralException("Warning : Wrong argument size");}
 
@@ -197,7 +243,7 @@ public class MyVelibCommands {
 				if (arguments.size() == 1) {
 					int stationID = Integer.parseInt(arguments.get(0));
 					System.out.println(MyVelibSystem.myVelib.getStationFromID(stationID)+"\n\n");
-					
+
 
 
 				}
@@ -242,20 +288,20 @@ public class MyVelibCommands {
 						MyVelibSystem.myVelib.SortByIDStation();
 						System.out.println("\u001B[32mStations have been sorted by ID\u001B[0m\n\n");
 						break;
-					
+
 					case "leastOccupied":
 						MyVelibSystem.myVelib.SortByLeastOccupiedStation();
 						System.out.println("\u001B[32mStations have been sorted by least occupied\u001B[0m\n\n");
 						break;
-						
+
 					case "mostUsed":
 						MyVelibSystem.myVelib.SortByMostUsedStation();
 						System.out.println("\u001B[32mStations have been sorted by most used\u001B[0m\n\n");
 						break;
-					
+
 					default:
 						throw new GeneralException("This sorting policy isn't handled by the system");
-					
+
 					}
 
 

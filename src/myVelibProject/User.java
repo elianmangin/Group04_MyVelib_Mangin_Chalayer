@@ -6,7 +6,7 @@ public class User {
 	protected int uniqID;
 	protected Coordinates gps;
 	protected UserBalance balance;
-	protected double creditBalance;
+	public double creditBalance;
 	protected Card registrationCard; 
 	protected Ride currentRide;
 

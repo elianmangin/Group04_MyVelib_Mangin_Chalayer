@@ -7,7 +7,7 @@ public class MyVelib {
 	protected ArrayList<Bicycle> bicycleList;
 	protected ArrayList<User> userList;
 	protected ArrayList<DockingStation> stationList;
-	protected Renter renter = new Renter(this);
+	public Renter renter = new Renter(this);
 
 	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion,double s) throws GeneralException {
 		super();

@@ -56,7 +56,7 @@ public class DockingStation {
 	}
 	
 	public Bicycle takeBicycle(String type) throws GeneralException {
-		if (type == "mecanical" && this.numberOfMecanicalBicycle > 0) {
+		if (type.equals("mecanical") && this.numberOfMecanicalBicycle > 0) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
 				if (parkingSlot.parkedBicycle.getType() == "mecanical") {
 					Bicycle B = parkingSlot.parkedBicycle;
@@ -68,7 +68,7 @@ public class DockingStation {
 			}
 			throw new GeneralException("Error taking bicycle");
 		}
-		else if (type == "electrical" && this.numberOfElectricalBicycle > 0) {
+		else if (type.equals("electrical") && this.numberOfElectricalBicycle > 0) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
 				if (parkingSlot.parkedBicycle.getType() == "electrical") {
 					Bicycle B = parkingSlot.parkedBicycle;
@@ -81,7 +81,7 @@ public class DockingStation {
 			throw new GeneralException("Error taking bicycle");
 		}
 		else {
-			throw new GeneralException("No bicycle of the required type in this station");
+			throw new GeneralException("No bicycle of the required type ("+ type +") in this station");
 		}
 	}
 
