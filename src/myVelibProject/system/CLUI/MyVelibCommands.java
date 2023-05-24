@@ -270,7 +270,7 @@ public class MyVelibCommands {
 					MyVelibSystem.myVelib.renter.setItinerary(new StationToStationItinerary(station, null, type));
 					int bikeID = MyVelibSystem.myVelib.renter.rentBicycle(LocalTime.of(0, 0));
 					MyVelibSystem.myVelib.renter.disconnectUser();
-					System.out.println("\u001B[32m"+user.getName()+" successfully took the bike number "+bikeID+" from the station number "+stationID+"\u001B[0m\n\n");
+					System.out.println("\u001B[32m"+user.getName()+" successfully took the "+MyVelibSystem.myVelib.getBicycleFromID(bikeID).getType()+" bike number "+bikeID+" from the station number "+stationID+"\u001B[0m\n\n");
 					
 
 

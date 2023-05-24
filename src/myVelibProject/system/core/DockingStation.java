@@ -96,7 +96,7 @@ public class DockingStation {
 	// Getters, Setters, toString
 	@Override
 	public String toString() {
-		return "\n\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\nSTATUS :" + status + "\nSLOTS : " + numberOfSlots 
+		return "\n\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\nTYPE : "+ type + "\nSTATUS :" + status + "\nSLOTS : " + numberOfSlots 
 				+ "\nBALANCE :"+ dockingStationBalance + "\nBicycles parked here : " + this.getBicycleIDList();
 	}
 
