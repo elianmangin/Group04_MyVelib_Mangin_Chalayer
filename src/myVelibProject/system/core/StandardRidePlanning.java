@@ -24,14 +24,14 @@ public class StandardRidePlanning implements RidePlanning{
 		
 		//Create possible station lists
 		
-		if(type == "electrical") {
+		if(type.equals("electrical")) {
 			for (DockingStation dockingStation : myvelib.getStationList()) {
 				if (dockingStation.getNumberOfElectricalBicycle() > 0) {
 					possibleStartingDockingStationList.add(dockingStation);
 				}
 			}
 		}
-		if(type == "mecanical") {
+		if(type.equals("mecanical")) {
 			for (DockingStation dockingStation : myvelib.getStationList()) {
 				if (dockingStation.getNumberOfMecanicalBicycle() > 0) {
 					possibleStartingDockingStationList.add(dockingStation);

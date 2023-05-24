@@ -55,6 +55,12 @@ public class MyVelibCommands {
 
 					+ "-  online <stationID>\n"
 					+ "Put a station status on online.\n\n"
+					
+					+ "-  askPlanning <userID> <xDestination> <yDestination> <wantedTypeOfBicycle> <planning>\n"
+					+ "Give the optimal start and the optimal end for a user wanting to go to (x,y) with a bicycle of\n"
+					+ "a given type following a given ride planning\n"
+					+ "planning : 'standard'\n\n"
+					
 			
 					+ "-  rentBike <userID> <stationID> <type>\n"
 					+ "A user rent a bicycle of a given type from a given station.\n"
@@ -241,6 +247,58 @@ public class MyVelibCommands {
 					int stationID = Integer.parseInt(arguments.get(0));
 					MyVelibSystem.myVelib.setOnlineStation(stationID);
 					System.out.println("\u001B[32mStation number "+stationID+" went online\u001B[0m\n\n");
+
+
+				}
+				else {throw new GeneralException("Warning : Wrong argument size");}
+
+
+
+			} catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mStation status has not changed\u001B[0m\n\n");
+			}
+			break;
+			
+			
+		case "askPlanning":
+			try {
+				// askPlanning <userID> <xDestination> <yDestination> <wantedTypeOfBicycle> <planning>
+				if (arguments.size() == 5) {
+					int userID = Integer.parseInt(arguments.get(0));
+					int x = Integer.parseInt(arguments.get(1));
+					int y = Integer.parseInt(arguments.get(2));
+					String wantedType = arguments.get(3);
+					String planning = arguments.get(4);
+					
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					
+					MyVelibSystem.myVelib.renter.connectUser(user);
+					MyVelibSystem.myVelib.renter.askPlanning(new Coordinates(x, y), wantedType, planning);
+					RideItinerary itinerary = MyVelibSystem.myVelib.renter.getItinerary();
+					
+					System.out.println("\u001B[32mHere's the suggested itinerary :\u001B[0m");
+					if (itinerary.getStart() instanceof Bicycle) {
+						Bicycle B = (Bicycle) itinerary.getStart();
+						System.out.println("\u001B[32mStart : Bicycle number "+B.getUniqID()+" located at "+B.getGps()+"\u001B[0m");
+					}
+					else if (itinerary.getStart() instanceof DockingStation) {
+						DockingStation S = (DockingStation) itinerary.getStart();
+						System.out.println("\u001B[32mStart : Station number "+S.getUniqID()+" located at "+S.getGps()+"\u001B[0m");
+					}
+					else {throw new GeneralException("Error : The type of start is unknown");}
+					
+					if (itinerary.getEnd() instanceof Coordinates) {
+						Coordinates C = (Coordinates) itinerary.getEnd();
+						System.out.println("\u001B[32mEnd : In the street "+C+"\u001B[0m\n\n");
+					}
+					else if (itinerary.getEnd() instanceof DockingStation) {
+						DockingStation S = (DockingStation) itinerary.getEnd();
+						System.out.println("\u001B[32mEnd : Station number "+S.getUniqID()+" located at "+S.getGps()+"\u001B[0m\n\n");
+					}
+					else {throw new GeneralException("Error : The type of end is unknown");}
+					
 
 
 				}
