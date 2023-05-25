@@ -1,6 +1,12 @@
 package myVelibProject.system.core;
 import java.util.Comparator;
 
+/**
+ * Implements Comparator for DockingStation.
+ * <p>
+ * Compare stations by their distance to a given coordinates.
+ * </p>
+ */
 public class ComparatorByDistanceStation implements Comparator<DockingStation>{
 	protected Coordinates coordinates;
 	

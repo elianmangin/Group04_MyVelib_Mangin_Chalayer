@@ -1,6 +1,12 @@
 package myVelibProject.system.core;
 import java.util.Comparator;
 
+/**
+ * Implements Comparator for DockingStation.
+ * <p>
+ * Compare stations by the difference of the number of bike dropped in and rent from.
+ * </p>
+ */
 public class ComparatorByLeastOccupiedStation implements Comparator<DockingStation>{
 
 	@Override

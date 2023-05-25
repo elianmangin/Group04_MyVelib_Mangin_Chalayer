@@ -1,6 +1,10 @@
 package myVelibProject.system.core;
 
+/**
+ * Factory of CostStrategy
+ */
 public class CostFactory {
+	/** Creates a CostStrategy for a given card type.*/
 	public CostStrategy create(String cardType) throws GeneralException{
 		if(cardType == null){
 			return new NoCardStrategy();

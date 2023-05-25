@@ -1,6 +1,12 @@
 package myVelibProject.system.core;
 import java.util.Comparator;
 
+/**
+ * Implements Comparator for DockingStation.
+ * <p>
+ * Compare stations by the number of operation done in it.
+ * </p>
+ */
 public class ComparatorByMostUsedStation implements Comparator<DockingStation>{
 
 	@Override

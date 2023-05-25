@@ -1,5 +1,12 @@
 package myVelibProject.system.core;
 
+/**
+ * This class defines the characteristics of a bicycle.
+ * <p>
+ * It consists of the different attribute of the bicycle which has no particular method.
+ * In our system, the bicycles are passive objects. They can be rented by the users.
+ * </p>
+ */
 public class Bicycle {
 	protected static int idCounterBicycle = 0;
 	protected int uniqID;
@@ -8,6 +15,8 @@ public class Bicycle {
 	protected boolean inStation;
 	protected boolean currentlyRentedBicycle;
 	
+	/** Creates a bicycle with given coordinates, a given type (mecanical or electrical) and set its status (inStation and 
+	 * currentlyRentedBicycle) to false.*/
 	public Bicycle(Coordinates gps, String type) {
 		super();
 		idCounterBicycle++;

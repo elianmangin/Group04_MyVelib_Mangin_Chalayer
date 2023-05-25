@@ -2,6 +2,12 @@ package myVelibProject.system.core;
 
 import java.util.Comparator;
 
+/**
+ * Implements Comparator for DockingStation.
+ * <p>
+ * Compare stations by their ID.
+ * </p>
+ */
 public class ComparatorByIDStation implements Comparator<DockingStation> {
 	@Override
 	public int compare(DockingStation o1, DockingStation o2) {
