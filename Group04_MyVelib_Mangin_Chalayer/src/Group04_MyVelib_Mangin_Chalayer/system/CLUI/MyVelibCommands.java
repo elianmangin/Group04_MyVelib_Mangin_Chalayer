@@ -100,7 +100,7 @@ public class MyVelibCommands {
 				// online <stationID>
 				if (arguments.size() == 1) {
 					String testName = arguments.get(0);
-					File testFile = new File("src/myVelibProject/eval/"+testName+".txt");
+					File testFile = new File("src/Group04_MyVelib_Mangin_Chalayer/eval/"+testName+".txt");
 
 					try (Scanner scanner = new Scanner(testFile)) {
 						while (scanner.hasNextLine()) {
