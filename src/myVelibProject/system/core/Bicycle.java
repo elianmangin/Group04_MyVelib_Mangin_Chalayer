@@ -43,6 +43,10 @@ public class Bicycle {
 		return type;
 	}
 	
+	public static void setIdCounterBicycle(int idCounterBicycle) {
+		Bicycle.idCounterBicycle = idCounterBicycle;
+	}
+	
 	public void setInStation(boolean b) {
 		this.inStation = b;
 	}

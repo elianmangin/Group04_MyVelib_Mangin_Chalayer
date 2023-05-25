@@ -23,6 +23,7 @@ public class User {
 	}
 	
 	public void charge(double amount) throws GeneralException {
+		if (amount<0) throw new GeneralException();
 		if (creditBalance >amount) {creditBalance -= amount;}
 		else throw new GeneralException("Balance Insufficient");
 	}
@@ -65,6 +66,10 @@ public class User {
 	public int getUniqID() {
 		return uniqID;
 	}
+	
+	public static void setIdCounterUser(int idCounterUser) {
+		User.idCounterUser = idCounterUser;
+	}
 
 	public UserBalance getBalance() {
 		return balance;
@@ -76,7 +81,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "\n\t\t" + name + ", (" + uniqID + ")\nCurrent position : " + gps + "\nBalance : " + balance
+		return "\n\t\t" + name + " ID " + uniqID + "\nCurrent position : " + gps + "\nBalance : " + balance
 				+ "\nCredit : " + creditBalance + " euros\nRegistration Card : " + registrationCard + "\nCurrently on ride : "
 				+ this.isCurrentlyRenting();
 	}

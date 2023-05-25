@@ -14,6 +14,9 @@ public class MyVelib {
 		bicycleList = new ArrayList<Bicycle>();
 		userList = new ArrayList<User>();
 		stationList = new ArrayList<DockingStation>();
+		User.setIdCounterUser(0);
+		DockingStation.setIdCounterStation(0);
+		Bicycle.setIdCounterBicycle(0);
 
 		//Création des DockingStations
 
@@ -102,6 +105,20 @@ public class MyVelib {
 		}
 	}
 
+	public void report() {
+		System.out.print("\nOnline Stations : ");
+		for (DockingStation DS : stationList) {
+			if (DS.status == "online") {
+				System.out.print("\nDockingStation number "+DS.getUniqID() );
+			}
+		}
+		System.out.print("\nOffline Stations : ");
+		for (DockingStation DS : stationList) {
+			if (DS.status == "offline") {
+				System.out.print("\nDockingStation number "+DS.getUniqID());
+			}
+		}
+	}
 	
 	public User getUserFromID(int ID) throws GeneralException {
 		for (User U : userList) {

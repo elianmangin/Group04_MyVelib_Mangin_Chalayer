@@ -32,16 +32,20 @@ public class Ride {
 	}
 
 
-	public void endRide(DockingStation endStation, LocalTime endTime) {
+	public void endRide(DockingStation endStation, LocalTime endTime) throws GeneralException  {
+		if(!endTime.isAfter(startTime)) throw new GeneralException();
 		this.endCoordinates = endStation.getGps();
 		this.endTime = endTime;
 		this.endStation = endStation;
+		this.bicycleUsed.setGps(endCoordinates);
 	}
 	
-	public void endRide(Coordinates gps, LocalTime endTime) {
+	public void endRide(Coordinates gps, LocalTime endTime) throws GeneralException {
+		if(!endTime.isAfter(startTime)) throw new GeneralException();
 		this.endCoordinates = gps;
 		this.endTime = endTime;
 		this.endStation = null;
+		this.bicycleUsed.setGps(endCoordinates);
 	}
 
 	
@@ -51,7 +55,15 @@ public class Ride {
 		return "Ride from " +startStation+ "(" + startCoordinates + ") to "+endStation+ "(" + endCoordinates
 				+"\nDeparture : " + startTime + " / Arrival : " + endTime + "\nCost : " + cost;
 	}
+	
+	public User getUser() {
+		return user;
+	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	public Coordinates getStartCoordinates() {
 		return startCoordinates;
 	}

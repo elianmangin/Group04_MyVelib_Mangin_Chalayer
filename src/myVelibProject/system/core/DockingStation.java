@@ -97,7 +97,7 @@ public class DockingStation {
 	@Override
 	public String toString() {
 		return "\n\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\nTYPE : "+ type + "\nSTATUS :" + status + "\nSLOTS : " + numberOfSlots 
-				+ "\nBALANCE :"+ dockingStationBalance + "\nBicycles parked here : " + this.getBicycleIDList();
+				+ "\nSLOTS OCCUPIED : " + numberOfSlotsOccupied+ "\nBALANCE :"+ dockingStationBalance + "\nBicycles parked here : " + this.getBicycleIDList();
 	}
 
 	public int getNumberOfMecanicalBicycle() {
@@ -134,6 +134,10 @@ public class DockingStation {
 
 	public int getUniqID() {
 		return uniqID;
+	}
+	
+	public static void setIdCounterStation(int idCounterStation) {
+		DockingStation.idCounterStation = idCounterStation;
 	}
 
 	public Coordinates getGps() {

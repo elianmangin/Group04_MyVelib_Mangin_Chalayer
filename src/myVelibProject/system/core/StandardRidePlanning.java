@@ -12,7 +12,7 @@ public class StandardRidePlanning implements RidePlanning{
 	}
 	
 	
-	public StationToStationItinerary plan(Coordinates startingCoordinates,Coordinates endingCoordinates,String type) {
+	public StationToStationItinerary plan(Coordinates startingCoordinates,Coordinates endingCoordinates,String type) throws GeneralException{
 		
 		//Initialisation
 		
@@ -50,7 +50,7 @@ public class StandardRidePlanning implements RidePlanning{
 		Collections.sort(possibleStartingDockingStationList,startComparator);
 		Collections.sort(possibleEndingDockingStationList,endComparator);
 		if(possibleEndingDockingStationList.isEmpty() || possibleStartingDockingStationList.isEmpty()) {
-			System.out.print("exception trajet impossible");
+			throw new GeneralException("No itinerary possible");
 		}
 		
 		DockingStation startingDockingStation = possibleStartingDockingStationList.get(0);

@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 public class VlibreStrategy implements CostStrategy {
 
 	@Override
-	public double calculate(Ride ride) {
+	public double calculate(Ride ride) throws GeneralException {
 		//Créer une exception au lieu de return 0 à la fin
 		double cost = 0;
 		double timeCredit = ride.user.registrationCard.getBalance();

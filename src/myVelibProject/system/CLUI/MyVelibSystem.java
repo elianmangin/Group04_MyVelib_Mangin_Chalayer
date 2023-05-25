@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import org.ini4j.*;
 
-import myVelibProject.*;
 import myVelibProject.system.core.MyVelib;
 
 public class MyVelibSystem {

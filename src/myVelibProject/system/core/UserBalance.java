@@ -23,7 +23,8 @@ public class UserBalance {
 		totalCharges+=ride.cost;
 	}
 	
-	public void addTotalTimeCredit(int addedTotalTimeCredit) {
+	public void addTotalTimeCredit(int addedTotalTimeCredit) throws GeneralException{
+		if (addedTotalTimeCredit<0) throw new GeneralException();
 		totalTimeCredit+=addedTotalTimeCredit;
 	}
 
@@ -47,8 +48,8 @@ public class UserBalance {
 	
 	@Override
 	public String toString() {
-		return "Number of ride : " + numberOfRide + " / Time on bike : " + totalTime + " / Total charges :"
-				+ totalCharges + " / Time credit : " + totalTimeCredit + ".";
+		return "Balance : \nRides : " + numberOfRide + "           | Time on bike : " + totalTime + " \nTotal charges : "
+				+ totalCharges + " | Time credit : " + totalTimeCredit + ".";
 	}
 	
 	

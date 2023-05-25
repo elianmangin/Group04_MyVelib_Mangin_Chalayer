@@ -4,7 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class TestMyVelib {
+import myVelibProject.system.core.*;
+
+class TestUseCaseRidePlanning {
+	private MyVelib system;
+	private User user1;
+	private Renter renter;
 
 	@Test
 	void test() {

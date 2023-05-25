@@ -23,11 +23,14 @@ public class Card {
 		this.strategy = costFactory.create(type);
 	}
 	
-	public void addCredit(int amount) {
+	public void addCredit(int amount) throws GeneralException{
+		if(amount <0) throw new GeneralException();
 		this.balance += amount;
 	}
 	
-	public void removeCredit(int amount) {
+	public void removeCredit(int amount) throws GeneralException{
+		if(amount < 0) throw new GeneralException();
+		if(amount > balance) throw new GeneralException();
 		this.balance -= amount;
 	}
 	

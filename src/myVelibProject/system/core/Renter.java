@@ -16,7 +16,8 @@ public class Renter {
 
 	}
 	
-	public void connectUser(User U) {
+	public void connectUser(User U) throws GeneralException {
+		if(user != null) throw new GeneralException("User : "+user.getName() +" is already connected");
 		this.user = U;
 	}
 
@@ -26,26 +27,22 @@ public class Renter {
 	}
 
 
-	public void askPlanning(Coordinates destination, String bicycleType, String planningType) {
-		if (this.user != null) {
-			PlanningFactory PF = new PlanningFactory();
-			RidePlanning RP = PF.create(planningType, myVelib);
-			itinerary = RP.plan(user.getGps(),destination, bicycleType);
-		}
-		else {
-			System.out.println("Warning : No user connected");
-		}
+	public void askPlanning(Coordinates destination, String bicycleType, String planningType) throws GeneralException {
+		if (this.user  == null) throw new GeneralException("User not connected");
+		PlanningFactory PF = new PlanningFactory();
+		RidePlanning RP = PF.create(planningType, myVelib);
+		itinerary = RP.plan(user.getGps(),destination, bicycleType);
 
 	}
 
 	public int rentBicycle(LocalTime startTime) throws GeneralException {
+		if (this.user  == null) throw new GeneralException("User not connected");
 		// If the bicycle is taken from a Docking Station
 		if (itinerary.start instanceof DockingStation) {
 			DockingStation startStation = (DockingStation) this.itinerary.start;
 
 			// Take the bike from the station and update its number of rent
 			Bicycle bicycle = startStation.takeBicycle(this.itinerary.getType());
-			bicycle.setCurrentlyRentedBicycle(true);
 			startStation.dockingStationBalance.totalNumberOfRent++;
 
 			// Change bike status and store start data of the user current ride 
@@ -60,7 +57,6 @@ public class Renter {
 
 			Bicycle bicycle = (Bicycle) this.itinerary.start;
 			if (bicycle.getInStation()) {throw new GeneralException("This bicycle is in a station and cannot be rented directly");}
-			bicycle.setCurrentlyRentedBicycle(true);
 
 			bicycle.setCurrentlyRentedBicycle(true);
 			user.setCurrentRide(new Ride(this.user, bicycle, startTime));
@@ -71,6 +67,7 @@ public class Renter {
 	}
 
 	public void returnBicycle(LocalTime endTime) throws GeneralException {
+		if (this.user  == null) throw new GeneralException("User not connected");
 		// If the bicycle is returned to a Docking Station
 		if (itinerary.getEnd() instanceof DockingStation) {
 			DockingStation endStation = (DockingStation) this.itinerary.end;
