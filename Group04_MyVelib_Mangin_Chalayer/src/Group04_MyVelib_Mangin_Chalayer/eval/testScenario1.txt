@@ -1,0 +1,18 @@
+displayStation 3
+rentBike 1 3 mecanical
+displayStation 3
+displayStation 7
+rentBike 2 7 electrical
+displayStation 7
+returnBike 1 8 273
+displayStation 8
+displayUser 1
+displayStation 2
+rentBike 3 2 mecanical
+displayStation 2
+returnBike 3 1 186
+displayStation 1
+displayUser 3
+returnBike 2 5 367
+displayStation 5
+displayUser 2
