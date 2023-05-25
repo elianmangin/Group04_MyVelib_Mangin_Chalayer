@@ -9,6 +9,7 @@ public class User {
 	protected double creditBalance;
 	protected Card registrationCard; 
 	protected Ride currentRide;
+	
 
 	public User(String name, Coordinates gps, String cardType, double initialBalance) throws GeneralException {
 		super();
@@ -23,6 +24,7 @@ public class User {
 	}
 	
 	public void charge(double amount) throws GeneralException {
+		if (amount<0) throw new GeneralException();
 		if (creditBalance >amount) {creditBalance -= amount;}
 		else throw new GeneralException("Balance Insufficient");
 	}

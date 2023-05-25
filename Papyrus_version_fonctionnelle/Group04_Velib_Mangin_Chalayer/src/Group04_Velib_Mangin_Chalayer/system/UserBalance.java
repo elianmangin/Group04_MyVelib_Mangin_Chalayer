@@ -23,7 +23,8 @@ public class UserBalance {
 		totalCharges+=ride.cost;
 	}
 	
-	public void addTotalTimeCredit(int addedTotalTimeCredit) {
+	public void addTotalTimeCredit(int addedTotalTimeCredit) throws GeneralException{
+		if (addedTotalTimeCredit<0) throw new GeneralException();
 		totalTimeCredit+=addedTotalTimeCredit;
 	}
 

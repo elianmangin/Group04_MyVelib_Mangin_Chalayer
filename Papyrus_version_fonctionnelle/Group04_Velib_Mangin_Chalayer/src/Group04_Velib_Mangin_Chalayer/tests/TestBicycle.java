@@ -22,7 +22,7 @@ class TestBicycle {
 	@BeforeEach
 	void setUp() {
 		coordCS = new Coordinates(48.7102069003148, 2.1662276002460428);
-		bicycle1 = new Bicycle(new Coordinates(48.7102069003148, 2.1662276002460428), "mecanical");	
+		bicycle1 = new Bicycle(new Coordinates(48.7102069003148, 2.1662276002460428), "mecanical");
 		bicycle2 = new Bicycle(new Coordinates(48.71115801173848, 2.162402249270749), "electrical");	
 		bicycle3 = new Bicycle(new Coordinates(48.70829819232185, 2.1615321467445616), "electrical");	
 		bicycle4 = new Bicycle(new Coordinates(48.70489703744113, 2.191273394996826), "mecanical");	
@@ -32,11 +32,12 @@ class TestBicycle {
 
 	@Test
 	void testGetCoord() {
-		assertEquals(bicycle1.getGps(), coordCS);
+		assertTrue(bicycle1.getGps().equals(coordCS));
 	}
 	
 	@Test
 	void testUniqID() {
+		//Assert each id is unique
 		assertNotEquals(bicycle1.getUniqID(),bicycle2.getUniqID());
 		assertNotEquals(bicycle1.getUniqID(),bicycle4.getUniqID());
 		assertNotEquals(bicycle2.getUniqID(),bicycle3.getUniqID());
@@ -51,11 +52,21 @@ class TestBicycle {
 	
 	@Test
 	void testCurrRent() {
+		//Assert if you can change the state of a bike to rented or not
 		assertFalse(bicycle1.isCurrentlyRentedBicycle());
 		bicycle1.setCurrentlyRentedBicycle(true);
 		assertTrue(bicycle1.isCurrentlyRentedBicycle());
 		bicycle1.setCurrentlyRentedBicycle(false);
 		assertFalse(bicycle1.isCurrentlyRentedBicycle());
+	}
+	
+	@Test
+	void testType() {
+		//Assert if you can change the type of a bike
+		assertEquals(bicycle1.getType(),"mecanical");
+		assertNotEquals(bicycle1.getType(),"electrical");
+		assertEquals(bicycle2.getType(),"electrical");
+		assertNotEquals(bicycle2.getType(),"mecanical");
 	}
 
 }

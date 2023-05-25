@@ -11,16 +11,14 @@ public class StandardRidePlanning implements RidePlanning{
 		this.myvelib = myvelib;
 	}
 	
-	
-	public StationToStationItinerary plan(Coordinates startingCoordinates,Coordinates endingCoordinates,String type) {
+	public StationToStationItinerary plan(Coordinates startingCoordinates,Coordinates endingCoordinates,String type) throws GeneralException {
 		
-		//Initialisation
+		//Initialization
 		
 		ArrayList<DockingStation> possibleStartingDockingStationList = new ArrayList<DockingStation>();
 		ComparatorByDistanceStation startComparator = new ComparatorByDistanceStation(startingCoordinates);
 		ArrayList<DockingStation> possibleEndingDockingStationList = new ArrayList<DockingStation>();
 		ComparatorByDistanceStation endComparator = new ComparatorByDistanceStation(endingCoordinates);
-		
 		
 		//Create possible station lists
 		
@@ -44,13 +42,12 @@ public class StandardRidePlanning implements RidePlanning{
 			}
 		}
 		
-		
 		//Sort the list by distance get the best stations
 		
 		Collections.sort(possibleStartingDockingStationList,startComparator);
 		Collections.sort(possibleEndingDockingStationList,endComparator);
 		if(possibleEndingDockingStationList.isEmpty() || possibleStartingDockingStationList.isEmpty()) {
-			System.out.print("exception trajet impossible");
+			throw new GeneralException("No itinerary possible");
 		}
 		
 		DockingStation startingDockingStation = possibleStartingDockingStationList.get(0);

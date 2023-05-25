@@ -16,7 +16,8 @@ public class Renter {
 
 	}
 	
-	public void connectUser(User U) {
+	public void connectUser(User U) throws GeneralException {
+		if(user != null) throw new GeneralException("User : "+user.getName() +" is already connected");
 		this.user = U;
 	}
 
@@ -26,19 +27,16 @@ public class Renter {
 	}
 
 
-	public void askPlanning(Coordinates destination, String bicycleType, String planningType) {
-		if (this.user != null) {
-			PlanningFactory PF = new PlanningFactory();
-			RidePlanning RP = PF.create(planningType, myVelib);
-			itinerary = RP.plan(user.getGps(),destination, bicycleType);
-		}
-		else {
-			System.out.println("Warning : No user connected");
+	public void askPlanning(Coordinates destination, String bicycleType, String planningType) throws GeneralException {
+		if (this.user  == null) throw new GeneralException("User not connected");
+		PlanningFactory PF = new PlanningFactory();
+		RidePlanning RP = PF.create(planningType, myVelib);
+		itinerary = RP.plan(user.getGps(),destination, bicycleType);
 		}
 
-	}
 
 	public void rentBicycle(LocalTime startTime) throws GeneralException {
+		if (this.user  == null) throw new GeneralException("User not connected");
 		// If the bicycle is taken from a Docking Station
 		if (itinerary.start instanceof DockingStation) {
 			DockingStation startStation = (DockingStation) this.itinerary.start;
@@ -58,14 +56,13 @@ public class Renter {
 
 			Bicycle bicycle = (Bicycle) this.itinerary.start;
 			bicycle.setCurrentlyRentedBicycle(true);
-
-			bicycle.setCurrentlyRentedBicycle(true);
 			user.setCurrentRide(new Ride(this.user, bicycle, startTime));
 		}
 
 	}
 
 	public void returnBicycle(LocalTime endTime) throws GeneralException {
+		if (this.user  == null) throw new GeneralException("User not connected");
 		// If the bicycle is returned to a Docking Station
 		if (itinerary.getEnd() instanceof DockingStation) {
 			DockingStation endStation = (DockingStation) this.itinerary.end;

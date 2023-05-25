@@ -1,7 +1,8 @@
 package Group04_Velib_Mangin_Chalayer.system;
 
 public class PlanningFactory {
-	public RidePlanning create(String planning, MyVelib myVelib){
+	
+	public RidePlanning create(String planning, MyVelib myVelib) throws GeneralException{
 		if(planning == null){
 			return null;
 		}
@@ -10,10 +11,8 @@ public class PlanningFactory {
 			return new StandardRidePlanning(myVelib);
 		} 
 		
-		else {
-			System.out.println("Warning : no planning with this name exists");
-			return null;
+		else throw new GeneralException("No planning of this name");
 		}
 	}
 
-}
+

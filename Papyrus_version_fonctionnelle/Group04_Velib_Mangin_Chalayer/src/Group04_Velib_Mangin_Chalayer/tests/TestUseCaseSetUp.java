@@ -1,15 +1,21 @@
 package Group04_Velib_Mangin_Chalayer.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Group04_Velib_Mangin_Chalayer.system.*;
+import Group04_Velib_Mangin_Chalayer.system.Bicycle;
+import Group04_Velib_Mangin_Chalayer.system.Coordinates;
+import Group04_Velib_Mangin_Chalayer.system.DockingStation;
+import Group04_Velib_Mangin_Chalayer.system.GeneralException;
+import Group04_Velib_Mangin_Chalayer.system.MyVelib;
+import Group04_Velib_Mangin_Chalayer.system.User;
 
-class testSetUp {
+public class TestUseCaseSetUp {
 	private MyVelib myVelib;
 	private MyVelib myVelib2;
 	private User user1;
@@ -31,6 +37,7 @@ class testSetUp {
 		myVelib2.addUser(user3);
 	}
 
+	
 	@Test
 	void testNumberOfBicycle() {
 		ArrayList<Bicycle> bicycleList = myVelib.getBicycleList();
@@ -71,6 +78,15 @@ class testSetUp {
 			if(station.getType() == "plus") {plusCounter++;}
 		}
 		assertEquals(plusCounter,Math.round(11*0.5));
+	}
+	
+	@Test
+	void testInitStationInSquare() {
+		// Checking if the stations are in the 10x10 square
+		for (DockingStation s : myVelib.getStationList()) {
+			assertTrue(s.getGps().getX() >= 0 && s.getGps().getX() <= 10);
+			assertTrue(s.getGps().getY() >= 0 && s.getGps().getY() <= 10);
+		}
 	}
 
 

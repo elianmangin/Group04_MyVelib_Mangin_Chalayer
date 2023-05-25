@@ -1,15 +1,19 @@
 package Group04_Velib_Mangin_Chalayer.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Group04_Velib_Mangin_Chalayer.system.*;
+import Group04_Velib_Mangin_Chalayer.system.Coordinates;
+import Group04_Velib_Mangin_Chalayer.system.GeneralException;
+import Group04_Velib_Mangin_Chalayer.system.MyVelib;
+import Group04_Velib_Mangin_Chalayer.system.Renter;
+import Group04_Velib_Mangin_Chalayer.system.User;
 
-class testRentOfABike {
+public class TestUseCaseRentalOfABike {
 	private MyVelib myVelib;
 	private Renter renter;
 	private User user1;
@@ -32,15 +36,12 @@ class testRentOfABike {
 	@Test
 	void test() throws GeneralException {
 		renter.connectUser(user1);
-		
 		assertEquals(renter.getUser().getName(), "John");
-		
 		renter.askPlanning(new Coordinates(5,6), "mecanical", "standard");
-		
 		renter.rentBicycle(LocalTime.of(4, 45));
-		
 		renter.returnBicycle(LocalTime.of(6, 48));
 	}
+}
 	
 	/*
 	@Test
@@ -64,7 +65,3 @@ class testRentOfABike {
 
 	}*/
 	
-	
-}
-
-
