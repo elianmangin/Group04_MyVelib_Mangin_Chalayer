@@ -24,7 +24,7 @@ public class MyVelibSystem {
 	private static void initialization() {
 		// Code for Loading my_velib.ini
 		try{
-			Wini ini = new Wini(new File("src/myVelibProject/eval/myVelib.ini"));
+			Wini ini = new Wini(new File("Group04_MyVelib_Mangin_Chalayer/src/Group04_MyVelib_Mangin_Chalayer/eval/myVelib.ini"));
 
 
 			String nstations = ini.get("stations", "nstations", String.class);
