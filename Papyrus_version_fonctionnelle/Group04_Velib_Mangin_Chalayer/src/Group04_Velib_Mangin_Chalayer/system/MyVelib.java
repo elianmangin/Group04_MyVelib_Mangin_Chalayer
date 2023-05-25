@@ -9,6 +9,7 @@ public class MyVelib {
 	protected ArrayList<DockingStation> stationList;
 	protected Renter renter = new Renter(this);
 
+	
 	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion,double s) throws GeneralException {
 		super();
 		bicycleList = new ArrayList<Bicycle>();
@@ -97,7 +98,20 @@ public class MyVelib {
 		}
 	}
 
-	
+	public void report() {
+		System.out.print("\nOnline Stations : ");
+		for (DockingStation DS : stationList) {
+			if (DS.status == "online") {
+				System.out.print("\nDockingStation number "+DS.getUniqID() );
+			}
+		}
+		System.out.print("\nOffline Stations : ");
+		for (DockingStation DS : stationList) {
+			if (DS.status == "offline") {
+				System.out.print("\nDockingStation number "+DS.getUniqID());
+			}
+		}
+	}
 	public User getUserFromID(int ID) throws GeneralException {
 		for (User U : userList) {
 			if (U.getUniqID()==ID) {return U;}

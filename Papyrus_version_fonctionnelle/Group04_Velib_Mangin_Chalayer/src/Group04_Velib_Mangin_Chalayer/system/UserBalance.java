@@ -48,8 +48,8 @@ public class UserBalance {
 	
 	@Override
 	public String toString() {
-		return "Balance : \nNumber of ride : " + numberOfRide + " / Time on bike : " + totalTime + " / Total charges :"
-				+ totalCharges + " / Time credit : " + totalTimeCredit + ".";
+		return "Balance : \nRides : " + numberOfRide + "           | Time on bike : " + totalTime + " \nTotal charges : "
+				+ totalCharges + " | Time credit : " + totalTimeCredit + ".";
 	}
 	
 	

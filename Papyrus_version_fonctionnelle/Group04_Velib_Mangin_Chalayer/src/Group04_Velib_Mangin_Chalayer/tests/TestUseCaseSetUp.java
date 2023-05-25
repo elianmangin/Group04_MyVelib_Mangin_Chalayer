@@ -40,25 +40,51 @@ public class TestUseCaseSetUp {
 	
 	@Test
 	void testNumberOfBicycle() {
+		//test the numbers of bicycles in the system
 		ArrayList<Bicycle> bicycleList = myVelib.getBicycleList();
 		assertEquals(bicycleList.size(), Math.round(10*10*0.9));
 	}
 	
 	@Test
 	void testNumberOfStations() {
+		//test the numbers of station in the system
 		ArrayList<DockingStation> stationList = myVelib.getStationList();
 		assertEquals(stationList.size(), Math.round(10));
 	}
 	
 	@Test
 	void testNumberOfUsers() {
+		//test the numbers of users in the system
 		ArrayList<User> userList = myVelib.getUserList();
 		assertEquals(userList.size(), Math.round(3));
 	}
-
+	
 	@Test
-	void testTypeOfBicycles() {
-		//Test non passé avec les arrondis on a parfois 1 vélo d'écart puisque le pourcentage donne pas un nombre de vélo entier
+	void testInfoOfUsers() {
+		//test the info of the user in the system
+		ArrayList<User> userList = myVelib.getUserList();
+		assertEquals(userList.get(0), user1);
+		assertEquals(userList.get(1), user2);
+		assertEquals(userList.get(2), user3);	
+		}
+	
+	@Test
+	void testTypeOfBicyclesGoodCase() {
+		//test the number of bicycles of a certain type, case where it works
+		ArrayList<Bicycle> bicycleList = myVelib.getBicycleList();
+		int mecanicalCounter = 0;
+		int electricalCounter = 0;
+		for (Bicycle bicycle : bicycleList) {
+			if(bicycle.getType() == "mecanical") {mecanicalCounter++;}
+			if(bicycle.getType() == "electrical") {electricalCounter++;}
+		}
+		assertEquals(mecanicalCounter,Math.round(10*10*0.9*0.5));
+		assertEquals(electricalCounter,Math.round(10*10*0.9*0.5));
+	}
+	
+	@Test
+	void testTypeOfBicyclesBadCase() {
+		//test the number of bicycles of a certain type, case where it works
 		ArrayList<Bicycle> bicycleList = myVelib2.getBicycleList();
 		int mecanicalCounter = 0;
 		int electricalCounter = 0;
@@ -69,9 +95,10 @@ public class TestUseCaseSetUp {
 		assertEquals(mecanicalCounter,Math.round(11*9*0.9*0.5));
 		assertEquals(electricalCounter,Math.round(11*9*0.9*0.5));
 	}
+	
 	@Test
-	void testTypeOfStations() {
-		//Test non passé avec les arrondis on a parfois 1 station d'écart puisque le pourcentage donne pas un nombre de station entier
+	void testTypeOfStationsBadCase () {
+		//test the number of station of a certain type, case where it works
 		ArrayList<DockingStation> stationList = myVelib2.getStationList();
 		int plusCounter = 0;
 		for (DockingStation station : stationList) {
@@ -81,7 +108,18 @@ public class TestUseCaseSetUp {
 	}
 	
 	@Test
-	void testInitStationInSquare() {
+	void testTypeOfStationsGoodCase () {
+		//test the number of station of a certain type, case where it works
+		ArrayList<DockingStation> stationList = myVelib.getStationList();
+		int plusCounter = 0;
+		for (DockingStation station : stationList) {
+			if(station.getType() == "plus") {plusCounter++;}
+		}
+		assertEquals(plusCounter,Math.round(10*0.5));
+	}
+	
+	@Test
+	void testStationInSquare() {
 		// Checking if the stations are in the 10x10 square
 		for (DockingStation s : myVelib.getStationList()) {
 			assertTrue(s.getGps().getX() >= 0 && s.getGps().getX() <= 10);

@@ -78,10 +78,15 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "\t\t\n" + name + ", (" + uniqID + ")\nCurrent position : " + gps + "\nBalance :\n" + balance
-				+ "\n---\nCredit : " + creditBalance + " euros\n Registration Card : " + registrationCard + "\nCurrently on ride : "
+		return "\n\n" + name + " ID " + uniqID + "\nCurrent position : " + gps + "\n" + balance
+				+ "\n---\nCredit : " + creditBalance + " euros\nRegistration Card : " + registrationCard + "\nCurrently on ride : "
 				+ this.isCurrentlyRenting();
 	}
+
+	public static void setIdCounterUser(int idCounterUser) {
+		User.idCounterUser = idCounterUser;
+	}
+
 
 
 

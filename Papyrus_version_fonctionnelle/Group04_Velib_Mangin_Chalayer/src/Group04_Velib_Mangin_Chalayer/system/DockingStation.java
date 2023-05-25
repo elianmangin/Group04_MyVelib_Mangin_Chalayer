@@ -15,6 +15,10 @@ public class DockingStation {
 	protected int numberOfMecanicalBicycle;
 	protected int numberOfElectricalBicycle;
 	
+	public static void setIdCounterStation(int idCounterStation) {
+		DockingStation.idCounterStation = idCounterStation;
+	}
+
 	public DockingStation(Coordinates coordinatesStation, String type, int numberOfSlots) {
 		super();
 		idCounterStation++;
@@ -89,8 +93,8 @@ public class DockingStation {
 	// Getters, Setters, toString
 	@Override
 	public String toString() {
-		return "\t\tStation number " + uniqID + "\nCoordinates : " + gps+ "\n STATUS :" + status + "\nSLOTS : " + numberOfSlots 
-				+ "\nBALANCE :"+ dockingStationBalance;
+		return "\n\nStation number " + uniqID + "\nCoordinates : " + gps+ "\nSTATUS :" + status + "\nSLOTS OCCUPIED : " + numberOfSlotsOccupied 
+				+ "/"+numberOfSlots+ "\nBALANCE :"+ dockingStationBalance;
 	}
 
 	public int getNumberOfMecanicalBicycle() {
@@ -140,6 +144,7 @@ public class DockingStation {
 	public DockingStationBalance getDockingStationBalance() {
 		return dockingStationBalance;
 	}
+
 	
 
 	
