@@ -53,6 +53,7 @@ class TestRenter {
 			renter.rentBicycle(LocalTime.of(4, 15));
 		});
 		renter.connectUser(user1);
+		renter.setItinerary(new StreetToStationItinerary(b1,null, null));
 		renter.rentBicycle(LocalTime.of(4, 15));
 		assertTrue(b1.isCurrentlyRentedBicycle());
 		assertNotNull(user1.getCurrentRide());

@@ -14,7 +14,7 @@ public class Bicycle {
 		this.uniqID = idCounterBicycle;
 		this.gps = gps;
 		this.type = type;
-		this.inStation = true;
+		this.inStation = false;
 		this.currentlyRentedBicycle = false;
 	}
 
