@@ -109,14 +109,18 @@ public class MyVelib {
 		System.out.print("\nOnline Stations : ");
 		for (DockingStation DS : stationList) {
 			if (DS.status == "online") {
-				System.out.print("\nDockingStation number "+DS.getUniqID() );
+				System.out.print("\n Station "+DS.getUniqID() + " , parked bicycles " +DS.getBicycleIDList() );
 			}
 		}
 		System.out.print("\nOffline Stations : ");
 		for (DockingStation DS : stationList) {
 			if (DS.status == "offline") {
-				System.out.print("\nDockingStation number "+DS.getUniqID());
+				System.out.print(" "+DS.getUniqID());
 			}
+		}
+		System.out.print("\nUsers : ");
+		for (User user : userList) {
+			System.out.print(" "+user.getName()+ " (" + user.getUniqID() + ") " );
 		}
 	}
 

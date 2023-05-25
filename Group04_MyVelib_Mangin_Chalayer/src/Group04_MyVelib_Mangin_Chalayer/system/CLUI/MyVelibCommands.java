@@ -62,10 +62,13 @@ public class MyVelibCommands {
 					+ "position to the system.\n\n"
 
 					+ "-  moveUserToBicycle <userID> <bicycleID> \n"
-					+ "Move the user to this bicycle\n"
+					+ "Move the user to this bicycle\n\n"
 					
 					+ "-  moveUserToStation <userID> <stationID> \n"
-					+ "Move the user to this station\n"
+					+ "Move the user to this station\n\n"
+					
+					+ "-  moveUserToCoord <userID> <x> <y> \n"
+					+ "Move the user to the cordinates [x,y] \n\n"
 
 					+ "-  offline <stationID>\n"
 					+ "Put a station status on offline.\n\n"
@@ -75,21 +78,21 @@ public class MyVelibCommands {
 
 					+ "-  askPlanning <userID> <xDestination> <yDestination> <wantedTypeOfBicycle> <planning>\n"
 					+ "Give the optimal start and the optimal end for a user wanting to go to (x,y) with a bicycle of\n"
-					+ "a given type following a given ride planning\n"
+					+ "a given type following a given ride planning\n\n"
 					+ "planning : 'standard'\n\n"
 
 
 					+ "-  rentBike <userID> <stationID> <type>\n"
-					+ "A user rent a bicycle of a given type from a given station.\n"
+					+ "A user rent a bicycle of a given type from a given station.\n\n"
 
 					+ "-  rentBike <userID> <bicycleID>\n"
-					+ "A user rent the bicycle with this ID from the street\n"
+					+ "A user rent the bicycle with this ID from the street\n\n"
 
 					+ "-  returnBike <userID> <stationID> <duration>\n"
-					+ "A user return their bike to a given station after a given time (in minutes).\n"
+					+ "A user return their bike to a given station after a given time (in minutes).\n\n"
 					
 					+ "-  returnBike <userID> <x> <y> <duration>\n"
-					+ "A user return their bike in the street at a given position after a given time (in minutes).\n"
+					+ "A user return their bike in the street at a given position after a given time (in minutes).\n\n"
 					
 					+ "-  displayStation <stationID>\n"
 					+ "Display the station attributes and statistics.\n\n"
@@ -107,6 +110,30 @@ public class MyVelibCommands {
 			System.out.println(help);
 			break;
 
+		case "moveUserToCoord":
+			try {
+				// online <stationID>
+				if (arguments.size() == 3) {
+					int userID = Integer.parseInt(arguments.get(0));
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					double x = Double.parseDouble(arguments.get(1));
+					double y = Double.parseDouble(arguments.get(2));
+					Coordinates destination = new Coordinates(x, y);
+					user.setGps(destination);
+					if (user.isCurrentlyRenting()) {
+						user.getCurrentRide().getBicycleUsed().setGps(destination);
+					}
+					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the coordinates "+destination+"\n");
+				}
+				else {throw new GeneralException("Warning : Wrong argument size");}
+				
+			}catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
+			} 
+			break;	
+			
 			
 		case "moveUserToBicycle":
 			try {
@@ -117,6 +144,9 @@ public class MyVelibCommands {
 					int bikeID = Integer.parseInt(arguments.get(1));
 					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID);
 					user.setGps(bicycle.getGps());
+					if (user.isCurrentlyRenting()) {
+						user.getCurrentRide().getBicycleUsed().setGps(bicycle.getGps());
+					}
 					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the bicycle "+bikeID+"\n");
 				}
 				else {throw new GeneralException("Warning : Wrong argument size");}
@@ -137,6 +167,9 @@ public class MyVelibCommands {
 					int stationID = Integer.parseInt(arguments.get(1));
 					DockingStation station = MyVelibSystem.myVelib.getStationFromID(stationID);
 					user.setGps(station.getGps());
+					if (user.isCurrentlyRenting()) {
+						user.getCurrentRide().getBicycleUsed().setGps(station.getGps());
+					}
 					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the station "+stationID+"\n");
 				}
 		
@@ -330,8 +363,8 @@ public class MyVelibCommands {
 				// askPlanning <userID> <xDestination> <yDestination> <wantedTypeOfBicycle> <planning>
 				if (arguments.size() == 5) {
 					int userID = Integer.parseInt(arguments.get(0));
-					int x = Integer.parseInt(arguments.get(1));
-					int y = Integer.parseInt(arguments.get(2));
+					double x = Double.parseDouble(arguments.get(1));
+					double y = Double.parseDouble(arguments.get(2));
 					String wantedType = arguments.get(3);
 					String planning = arguments.get(4);
 
@@ -445,8 +478,8 @@ public class MyVelibCommands {
 				}
 				// returnBike <userID> <x> <y> <duration>
 				else if(arguments.size() == 4) {
-					int x = Integer.parseInt(arguments.get(1));
-					int y = Integer.parseInt(arguments.get(2));
+					double x = Double.parseDouble(arguments.get(1));
+					double y = Double.parseDouble(arguments.get(1));
 					int duration = Integer.parseInt(arguments.get(3));
 					int h = duration/60;
 					int m = duration%60;
@@ -553,7 +586,7 @@ public class MyVelibCommands {
 			try {
 				// display <>
 				if (arguments.size() == 0) {
-					System.out.println(MyVelibSystem.myVelib);
+					MyVelibSystem.myVelib.report();;
 
 
 				}
