@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import javax.print.Doc;
+
 import Group04_MyVelib_Mangin_Chalayer.system.core.Bicycle;
 import Group04_MyVelib_Mangin_Chalayer.system.core.Coordinates;
 import Group04_MyVelib_Mangin_Chalayer.system.core.DockingStation;
@@ -59,6 +61,12 @@ public class MyVelibCommands {
 					+ "Adds a user with a specified name, card type, credit balance, and initial\n"
 					+ "position to the system.\n\n"
 
+					+ "-  moveUserToBicycle <userID> <bicycleID> \n"
+					+ "Move the user to this bicycle\n"
+					
+					+ "-  moveUserToStation <userID> <stationID> \n"
+					+ "Move the user to this station\n"
+
 					+ "-  offline <stationID>\n"
 					+ "Put a station status on offline.\n\n"
 
@@ -73,12 +81,16 @@ public class MyVelibCommands {
 
 					+ "-  rentBike <userID> <stationID> <type>\n"
 					+ "A user rent a bicycle of a given type from a given station.\n"
-					+ "They can also rent it from the street with rentBike <userID> <bikenID>\n\n"
+
+					+ "-  rentBike <userID> <bicycleID>\n"
+					+ "A user rent the bicycle with this ID from the street\n"
 
 					+ "-  returnBike <userID> <stationID> <duration>\n"
 					+ "A user return their bike to a given station after a given time (in minutes).\n"
-					+ "They can also let it in the street with returnBike <userID> <x> <y> <duration>\n\n"
-
+					
+					+ "-  returnBike <userID> <x> <y> <duration>\n"
+					+ "A user return their bike in the street at a given position after a given time (in minutes).\n"
+					
 					+ "-  displayStation <stationID>\n"
 					+ "Display the station attributes and statistics.\n\n"
 
@@ -95,6 +107,48 @@ public class MyVelibCommands {
 			System.out.println(help);
 			break;
 
+			
+		case "moveUserToBicycle":
+			try {
+				// online <stationID>
+				if (arguments.size() == 2) {
+					int userID = Integer.parseInt(arguments.get(0));
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					int bikeID = Integer.parseInt(arguments.get(1));
+					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID);
+					user.setGps(bicycle.getGps());
+					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the bicycle "+bikeID+"\n");
+				}
+				else {throw new GeneralException("Warning : Wrong argument size");}
+				
+			}catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
+			} 
+			break;
+		
+		case "moveUserToStation":
+			try {
+				// online <stationID>
+				if (arguments.size() == 2) {
+					int userID = Integer.parseInt(arguments.get(0));
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					int stationID = Integer.parseInt(arguments.get(1));
+					DockingStation station = MyVelibSystem.myVelib.getStationFromID(stationID);
+					user.setGps(station.getGps());
+					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the station "+stationID+"\n");
+				}
+		
+				else {throw new GeneralException("Warning : Wrong argument size");}
+				
+			}catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
+			} 
+			break;
+			
 		case "readScen":
 			try {
 				// online <stationID>
@@ -212,7 +266,7 @@ public class MyVelibCommands {
 				}
 				else {throw new GeneralException("Warning : Wrong argument size");}
 
-				if (cardType.equals("none")) {cardType = null;}
+				if (cardType.equals("none") | cardType.equals("null")) {cardType = null;}
 
 				user = new User(userName, new Coordinates(initX, initY), cardType, initBalance);
 				MyVelibSystem.myVelib.addUser(user);
@@ -330,6 +384,9 @@ public class MyVelibCommands {
 				if (user.isCurrentlyRenting()) {throw new GeneralException(user.getName()+" is already renting a bike");}
 				// rentBike <userID> <stationID> <type>
 				if (arguments.size() == 3) {
+					int bikeID1 = Integer.parseInt(arguments.get(1));
+					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID1);
+					if (!user.getGps().equals(bicycle.getGps())) throw new GeneralException(user.getName()+" is not at the same place as the bike");
 					int stationID = Integer.parseInt(arguments.get(1));
 					String type = arguments.get(2);
 					DockingStation station = MyVelibSystem.myVelib.getStationFromID(stationID);
@@ -346,6 +403,7 @@ public class MyVelibCommands {
 				else if(arguments.size() == 2) {
 					int bikeID = Integer.parseInt(arguments.get(1));
 					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID);
+					if (!user.getGps().equals(bicycle.getGps())) throw new GeneralException(user.getName()+" is not at the same place as the bike");
 					MyVelibSystem.myVelib.renter.connectUser(user);
 					MyVelibSystem.myVelib.renter.setItinerary(new StreetToStationItinerary(bicycle, null, bicycle.getType()));
 					MyVelibSystem.myVelib.renter.rentBicycle(LocalTime.of(0, 0));

@@ -1,0 +1,6 @@
+setup
+displayStation 1
+addUser John Snow Vmax 100 2.456784 6.344574
+rentBike 1 1 mecanical
+moveUserToStation 1 1
+rentBike 1 1 mecanical
