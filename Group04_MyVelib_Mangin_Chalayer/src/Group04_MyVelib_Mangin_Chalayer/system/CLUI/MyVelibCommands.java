@@ -124,6 +124,10 @@ public class MyVelibCommands{
 					try (Scanner scanner = new Scanner(testFile)) {
 						while (scanner.hasNextLine()) {
 							String commandInput = scanner.nextLine();
+							commandInput = commandInput.trim();
+							if (commandInput.isEmpty()) {
+								continue;
+							}
 						    ArrayList<String> commandInputSplit = new ArrayList<>(Arrays.asList(commandInput.split(" ")));
 
 						    String command = commandInputSplit.get(0);
