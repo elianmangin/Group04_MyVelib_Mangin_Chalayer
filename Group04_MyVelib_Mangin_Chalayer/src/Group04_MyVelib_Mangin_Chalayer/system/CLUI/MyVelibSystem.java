@@ -13,15 +13,13 @@ public class MyVelibSystem {
 	public static MyVelib myVelib;
 
 	public static void main(String[] args) {
-		initialization();
+		startProcess();
 
 		commandLoop();
 
-		endProcess();
-
 	}
 
-	private static void initialization() {
+	private static void startProcess() {
 		// Code for Loading my_velib.ini
 		try{
 			Wini ini = new Wini(new File("Group04_MyVelib_Mangin_Chalayer/src/Group04_MyVelib_Mangin_Chalayer/eval/myVelib.ini"));
@@ -90,12 +88,10 @@ public class MyVelibSystem {
 
 	private static void commandLoop() {
 		try (Scanner scanner = new Scanner(System.in)) {
-			String checkExit = "";
-            while (checkExit != "exit") {
-
+            while (true) {
             	System.out.println("\u001B[36mPlease enter a command : \u001B[0m");
+            	System.out.print("> ");
                 String commandInput = scanner.nextLine();
-                checkExit = commandInput.intern();
                 ArrayList<String> commandInputSplit = new ArrayList<>(Arrays.asList(commandInput.split(" ")));
 
                 String command = commandInputSplit.get(0);
@@ -113,11 +109,6 @@ public class MyVelibSystem {
             System.out.println(e.getMessage());
         }
 
-	}
-
-	private static void endProcess() {
-		myVelib = null;
-		System.out.println("You exited the system");
 	}
 
 

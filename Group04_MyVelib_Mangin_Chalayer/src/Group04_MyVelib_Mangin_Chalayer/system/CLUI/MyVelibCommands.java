@@ -21,7 +21,7 @@ import Group04_MyVelib_Mangin_Chalayer.system.core.StreetToStationItinerary;
 import Group04_MyVelib_Mangin_Chalayer.system.core.User;
 
 
-public class MyVelibCommands {
+public class MyVelibCommands{
 	private String command;
 	private ArrayList<String> arguments;
 
@@ -40,7 +40,7 @@ public class MyVelibCommands {
 		case "help":
 			String help;
 			help = "Here are the different commands that you can use on the myVelib system : \n\n"
-					+"-  readScen <testScenario>\n"
+					+"-  runtest <testScenario>\n"
 					+ "Execute all the commands of testScenario.\n"
 					+ "testScenario : name of a test in the 'eval' floder without .txt\n\n"
 
@@ -81,7 +81,6 @@ public class MyVelibCommands {
 					+ "a given type following a given ride planning\n\n"
 					+ "planning : 'standard'\n\n"
 
-
 					+ "-  rentBike <userID> <stationID> <type>\n"
 					+ "A user rent a bicycle of a given type from a given station.\n\n"
 
@@ -105,89 +104,22 @@ public class MyVelibCommands {
 					+ "sortPolicy : 'ID' / 'leastOccupied' / 'mostUsed'\n\n"
 
 					+ "-  display <>\n"
-					+ "Display the actual status of the whole system.\n\n";
+					+ "Display the actual status of the whole system.\n\n"
+					
+					+ "-  exit <>\n"
+					+ "Quit end all tasks and quit the program.\n\n";
 
 			System.out.println(help);
 			break;
 
-		case "moveUserToCoord":
-			try {
-				// online <stationID>
-				if (arguments.size() == 3) {
-					int userID = Integer.parseInt(arguments.get(0));
-					User user = MyVelibSystem.myVelib.getUserFromID(userID);
-					double x = Double.parseDouble(arguments.get(1));
-					double y = Double.parseDouble(arguments.get(2));
-					Coordinates destination = new Coordinates(x, y);
-					user.setGps(destination);
-					if (user.isCurrentlyRenting()) {
-						user.getCurrentRide().getBicycleUsed().setGps(destination);
-					}
-					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the coordinates "+destination+"\n");
-				}
-				else {throw new GeneralException("Warning : Wrong argument size");}
-				
-			}catch (GeneralException e) {
-				// TODO Auto-generated catch block
-				System.err.println(e.getMessage());
-				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
-			} 
-			break;	
-			
-			
-		case "moveUserToBicycle":
-			try {
-				// online <stationID>
-				if (arguments.size() == 2) {
-					int userID = Integer.parseInt(arguments.get(0));
-					User user = MyVelibSystem.myVelib.getUserFromID(userID);
-					int bikeID = Integer.parseInt(arguments.get(1));
-					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID);
-					user.setGps(bicycle.getGps());
-					if (user.isCurrentlyRenting()) {
-						user.getCurrentRide().getBicycleUsed().setGps(bicycle.getGps());
-					}
-					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the bicycle "+bikeID+"\n");
-				}
-				else {throw new GeneralException("Warning : Wrong argument size");}
-				
-			}catch (GeneralException e) {
-				// TODO Auto-generated catch block
-				System.err.println(e.getMessage());
-				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
-			} 
-			break;
 		
-		case "moveUserToStation":
-			try {
-				// online <stationID>
-				if (arguments.size() == 2) {
-					int userID = Integer.parseInt(arguments.get(0));
-					User user = MyVelibSystem.myVelib.getUserFromID(userID);
-					int stationID = Integer.parseInt(arguments.get(1));
-					DockingStation station = MyVelibSystem.myVelib.getStationFromID(stationID);
-					user.setGps(station.getGps());
-					if (user.isCurrentlyRenting()) {
-						user.getCurrentRide().getBicycleUsed().setGps(station.getGps());
-					}
-					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the station "+stationID+"\n");
-				}
-		
-				else {throw new GeneralException("Warning : Wrong argument size");}
-				
-			}catch (GeneralException e) {
-				// TODO Auto-generated catch block
-				System.err.println(e.getMessage());
-				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
-			} 
-			break;
 			
-		case "readScen":
+		case "runtest":
 			try {
 				// online <stationID>
 				if (arguments.size() == 1) {
 					String testName = arguments.get(0);
-					File testFile = new File("src/Group04_MyVelib_Mangin_Chalayer/eval/"+testName+".txt");
+					File testFile = new File("Group04_MyVelib_Mangin_Chalayer/src/Group04_MyVelib_Mangin_Chalayer/eval/"+testName+".txt");
 
 					try (Scanner scanner = new Scanner(testFile)) {
 						while (scanner.hasNextLine()) {
@@ -305,16 +237,85 @@ public class MyVelibCommands {
 				MyVelibSystem.myVelib.addUser(user);
 				System.out.print("\u001B[32mSuccessfully added user to the system :\u001B[0m" + MyVelibSystem.myVelib.getUserList().get(MyVelibSystem.myVelib.getUserList().size()-1) + "\n\n");
 
-
-
-
-
 			} catch (GeneralException e) {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
 				System.out.println("\u001B[33mUser has not been added to the system\u001B[0m\n\n");
 			}
 			break;
+			
+		case "moveUserToCoord":
+			try {
+				// online <stationID>
+				if (arguments.size() == 3) {
+					int userID = Integer.parseInt(arguments.get(0));
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					double x = Double.parseDouble(arguments.get(1));
+					double y = Double.parseDouble(arguments.get(2));
+					Coordinates destination = new Coordinates(x, y);
+					user.setGps(destination);
+					if (user.isCurrentlyRenting()) {
+						user.getCurrentRide().getBicycleUsed().setGps(destination);
+					}
+					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the coordinates "+destination+"\n");
+				}
+				else {throw new GeneralException("Warning : Wrong argument size");}
+				
+			}catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
+			} 
+			break;	
+			
+			
+		case "moveUserToBicycle":
+			try {
+				// online <stationID>
+				if (arguments.size() == 2) {
+					int userID = Integer.parseInt(arguments.get(0));
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					int bikeID = Integer.parseInt(arguments.get(1));
+					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID);
+					user.setGps(bicycle.getGps());
+					if (user.isCurrentlyRenting()) {
+						user.getCurrentRide().getBicycleUsed().setGps(bicycle.getGps());
+					}
+					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the bicycle "+bikeID+"\n");
+				}
+				else {throw new GeneralException("Warning : Wrong argument size");}
+				
+			}catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
+			} 
+			break;
+		
+		case "moveUserToStation":
+			try {
+				// online <stationID>
+				if (arguments.size() == 2) {
+					int userID = Integer.parseInt(arguments.get(0));
+					User user = MyVelibSystem.myVelib.getUserFromID(userID);
+					int stationID = Integer.parseInt(arguments.get(1));
+					DockingStation station = MyVelibSystem.myVelib.getStationFromID(stationID);
+					user.setGps(station.getGps());
+					if (user.isCurrentlyRenting()) {
+						user.getCurrentRide().getBicycleUsed().setGps(station.getGps());
+					}
+					System.out.println("\u001B[32m"+user.getName()+" successfully moved to the station "+stationID+"\n");
+				}
+		
+				else {throw new GeneralException("Warning : Wrong argument size");}
+				
+			}catch (GeneralException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+				System.out.println("\u001B[33mUser position has not changed\u001B[0m\n\n");
+			} 
+			break;
+			
 
 		case "offline":
 			try {
@@ -600,6 +601,10 @@ public class MyVelibCommands {
 				System.out.println("\\u001B[33mUser has not been added to the system\\u001B[0m\\n\\n");
 			}
 			break;
+			
+		case "exit":
+			System.out.println("\u001B[32mYou correctly quit the program\u001B[0m\n\n");
+			System.exit(0);
 
 		default :
 			try {
