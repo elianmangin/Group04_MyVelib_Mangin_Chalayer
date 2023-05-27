@@ -6,6 +6,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * This class is define as a JUnit test to launch the scenarios.
+ * <p>
+ * It is faster to launch all the scenario and we can also launch them one by one
+ * </p>
+ */
 class RunTestScenario {
 
 	@BeforeEach

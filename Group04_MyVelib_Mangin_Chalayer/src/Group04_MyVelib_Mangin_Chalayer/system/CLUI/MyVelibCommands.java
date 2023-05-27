@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import javax.print.Doc;
-
 import Group04_MyVelib_Mangin_Chalayer.system.core.Bicycle;
 import Group04_MyVelib_Mangin_Chalayer.system.core.Coordinates;
 import Group04_MyVelib_Mangin_Chalayer.system.core.DockingStation;
@@ -20,19 +18,24 @@ import Group04_MyVelib_Mangin_Chalayer.system.core.StationToStreetItinerary;
 import Group04_MyVelib_Mangin_Chalayer.system.core.StreetToStationItinerary;
 import Group04_MyVelib_Mangin_Chalayer.system.core.User;
 
-
+/**
+ * This class defines the commands for the CLUI.
+ * <p>
+ * It consists of a command and a list of argument which can be evaluated to launch it.
+ * </p>
+ */
 public class MyVelibCommands{
 	private String command;
 	private ArrayList<String> arguments;
 
-
+	/** Set the command and the arguments.*/
 	public MyVelibCommands(String command, ArrayList<String> arguments) {
 		super();
 		this.command = command;
 		this.arguments = arguments;
 	}
 
-
+	/** Launch the execution.*/
 	public void eval() {
 		// TODO Auto-generated method stub
 		switch (command) {
@@ -377,6 +380,7 @@ public class MyVelibCommands{
 
 					MyVelibSystem.myVelib.renter.connectUser(user);
 					MyVelibSystem.myVelib.renter.askPlanning(new Coordinates(x, y), wantedType, planning);
+					@SuppressWarnings("rawtypes")
 					RideItinerary itinerary = MyVelibSystem.myVelib.renter.getItinerary();
 
 					System.out.println("\u001B[32mHere's the suggested itinerary :\u001B[0m");

@@ -9,16 +9,21 @@ import org.ini4j.*;
 
 import Group04_MyVelib_Mangin_Chalayer.system.core.MyVelib;
 
+/**
+ * The main for launching the CLUI.
+ */
 public class MyVelibSystem {
 	public static MyVelib myVelib;
-
+	
+	/** Initialize the system with "eval.myVelib.ini" and wait for commands in the console with a loop.*/
 	public static void main(String[] args) {
 		startProcess();
 
 		commandLoop();
 
 	}
-
+	
+	/** Initialize the system with "eval.myVelib.ini".*/
 	public static void startProcess() {
 		// Code for Loading my_velib.ini
 		try{
@@ -85,7 +90,8 @@ public class MyVelibSystem {
 		}
 
 	}
-
+	
+	/** Wait for commands in the console with a loop.*/
 	public static void commandLoop() {
 		try(Scanner scanner = new Scanner(System.in)){
 			while (true) {
