@@ -2,9 +2,13 @@ package Group04_MyVelib_Mangin_Chalayer.system.core;
 
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Strategy to compute the cost of a ride for a user with a Vlibre card.
+ */
 public class VlibreStrategy implements CostStrategy {
 
 	@Override
+	/** Compute the cost of a given ride.*/
 	public double calculate(Ride ride) throws GeneralException {
 		//Créer une exception au lieu de return 0 à la fin
 		double cost = 0;

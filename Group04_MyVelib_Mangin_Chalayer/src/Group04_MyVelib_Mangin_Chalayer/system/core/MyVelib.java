@@ -3,12 +3,21 @@ package Group04_MyVelib_Mangin_Chalayer.system.core;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This class defines the characteristics of the myVelib system.
+ * <p>
+ * It is composed of the bicycle list, the station list, the user list and a renter.
+ * @see Renter
+ * </p>
+ */
 public class MyVelib {
 	protected ArrayList<Bicycle> bicycleList;
 	protected ArrayList<User> userList;
 	protected ArrayList<DockingStation> stationList;
 	public Renter renter = new Renter(this);
-
+	
+	/** Initialise the system with a given number of station, a given number of slot per station, a given proportion of the slot fill with bike (between 0 and 1),
+	 * a given proportion of mecanical bicycle (the rest is electrical), a given proportion of plus station and a given size of the side of the square (area).*/
 	public MyVelib(int numberOfDockingStation, int numberOfParkingSlotByStation, double initialPopulationProportion,double mecanicalBicycleProportion,double plusStationProportion,double s) throws GeneralException {
 		super();
 		bicycleList = new ArrayList<>();
@@ -60,51 +69,63 @@ public class MyVelib {
 		}
 
 	}
-
+	
+	/** Add a bicycle to the system.*/
 	public void addBicycle(Bicycle bicycle) {
 		bicycleList.add(bicycle);
 	}
+	
+	/** Add a station to the system.*/
 	public void addDockingStation(DockingStation dockingStation) {
 		stationList.add(dockingStation);
 	}
-
+	
+	/** Add a user to the system.*/
 	public void addUser(User user) {
 		userList.add(user);
 	}
-
+	
+	/** Sort station using ComparatorByMostUsedStation.*/
 	public void SortByMostUsedStation(){
 		ComparatorByMostUsedStation comparatorByMostUsedStation = new ComparatorByMostUsedStation();
 		Collections.sort(this.stationList,comparatorByMostUsedStation);
 	}
-
+	
+	/** Sort station using ComparatorByLeastUsedStation.*/
 	public void SortByLeastOccupiedStation(){
 		ComparatorByLeastOccupiedStation comparatorByLeastOccupiedStation = new ComparatorByLeastOccupiedStation();
 		Collections.sort(this.stationList,comparatorByLeastOccupiedStation);
 	}
-
+	
+	/** Sort station using ComparatorByIDStation.*/
 	public void SortByIDStation(){
 		ComparatorByIDStation comparatorByIDStation = new ComparatorByIDStation();
 		Collections.sort(this.stationList,comparatorByIDStation);
 	}
-
+	
+	/** Print the toString of each station of the system.*/
 	public void displayStations() {
 		for (DockingStation DS : stationList) {
 			System.out.println(DS);
 		}
 	}
-
+	
+	/** Print the toString of each bicycle of the system.*/
 	public void displayBicycles() {
 		for (Bicycle B : bicycleList) {
 			System.out.println(B);
 		}
 	}
-
+	
+	/** Print the toString of each user of the system.*/
 	public void displayUsers() {
 		for (User U : userList) {
 			System.out.println(U);
 		}
 	}
-
+	
+	/** Print a report of the system (online stations with the list of bicycle parked inside,
+	 *  offline stations with the list of bicycle parked inside and users).*/
 	public void report() {
 		System.out.print("\nOnline Stations : ");
 		for (DockingStation DS : stationList) {
@@ -123,28 +144,32 @@ public class MyVelib {
 			System.out.print(" "+user.getName()+ " (" + user.getUniqID() + ") " );
 		}
 	}
-
+	
+	/** Return the user assiociated to the given ID.*/
 	public User getUserFromID(int ID) throws GeneralException {
 		for (User U : userList) {
 			if (U.getUniqID()==ID) {return U;}
 		}
 		throw new GeneralException("No user found with this ID");
 	}
-
+	
+	/** Return the bicycle assiociated to the given ID.*/
 	public Bicycle getBicycleFromID(int ID) throws GeneralException {
 		for (Bicycle B : bicycleList) {
 			if (B.getUniqID()==ID) {return B;}
 		}
 		throw new GeneralException("No bicycle found with this ID");
 	}
-
+	
+	/** Return the station assiociated to the given ID.*/
 	public DockingStation getStationFromID(int ID) throws GeneralException {
 		for (DockingStation S : stationList) {
 			if (S.getUniqID()==ID) {return S;}
 		}
 		throw new GeneralException("No station found with this ID");
 	}
-
+	
+	/** Set the station with a given ID to offline.*/
 	public boolean setOfflineStation(int ID) throws GeneralException {
 		for (DockingStation S : stationList) {
 			if (S.getUniqID()==ID) {
@@ -166,7 +191,8 @@ public class MyVelib {
 		throw new GeneralException("No station found with this ID");
 
 	}
-
+	
+	/** Set the station with a given ID to online.*/
 	public boolean setOnlineStation(int ID) throws GeneralException {
 		for (DockingStation S : stationList) {
 			if (S.getUniqID()==ID) {

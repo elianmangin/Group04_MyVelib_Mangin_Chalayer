@@ -2,12 +2,19 @@ package Group04_MyVelib_Mangin_Chalayer.system.core;
 
 import java.time.LocalTime;
 
+/**
+ * Used to compute the rent, return, and ask  planning.
+ * <p>
+ * The renter is linked to the myVelib system and allows users to connect to it and disconnect.
+ * </p>
+ */
 public class Renter {
 	private MyVelib myVelib;
 	private User user;
 	@SuppressWarnings("rawtypes")
 	private RideItinerary itinerary;
-
+	
+	/** Creates a renter and link it to a given myVelib system.*/
 	public Renter(MyVelib myVelib) {
 		super();
 		this.myVelib = myVelib;
@@ -15,18 +22,21 @@ public class Renter {
 		this.itinerary = null;
 
 	}
-
+	
+	/** Connect a user to the renter.*/
 	public void connectUser(User U) throws GeneralException {
 		if(user != null) throw new GeneralException("User : "+user.getName() +" is already connected");
 		this.user = U;
 	}
-
+	
+	/** Disconnect the user from the renter.*/
 	public void disconnectUser() {
 		this.user = null;
 		this.itinerary = null;
 	}
 
-
+	/** Ask for the itinerary to go to a given destination (x,y) using a bicycle of a given type following 	a given planning.
+	 * @see RidePlanning*/
 	public void askPlanning(Coordinates destination, String bicycleType, String planningType) throws GeneralException {
 		if (this.user  == null) throw new GeneralException("User not connected");
 		PlanningFactory PF = new PlanningFactory();
@@ -34,7 +44,8 @@ public class Renter {
 		itinerary = RP.plan(user.getGps(),destination, bicycleType);
 
 	}
-
+	
+	/** Rent a bicycle a the start of the RideItinerary.*/
 	public int rentBicycle(LocalTime startTime) throws GeneralException {
 		if (this.user  == null) throw new GeneralException("User not connected");
 		// If the bicycle is taken from a Docking Station
@@ -73,7 +84,8 @@ public class Renter {
 		throw new GeneralException("Fail to rent a bike");
 
 	}
-
+	
+	/** Return a bicycle to the end of the RideItinerary.*/
 	public void returnBicycle(LocalTime endTime) throws GeneralException {
 		if (this.user  == null) throw new GeneralException("User not connected");
 		// If the bicycle is returned to a Docking Station

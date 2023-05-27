@@ -1,6 +1,12 @@
 package Group04_MyVelib_Mangin_Chalayer.system.core;
 
+/**
+ * Factory of RidePlanning
+ * @see RidePlanning
+ * @see StandardRidePlanning
+ */
 public class PlanningFactory {
+	/** Creates a RidePlanning for a given planning method ("standard").*/
 	public RidePlanning create(String planning, MyVelib myVelib) throws GeneralException{
 		if(planning == null){
 			return null;

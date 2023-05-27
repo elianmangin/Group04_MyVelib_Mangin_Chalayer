@@ -1,5 +1,6 @@
 package Group04_MyVelib_Mangin_Chalayer.system.core;
 
+/** Store a starting docking station and ending coordinates with a bicycle type.*/
 public class StationToStreetItinerary extends RideItinerary<DockingStation, Coordinates> {
 
 	public StationToStreetItinerary(DockingStation start, Coordinates end, String type) {

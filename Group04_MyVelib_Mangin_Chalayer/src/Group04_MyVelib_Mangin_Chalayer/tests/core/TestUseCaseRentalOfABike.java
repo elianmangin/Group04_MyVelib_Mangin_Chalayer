@@ -1,6 +1,6 @@
 package Group04_MyVelib_Mangin_Chalayer.tests.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalTime;
 
@@ -35,29 +35,10 @@ public class TestUseCaseRentalOfABike {
 		assertEquals(renter.getUser().getName(), "John");
 		renter.askPlanning(new Coordinates(5,6), "mecanical", "standard");
 		renter.rentBicycle(LocalTime.of(4, 45));
+		assertTrue(renter.getUser().isCurrentlyRenting());
 		renter.returnBicycle(LocalTime.of(6, 48));
+		assertFalse(renter.getUser().isCurrentlyRenting());
 	}
 }
 	
-	/*
-	@Test
-	void test() throws GeneralException {
-
-		ArrayList<DockingStation> stationList = myVelib.getStationList();
-		DockingStation dockingStation1 = stationList.get(0);
-		ParkingSlot parkingSlot1 = dockingStation1.getParkingSlotList().get(0);
-		Bicycle bicycle1 = parkingSlot1.getParkedBicycle();
-		renter.rentBicycle(user3, dockingStation1.gGps(), LocalTime.of(4,45), dockingStation1, parkingSlot1, bicycle1);
-
-		DockingStation dockingStation2 = stationList.get(1);
-		ParkingSlot parkingSlot2 = null;
-		for (ParkingSlot parkingSlot : dockingStation2.getParkingSlotList()) {
-			if (!parkingSlot.isOccupied()) {
-				parkingSlot2=parkingSlot;
-				break;
-			}
-		}
-		renter.returnBicycle(user3, dockingStation2.getGps(), LocalTime.of(6,48), dockingStation2, parkingSlot2, bicycle1);
-
-	}*/
 	

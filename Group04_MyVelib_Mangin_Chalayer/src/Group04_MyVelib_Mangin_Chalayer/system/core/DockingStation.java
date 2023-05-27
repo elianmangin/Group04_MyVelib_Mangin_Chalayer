@@ -2,6 +2,12 @@ package Group04_MyVelib_Mangin_Chalayer.system.core;
 
 import java.util.ArrayList;
 
+/**
+ * This class defines the characteristics of a docking station.
+ * <p>
+ * A docking station can store bicycles which can be rented from and returned to it.
+ * </p>
+ */
 public class DockingStation {
 	protected static int idCounterStation = 0;
 	protected int uniqID;
@@ -14,7 +20,8 @@ public class DockingStation {
 	protected DockingStationBalance dockingStationBalance;
 	protected int numberOfMecanicalBicycle;
 	protected int numberOfElectricalBicycle;
-
+	
+	/** Creates a docking station with given coordinates, a given type (plus or null) and a number of slots.*/
 	public DockingStation(Coordinates coordinatesStation, String type, int numberOfSlots) {
 		super();
 		idCounterStation++;
@@ -34,7 +41,8 @@ public class DockingStation {
 		}
 
 	}
-
+	
+	/** Park a given bicycle inside the docking station.*/
 	public boolean addBicycle(Bicycle B) throws GeneralException {
 		if (this.numberOfSlotsOccupied < this.numberOfSlots) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {
@@ -55,7 +63,8 @@ public class DockingStation {
 			throw new GeneralException("Warning : this station is full");
 		}
 	}
-
+	
+	/** Return a bicycle of a given type found inside the station and remove it from its bicycle list.*/
 	public Bicycle takeBicycle(String type) throws GeneralException {
 		if (type.equals("mecanical") && this.numberOfMecanicalBicycle > 0) {
 			for (ParkingSlot parkingSlot : parkingSlotList) {

@@ -3,9 +3,13 @@ package Group04_MyVelib_Mangin_Chalayer.system.core;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Standard planning to use to provide an itinerary to a user.
+ */
 public class StandardRidePlanning implements RidePlanning{
 	protected MyVelib myvelib;
-
+	
+	/** Get a myVelib system as attribute to access to all the component of the system.*/
 	public StandardRidePlanning(MyVelib myvelib) {
 		super();
 		this.myvelib = myvelib;
@@ -13,6 +17,7 @@ public class StandardRidePlanning implements RidePlanning{
 
 
 	@Override
+	/** Return the RideItinerary for a given start, end and type of bike.*/
 	public StationToStationItinerary plan(Coordinates startingCoordinates,Coordinates endingCoordinates,String type) throws GeneralException{
 
 		//Initialisation
