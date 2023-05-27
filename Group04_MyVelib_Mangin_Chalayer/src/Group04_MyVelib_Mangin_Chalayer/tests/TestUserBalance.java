@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import Group04_MyVelib_Mangin_Chalayer.system.core.*;
 
 class TestUserBalance {
+	private MyVelib myVelib;
+	private Renter renter;
 	private User u;
 	private LocalTime st;
 	private LocalTime et;
@@ -18,57 +20,61 @@ class TestUserBalance {
 	private DockingStation eds;
 	private Bicycle b;
 
-	
+
 
 	@BeforeEach
 	void setUp() throws GeneralException {
-		this.u = new User("Jean", new Coordinates(1.234,1.546), "Vlibre", 100);
-		this.st = LocalTime.of(6, 45);
-		this.et = LocalTime.of(10, 15);
-		this.edsplus = new DockingStation(new Coordinates(6.908,4.767),"plus",10);
-		this.eds = new DockingStation(new Coordinates(2.301,8.547),null,10);
-		this.b = new Bicycle(new Coordinates(7.151,1.677), "mecanical");
-		
+		myVelib = new MyVelib(2,10,0.9,0.5,0.5, 10);
+		renter = new Renter(myVelib);
+		u = new User("Jean", new Coordinates(1.234,1.546), "Vlibre", 100);
+		myVelib.addUser(u);
+		st = LocalTime.of(6, 45);
+		et = LocalTime.of(10, 15);
+		edsplus = myVelib.getStationList().get(0);
+		eds = myVelib.getStationList().get(1);
+		b = new Bicycle(new Coordinates(1.234,1.546), "mecanical");
+
 	}
 	@Test
 	void testAddRide() throws GeneralException {
 		//test if the add of a ride is functionnal
-		Ride ride = new Ride(u, b, st);
-		ride.endRide(eds, et);
-		UserBalance balance = new UserBalance();
-		
+		UserBalance balance = u.getBalance();
+
 		assertEquals(balance.getNumberOfRide(), 0);
 		assertEquals(balance.getTotalCharges(), 0);
 		assertEquals(balance.getTotalTime(), 0);
-		
-		balance.addRide(ride);
-		
+
+		renter.connectUser(u);
+		renter.setItinerary(new StreetToStationItinerary(b, eds, null));
+		renter.rentBicycle(st);
+		renter.returnBicycle(et);
+
 		assertEquals(balance.getNumberOfRide(), 1);
-		assertEquals(balance.getTotalCharges(), ride.getCost());
-		assertEquals(balance.getTotalTime(), ChronoUnit.MINUTES.between(ride.getStartTime(), ride.getEndTime()));
+		assertEquals(balance.getTotalCharges(), 2.25);
+		assertEquals(balance.getTotalTime(), 210);
 		assertEquals(balance.getTotalTimeCredit(), 0);
 	}
-	
+
 	@Test
 	void testAddRidePlus() throws GeneralException {
-		//test if the add of a ride with the add of 5 minutes to the totaltimecredit
-		Ride rideplus = new Ride(u, b, st);
-		rideplus.endRide(edsplus, et);
-		UserBalance balance = new UserBalance();
-		
+		//test if the add of a ride is functionnal
+		UserBalance balance = u.getBalance();
+
 		assertEquals(balance.getNumberOfRide(), 0);
 		assertEquals(balance.getTotalCharges(), 0);
 		assertEquals(balance.getTotalTime(), 0);
-		
-		balance.addRide(rideplus);
-		
+
+		renter.connectUser(u);
+		renter.setItinerary(new StreetToStationItinerary(b, edsplus, null));
+		renter.rentBicycle(st);
+		renter.returnBicycle(et);
+
 		assertEquals(balance.getNumberOfRide(), 1);
-		assertEquals(balance.getTotalCharges(), rideplus.getCost());
-		assertEquals(balance.getTotalTime(), ChronoUnit.MINUTES.between(rideplus.getStartTime(), rideplus.getEndTime()));
+		assertEquals(balance.getTotalCharges(), 2.25);
+		assertEquals(balance.getTotalTime(), 210);
 		assertEquals(balance.getTotalTimeCredit(), 5);
-		//Pas d'ajout de TotalTimeCredit c'est normal cela est fait par le renter en temps normal
 	}
-	
-	
+
+
 
 }

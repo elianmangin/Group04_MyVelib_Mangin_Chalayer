@@ -87,8 +87,8 @@ public class TestUseCaseSetUp {
 			if(bicycle.getType() == "mecanical") {mecanicalCounter++;}
 			if(bicycle.getType() == "electrical") {electricalCounter++;}
 		}
-		assertEquals(mecanicalCounter,Math.round(11*9*0.9*0.5));
-		assertEquals(electricalCounter,Math.round(11*9*0.9*0.5));
+		assertEquals(mecanicalCounter,Math.round(45));
+		assertEquals(electricalCounter,Math.round(44));
 	}
 	
 	@Test

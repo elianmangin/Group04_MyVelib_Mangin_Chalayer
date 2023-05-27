@@ -24,7 +24,7 @@ public class MyVelib {
 			Coordinates dockingStationCoordinates = new Coordinates(Math.random()*s,Math.random()*s);
 
 			String dockingStationType = null;
-			if(k>=(int)Math.round(plusStationProportion*numberOfDockingStation)) {dockingStationType ="plus";}
+			if(k<(int)Math.round(plusStationProportion*numberOfDockingStation)) {dockingStationType ="plus";}
 
 			DockingStation dockingStation = new DockingStation(dockingStationCoordinates,dockingStationType,numberOfParkingSlotByStation);
 			stationList.add(dockingStation);
@@ -203,6 +203,10 @@ public class MyVelib {
 	}
 	public ArrayList<DockingStation> getStationList() {
 		return stationList;
+	}
+	
+	public void setStationList(ArrayList<DockingStation> stationList) {
+		this.stationList = stationList;
 	}
 
 
