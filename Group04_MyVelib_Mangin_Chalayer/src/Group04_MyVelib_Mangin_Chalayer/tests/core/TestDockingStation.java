@@ -1,4 +1,4 @@
-package Group04_MyVelib_Mangin_Chalayer.tests;
+package Group04_MyVelib_Mangin_Chalayer.tests.core;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

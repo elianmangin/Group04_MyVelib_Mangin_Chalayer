@@ -40,10 +40,18 @@ public class Renter {
 		// If the bicycle is taken from a Docking Station
 		if (itinerary.start instanceof DockingStation) {
 			DockingStation startStation = (DockingStation) this.itinerary.start;
+			if (startStation.getStatus().equals("offline")) {
+				this.disconnectUser();
+				throw new GeneralException("This station is offline for the moment");
+			}
 
 			// Take the bike from the station and update its number of rent
 			Bicycle bicycle = startStation.takeBicycle(this.itinerary.getType());
 			startStation.dockingStationBalance.totalNumberOfRent++;
+			
+			if ((double)startStation.getNumberOfSlotsOccupied() < 0.4*((double)startStation.getNumberOfSlots())) {
+				startStation.setType("plus");
+			}
 
 			// Change bike status and store start data of the user current ride
 			bicycle.setCurrentlyRentedBicycle(true);
@@ -71,6 +79,10 @@ public class Renter {
 		// If the bicycle is returned to a Docking Station
 		if (itinerary.getEnd() instanceof DockingStation) {
 			DockingStation endStation = (DockingStation) this.itinerary.end;
+			if (endStation.getStatus().equals("offline")) {
+				this.disconnectUser();
+				throw new GeneralException("This station is offline for the moment");
+			}
 
 			// Update user and bike location
 			user.setGps(endStation.getGps());
@@ -92,6 +104,10 @@ public class Renter {
 			if (endStation.getType() == "plus" && this.user.registrationCard.getType() !=null){
 				user.registrationCard.addCredit(5);
 				user.balance.addTotalTimeCredit(5);
+			}
+			
+			if ((double)endStation.getNumberOfSlotsOccupied() > 0.4*((double)endStation.getNumberOfSlots())) {
+				endStation.setType(null);
 			}
 
 			// Add the cost value to the current ride and update user balance

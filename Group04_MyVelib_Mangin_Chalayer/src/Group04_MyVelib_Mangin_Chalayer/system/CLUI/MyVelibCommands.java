@@ -422,12 +422,10 @@ public class MyVelibCommands{
 				if (user.isCurrentlyRenting()) {throw new GeneralException(user.getName()+" is already renting a bike");}
 				// rentBike <userID> <stationID> <type>
 				if (arguments.size() == 3) {
-					int bikeID1 = Integer.parseInt(arguments.get(1));
-					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID1);
-					if (!user.getGps().equals(bicycle.getGps())) throw new GeneralException(user.getName()+" is not at the same place as the bike");
 					int stationID = Integer.parseInt(arguments.get(1));
 					String type = arguments.get(2);
 					DockingStation station = MyVelibSystem.myVelib.getStationFromID(stationID);
+					if (!user.getGps().equals(station.getGps())) throw new GeneralException(user.getName()+" is not at the same place than the docking station");
 					MyVelibSystem.myVelib.renter.connectUser(user);
 					MyVelibSystem.myVelib.renter.setItinerary(new StationToStationItinerary(station, null, type));
 					int bikeID = MyVelibSystem.myVelib.renter.rentBicycle(LocalTime.of(0, 0));
@@ -441,7 +439,7 @@ public class MyVelibCommands{
 				else if(arguments.size() == 2) {
 					int bikeID = Integer.parseInt(arguments.get(1));
 					Bicycle bicycle = MyVelibSystem.myVelib.getBicycleFromID(bikeID);
-					if (!user.getGps().equals(bicycle.getGps())) throw new GeneralException(user.getName()+" is not at the same place as the bike");
+					if (!user.getGps().equals(bicycle.getGps())) throw new GeneralException(user.getName()+" is not at the same place than the bike");
 					MyVelibSystem.myVelib.renter.connectUser(user);
 					MyVelibSystem.myVelib.renter.setItinerary(new StreetToStationItinerary(bicycle, null, bicycle.getType()));
 					MyVelibSystem.myVelib.renter.rentBicycle(LocalTime.of(0, 0));

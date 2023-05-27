@@ -19,7 +19,7 @@ public class MyVelibSystem {
 
 	}
 
-	private static void startProcess() {
+	public static void startProcess() {
 		// Code for Loading my_velib.ini
 		try{
 			Wini ini = new Wini(new File("Group04_MyVelib_Mangin_Chalayer/src/Group04_MyVelib_Mangin_Chalayer/eval/myVelib.ini"));
@@ -86,28 +86,35 @@ public class MyVelibSystem {
 
 	}
 
-	private static void commandLoop() {
-		try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-            	System.out.println("\u001B[36mPlease enter a command : \u001B[0m");
-            	System.out.print("> ");
-                String commandInput = scanner.nextLine();
-                ArrayList<String> commandInputSplit = new ArrayList<>(Arrays.asList(commandInput.split(" ")));
+	public static void commandLoop() {
+		try(Scanner scanner = new Scanner(System.in)){
+			while (true) {
+				try {
+					System.out.println("\u001B[36mPlease enter a command : \u001B[0m");
+					System.out.print("> ");
+					String commandInput = scanner.nextLine();
+					ArrayList<String> commandInputSplit = new ArrayList<>(Arrays.asList(commandInput.split(" ")));
 
-                String command = commandInputSplit.get(0);
+					String command = commandInputSplit.get(0);
 
-                commandInputSplit.remove(0);
+					commandInputSplit.remove(0);
 
-                ArrayList<String> arguments = commandInputSplit;
+					ArrayList<String> arguments = commandInputSplit;
 
-                MyVelibCommands myVelibLoop = new MyVelibCommands(command, arguments);
-                myVelibLoop.eval();
+					MyVelibCommands myVelibLoop = new MyVelibCommands(command, arguments);
+					myVelibLoop.eval();
 
+				}catch (Exception e) {
+					System.err.println("/!\\ Something went wrong /!\\\n"
+							+ "Make sure you write a correct command.\n"
+							+ "Please refer yourself to the help command if you have any doubt");
+				}
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
 	}
 

@@ -1,4 +1,4 @@
-package Group04_MyVelib_Mangin_Chalayer.tests;
+package Group04_MyVelib_Mangin_Chalayer.tests.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

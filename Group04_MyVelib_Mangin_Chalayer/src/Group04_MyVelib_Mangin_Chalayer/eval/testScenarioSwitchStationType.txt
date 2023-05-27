@@ -1,0 +1,12 @@
+displayStation 9
+displayStation 1
+moveUserToStation 1 9
+rentBike 1 9 mecanical
+moveUserToStation 1 1
+returnBike 1 1 120
+moveUserToStation 1 9
+rentBike 1 9 mecanical
+moveUserToStation 1 1
+returnBike 1 1 120
+displayStation 9
+displayStation 1
