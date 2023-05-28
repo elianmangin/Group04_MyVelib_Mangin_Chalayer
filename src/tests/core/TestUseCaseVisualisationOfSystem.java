@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
-class TestUseCaseVisualisationOfSystem {
+/**
+ * Junit test of the scenario visualisation of a system
+ */
+public class TestUseCaseVisualisationOfSystem {
 	private MyVelib system;
 	private User user1;
 	private User user2;
@@ -24,40 +27,45 @@ class TestUseCaseVisualisationOfSystem {
 		system.addUser(user3);
 	}
 	
-	@Test
+	
 	/** Test the method getUserFromId to see the state of a user*/
-	void testStateOfUserFromID() throws GeneralException {
+	@Test
+	public void testStateOfUserFromID() throws GeneralException {
 		assertEquals(system.getUserFromID(user1.getUniqID()), user1);
 		assertEquals(system.getUserFromID(user2.getUniqID()), user2);
 		assertEquals(system.getUserFromID(user3.getUniqID()), user3);
 	}
 	
-	@Test
+	
 	/** Test the method getStationFromId to see the state of a user*/
-	void testStateOfStationFromID() throws GeneralException {
+	@Test
+	public void testStateOfStationFromID() throws GeneralException {
 		assertEquals(system.getStationFromID(1), system.getStationList().get(0));
 		assertEquals(system.getStationFromID(2), system.getStationList().get(1));
 		assertEquals(system.getStationFromID(3), system.getStationList().get(2));
 	}
 	
-	@Test
+	
 	/** Test the method getUserFromId to see the state of a user. 
 	 * Visual confirmation of the informations displayed*/
-	void testReportUser() throws GeneralException {
+	@Test
+	public void testReportUser() throws GeneralException {
 		System.out.print(user1);
 	}
 	
-	@Test
+	
 	/**Test the method getUserFromId to see the state of a user
 	 * Visual confirmation of the informations displayed*/
-	void testReportStation() throws GeneralException {
+	@Test
+	public void testReportStation() throws GeneralException {
 		System.out.print(system.getStationFromID(1));
 	}
 	
-	@Test
+	
 	/** Test the method getUserFromId to see the state of a user
 	 * Visual confirmation of the informations displayed*/
-	void testReportSystem() throws GeneralException {
+	@Test
+	public void testReportSystem() throws GeneralException {
 		system.report();
 	}
 	

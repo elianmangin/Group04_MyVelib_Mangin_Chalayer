@@ -10,7 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
-class TestUseCaseRidePlanning {
+/**
+ * Junit test of the scenario ride planning
+ */
+public class TestUseCaseRidePlanning {
 	private MyVelib system;
 	private User user;
 	private Renter renter;

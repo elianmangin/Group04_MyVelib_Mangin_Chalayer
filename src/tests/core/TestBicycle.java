@@ -2,13 +2,18 @@ package tests.core;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import system.core.Bicycle;
 import system.core.Coordinates;
 
-class TestBicycle {
+/**
+ * Junit test of the Bicycle methods
+ * @see Bicycle
+ */
+public class TestBicycle {
 	private Bicycle bicycle1;
 	private Bicycle bicycle2;
 	private Bicycle bicycle3;
@@ -28,13 +33,13 @@ class TestBicycle {
 	}
 
 	@Test
-	void testGetCoord() {
+	public void testGetCoord() {
 		assertTrue(bicycle1.getGps().equals(coordCS));
 	}
 	
-	@Test
 	/**Assert each id is unique*/
-	void testUniqID() {
+	@Test
+	public void testUniqID() {
 		assertNotEquals(bicycle1.getUniqID(),bicycle2.getUniqID());
 		assertNotEquals(bicycle1.getUniqID(),bicycle4.getUniqID());
 		assertNotEquals(bicycle2.getUniqID(),bicycle3.getUniqID());
@@ -47,9 +52,10 @@ class TestBicycle {
 		assertNotEquals(bicycle5.getUniqID(),bicycle1.getUniqID());
 	}
 	
-	@Test
+	
 	/**Assert if you can change the state of a bike to rented or not*/
-	void testCurrRent() {
+	@Test
+	public void testCurrRent() {
 		assertFalse(bicycle1.isCurrentlyRentedBicycle());
 		bicycle1.setCurrentlyRentedBicycle(true);
 		assertTrue(bicycle1.isCurrentlyRentedBicycle());
@@ -57,9 +63,10 @@ class TestBicycle {
 		assertFalse(bicycle1.isCurrentlyRentedBicycle());
 	}
 	
-	@Test
+	
 	/**Assert if you can change the type of a bike*/
-	void testType() {
+	@Test
+	public void testType() {
 		assertEquals(bicycle1.getType(),"mecanical");
 		assertNotEquals(bicycle1.getType(),"electrical");
 		assertEquals(bicycle2.getType(),"electrical");

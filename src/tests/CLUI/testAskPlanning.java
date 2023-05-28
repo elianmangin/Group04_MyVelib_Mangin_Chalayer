@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the askPlanning command.
  */
-class testAskPlanning {
+public class testAskPlanning {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

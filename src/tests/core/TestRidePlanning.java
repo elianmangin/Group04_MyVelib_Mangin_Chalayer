@@ -9,7 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
-class TestRidePlanning {
+/**
+ * Junit test of the RidePlanning methods
+ * @see RidePlanning
+ */
+public class TestRidePlanning {
 	@SuppressWarnings("rawtypes")
 	private RideItinerary itinerary;
 	private RidePlanning RP;
@@ -24,27 +28,30 @@ class TestRidePlanning {
 		RP = PF.create("STANDARD", system);
 	}
 	
-	@Test
+	
 	/** Verify that the DockingStation are in the system and the bicycle is of the good type */
-	void testStartAndEnd() throws GeneralException {
+	@Test
+	public void testStartAndEnd() throws GeneralException {
 		itinerary = RP.plan(user.getGps(),new Coordinates(1.3,1.8), "mecanical");
 		assertTrue(system.getStationList().contains(itinerary.getStart()));
 		assertTrue(system.getStationList().contains(itinerary.getEnd()));
 		assertEquals(itinerary.getType(), "mecanical");
 	}
 	
-	@Test
+	
 	/** Verify that the DockingStation are in the system and the bicycle is of the good type*/
-	void testType() throws GeneralException {
+	@Test
+	public void testType() throws GeneralException {
 		itinerary = RP.plan(user.getGps(),new Coordinates(1.3,1.8), "mecanical");
 		assertEquals(itinerary.getType(), "mecanical");
 		itinerary = RP.plan(user.getGps(),new Coordinates(1.3,1.8), "electrical");
 		assertEquals(itinerary.getType(), "electrical");
 	}
 	
-	@Test
+	
 	/** Verify that the DockingStation are in the system and the bicycle is of the good type*/
-	void testNearestStation() throws GeneralException {
+	@Test
+	public void testNearestStation() throws GeneralException {
 		itinerary = RP.plan(user.getGps(),new Coordinates(1.3,1.8), "mecanical");
 		ArrayList<DockingStation> stationList = system.getStationList();
 		double minDistanceStart = Double.POSITIVE_INFINITY;

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the moveUserToStation command.
  */
-class testMoveUserToStation {
+public class testMoveUserToStation {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

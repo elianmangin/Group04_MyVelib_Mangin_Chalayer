@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the sortStation command.
  */
-class testSortStation {
+public class testSortStation {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

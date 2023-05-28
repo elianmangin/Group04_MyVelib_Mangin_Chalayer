@@ -9,13 +9,18 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
+/**
+ * Junit test of the DockingStation methods
+ * @see DockingStation
+ */
 public class TestDockingStation {
 	private DockingStation S;
 	
 	
-	@Test
+	
 	/**test the getter of the DokcingStation Class*/
-	void testGetters() {
+	@Test
+	public void testGetters() {
 		S = new DockingStation(new Coordinates(1,1), "plus", 2);
 		assertTrue(S.getGps().equals(new Coordinates(1,1)));
 		assertEquals(S.getNumberOfSlots(), 2);
@@ -24,9 +29,10 @@ public class TestDockingStation {
 		
 		
 	}
-	@Test
+	
 	/** Checking the correct implementation of all the parameters when a bicycle is added*/
-	void testAddBicycle() throws GeneralException {
+	@Test
+	public void testAddBicycle() throws GeneralException {
 		S = new DockingStation(new Coordinates(1,1), null, 2);
 		
 		assertEquals(S.getNumberOfSlotsOccupied(), 0);
@@ -56,9 +62,10 @@ public class TestDockingStation {
 	}
 	
 	
-	@Test
+	
 	/** Checking the correct implementation of all the parameters when a bicycle is taken*/
-	void testTakeBicycle() throws GeneralException {
+	@Test
+	public void testTakeBicycle() throws GeneralException {
 		S = new DockingStation(new Coordinates(1,1), null, 2);
 	
 		assertThrows(Exception.class, () -> {

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the moveUserToBicycle command.
  */
-class testMoveUserToBicycle {
+public class testMoveUserToBicycle {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

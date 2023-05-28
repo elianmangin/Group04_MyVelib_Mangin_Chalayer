@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the rentBike command.
  */
-class testRentBike {
+public class testRentBike {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

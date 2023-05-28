@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the moveUserToCoord command.
  */
-class testMoveUserToCoord {
+public class testMoveUserToCoord {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

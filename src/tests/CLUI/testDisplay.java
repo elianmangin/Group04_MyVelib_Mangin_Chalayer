@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the display command.
  */
-class testDisplay {
+public class testDisplay {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

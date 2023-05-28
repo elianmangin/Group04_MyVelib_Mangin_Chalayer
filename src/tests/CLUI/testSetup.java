@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the setup command.
  */
-class testSetup {
+public class testSetup {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

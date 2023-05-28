@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the online and offline command.
  */
-class testOfflineOnline {
+public class testOfflineOnline {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

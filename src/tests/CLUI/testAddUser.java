@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the addUser command.
  */
-class testAddUser {
+public class testAddUser {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

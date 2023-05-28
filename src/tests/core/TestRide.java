@@ -10,8 +10,11 @@ import org.junit.jupiter.api.Test;
 import system.core.*;
 
 
-
-class TestRide {
+/**
+ * Junit test of the Ride methods
+ * @see Ride
+ */
+public class TestRide {
 	private User u;
 	private LocalTime st;
 	private LocalTime et;
@@ -29,9 +32,10 @@ class TestRide {
 		this.b = new Bicycle(new Coordinates(7.151,1.677), "mecanical");
 
 	}
-	@Test
+	
 	/**test the different setter usable when the ride is started*/
-	void testGettersStartOfTheRide() {
+	@Test
+	public void testGettersStartOfTheRide() {
 		Ride rideds = new Ride(u, sds, b, st);
 		Ride ride = new Ride(u, b, st);
 		assertEquals(u,ride.getUser());
@@ -44,9 +48,10 @@ class TestRide {
 		assertEquals(st,rideds.getStartTime());
 	}
 
-	@Test
+	
 	/** test the different setter usable when the ride is ended*/
-	void testGettersEndOfTheRide() throws GeneralException {
+	@Test
+	public void testGettersEndOfTheRide() throws GeneralException {
 		Ride rideStreetToStreet = new Ride(u, b, st);
 		Ride rideStreetToDockingStation = new Ride(u, b, st);
 		Ride rideDockingStationToStreet = new Ride(u, sds, b, st);
@@ -66,9 +71,10 @@ class TestRide {
 	}
 
 
-	@Test
+	
 	/** Assert an exception is thrown if the time is not coherent*/
-	void testCoherenceOfTime() throws GeneralException {
+	@Test
+	public void testCoherenceOfTime() throws GeneralException {
 		assertTrue(et.isAfter(st));
 		Ride ridetrue = new Ride(u, b, st);
 		ridetrue.endRide(new Coordinates(1.520,1.260), et);
@@ -80,9 +86,10 @@ class TestRide {
 		});
 	}
 
-	@Test
+	
 	/** Assert  if the bicycle is where it is supposed to be at the end of the ride*/
-	void testCoherenceOfCoordinates() throws GeneralException {
+	@Test
+	public void testCoherenceOfCoordinates() throws GeneralException {
 		Ride ride = new Ride(u, b, st);
 		ride.endRide(new Coordinates(1.520,1.260), et);
 		assertTrue(ride.getEndCoordinates().equals(ride.getBicycleUsed().getGps()));

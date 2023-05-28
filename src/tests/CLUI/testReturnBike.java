@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the returnBike command.
  */
-class testReturnBike {
+public class testReturnBike {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
+/**
+ * Junit test of the scenario set up
+ */
 public class TestUseCaseSetUp {
 	private MyVelib myVelib;
 	private MyVelib myVelib2;
@@ -33,39 +36,44 @@ public class TestUseCaseSetUp {
 	}
 
 	
-	@Test
+	
 	/** test the numbers of bicycles in the system*/
-	void testNumberOfBicycle() {
+	@Test
+	public void testNumberOfBicycle() {
 		ArrayList<Bicycle> bicycleList = myVelib.getBicycleList();
 		assertEquals(bicycleList.size(), Math.round(10*10*0.9));
 	}
 	
-	@Test
+	
 	/** test the numbers of station in the system*/
-	void testNumberOfStations() {
+	@Test
+	public void testNumberOfStations() {
 		ArrayList<DockingStation> stationList = myVelib.getStationList();
 		assertEquals(stationList.size(), Math.round(10));
 	}
 	
-	@Test
+	
 	/** test the numbers of users in the system*/
-	void testNumberOfUsers() {
+	@Test
+	public void testNumberOfUsers() {
 		ArrayList<User> userList = myVelib.getUserList();
 		assertEquals(userList.size(), Math.round(3));
 	}
 	
-	@Test
+	
 	/** test the info of the user in the system*/
-	void testInfoOfUsers() {
+	@Test
+	public void testInfoOfUsers() {
 		ArrayList<User> userList = myVelib.getUserList();
 		assertEquals(userList.get(0), user1);
 		assertEquals(userList.get(1), user2);
 		assertEquals(userList.get(2), user3);	
 		}
 	
-	@Test
+	
 	/** test the number of bicycles of a certain type, case where it works*/
-	void testTypeOfBicyclesGoodCase() {
+	@Test
+	public void testTypeOfBicyclesGoodCase() {
 		ArrayList<Bicycle> bicycleList = myVelib.getBicycleList();
 		int mecanicalCounter = 0;
 		int electricalCounter = 0;
@@ -77,9 +85,10 @@ public class TestUseCaseSetUp {
 		assertEquals(electricalCounter,Math.round(10*10*0.9*0.5));
 	}
 	
-	@Test
+	
 	/** test the number of bicycles of a certain type, case where it works*/
-	void testTypeOfBicyclesBadCase() {
+	@Test
+	public void testTypeOfBicyclesBadCase() {
 		ArrayList<Bicycle> bicycleList = myVelib2.getBicycleList();
 		int mecanicalCounter = 0;
 		int electricalCounter = 0;
@@ -91,9 +100,10 @@ public class TestUseCaseSetUp {
 		assertEquals(electricalCounter,Math.round(44));
 	}
 	
-	@Test
+	
 	/** test the number of station of a certain type, case where it works */
-	void testTypeOfStationsBadCase () {
+	@Test
+	public void testTypeOfStationsBadCase () {
 		ArrayList<DockingStation> stationList = myVelib2.getStationList();
 		int plusCounter = 0;
 		for (DockingStation station : stationList) {
@@ -102,9 +112,10 @@ public class TestUseCaseSetUp {
 		assertEquals(plusCounter,Math.round(11*0.5));
 	}
 	
-	@Test
+	
 	/** test the number of station of a certain type, case where it works*/
-	void testTypeOfStationsGoodCase () {
+	@Test
+	public void testTypeOfStationsGoodCase () {
 		ArrayList<DockingStation> stationList = myVelib.getStationList();
 		int plusCounter = 0;
 		for (DockingStation station : stationList) {
@@ -113,9 +124,10 @@ public class TestUseCaseSetUp {
 		assertEquals(plusCounter,Math.round(10*0.5));
 	}
 	
-	@Test
+	
 	/** Checking if the stations are in the 10x10 square*/
-	void testStationInSquare() {
+	@Test
+	public void testStationInSquare() {
 		for (DockingStation s : myVelib.getStationList()) {
 			assertTrue(s.getGps().getX() >= 0 && s.getGps().getX() <= 10);
 			assertTrue(s.getGps().getY() >= 0 && s.getGps().getY() <= 10);

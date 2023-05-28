@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the displayUser command.
  */
-class testDisplayUser {
+public class testDisplayUser {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

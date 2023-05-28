@@ -9,7 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
-class TestRenter {
+/**
+ * Junit test of the Renter methods
+ * @see Renter
+ */
+public class TestRenter {
 	private Renter renter;
 	
 	@BeforeEach
@@ -18,9 +22,10 @@ class TestRenter {
 		renter = new Renter(system);
 	}	
 	
-	@Test
+	
 	/** Test userConnect and userDisconnect methods*/
-	void testUserConnection() throws GeneralException {
+	@Test
+	public void testUserConnection() throws GeneralException {
 		User user1 = new User("Jean", new Coordinates(1.234,1.546), "Vlibre", 100);
 		User user2 = new User("Pierre", new Coordinates(1.234,1.546), "Vlibre", 100);
 		renter.connectUser(user1);
@@ -32,9 +37,10 @@ class TestRenter {
 		assertEquals(null, renter.getUser());
 	}
 	
-	@Test
+	
 	/** Test the askPlanning method*/
-	void testAskRidePlanning() throws GeneralException {
+	@Test
+	public void testAskRidePlanning() throws GeneralException {
 		User user1 = new User("Jean", new Coordinates(1.234,1.546), "Vlibre", 100);
 		assertThrows(GeneralException.class, () -> {
 			renter.askPlanning(new Coordinates(1.4,1.5), "mecanical", "STANDARD");
@@ -44,9 +50,10 @@ class TestRenter {
 		assertNotNull(renter.getItinerary());
 	}
 	
-	@Test
+	
 	/**Test the askPlanning method*/
-	void testRentBicycleFromStreet() throws GeneralException {
+	@Test
+	public void testRentBicycleFromStreet() throws GeneralException {
 		Bicycle b1 = new Bicycle(new Coordinates(1.234,1.546), "mecanical");
 		User user1 = new User("Jean", new Coordinates(1.234,1.546), "Vlibre", 100);
 		assertThrows(GeneralException.class, () -> {

@@ -7,7 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TestUser {
+/**
+ * Junit test of the User methods
+ * @see User
+ */
+public class TestUser {
 	private MyVelib system;
 	private User user1;
 	private User user2;
@@ -23,23 +27,26 @@ class TestUser {
 		system.addUser(user3);
 	}
 	
-	@Test
+	
 	/** Checking if the getUserFromID method works as expected*/
-	void testGetUserFromID() throws GeneralException {
+	@Test
+	public void testGetUserFromID() throws GeneralException {
 		assertEquals(system.getUserFromID(user1.getUniqID()).getName(), "Jean");
 		assertEquals(system.getUserFromID(user2.getUniqID()).getName(), "Alex");
 		assertEquals(system.getUserFromID(user3.getUniqID()).getName(), "Clara");
 	}
-	@Test
+	
 	/**Test id the id are uniques*/
-	void testUniqID() {
+	@Test
+	public void testUniqID() {
 		assertNotEquals(user1.getUniqID(),user2.getUniqID());
 		assertNotEquals(user1.getUniqID(),user3.getUniqID());
 		assertNotEquals(user3.getUniqID(),user2.getUniqID());
 	}
-	@Test
+	
 	/** Test the getters and setters*/
-	void testGetters() throws GeneralException {
+	@Test
+	public void testGetters() throws GeneralException {
 		assertTrue(user1.getGps().equals(new Coordinates(1,1)));
 		assertTrue(user2.getGps().equals(new Coordinates(2,2)));
 		assertTrue(user3.getGps().equals(new Coordinates(7,8)));
@@ -57,9 +64,10 @@ class TestUser {
 		assertFalse(user3.isCurrentlyRenting());
 	}
 	
-	@Test
+	
 	/** Test the charging method**/
-	void testCharging() throws GeneralException {
+	@Test
+	public void testCharging() throws GeneralException {
 		assertEquals(user1.getCreditBalance(), 100);
 		assertEquals(user2.getCreditBalance(), 100);
 		assertEquals(user3.getCreditBalance(), 100);

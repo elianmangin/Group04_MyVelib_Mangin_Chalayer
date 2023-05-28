@@ -9,7 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
-class TestCost {
+/**
+ * Junit test of the methods to compute the cost of a ride
+ * @see CostStrategy
+ */
+public class TestCost {
 	private CostFactory factory = new CostFactory();
 	private CostStrategy strategy;
 	private Ride rideMecanical;
@@ -35,9 +39,10 @@ class TestCost {
 		
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVlibreStationToStreet() throws GeneralException {
+	@Test
+	public void testVlibreStationToStreet() throws GeneralException {
 		rideElectrical = new Ride(u,sds, be, st);
 		rideMecanical = new Ride(u,sds, bm, st);
 		rideElectrical.endRide(new Coordinates(1.520,1.260), et);
@@ -49,9 +54,10 @@ class TestCost {
 		assertEquals(costMecanical, 2.5*1.1);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVlibreStreetToStreet() throws GeneralException {
+	@Test
+	public void testVlibreStreetToStreet() throws GeneralException {
 		rideElectrical = new Ride(u, be, st);
 		rideMecanical = new Ride(u, bm, st);
 		rideElectrical.endRide(new Coordinates(1.520,1.260), et);
@@ -63,9 +69,10 @@ class TestCost {
 		assertEquals(costMecanical, 2.5*1.1);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVlibreStreetToStation() throws GeneralException {
+	@Test
+	public void testVlibreStreetToStation() throws GeneralException {
 		rideElectrical = new Ride(u, be, st);
 		rideMecanical = new Ride(u, bm, st);
 		rideElectrical.endRide(eds, et);
@@ -77,9 +84,10 @@ class TestCost {
 		assertEquals(costMecanical, 2.5*0.9);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVlibreStationToStation() throws GeneralException {
+	@Test
+	public void testVlibreStationToStation() throws GeneralException {
 		rideElectrical = new Ride(u,sds, be, st);
 		rideMecanical = new Ride(u,sds, bm, st);
 		rideElectrical.endRide(eds, et);
@@ -91,9 +99,10 @@ class TestCost {
 		assertEquals(costMecanical, 2.5);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVmaxStationToStation() throws GeneralException {
+	@Test
+	public void testVmaxStationToStation() throws GeneralException {
 		rideElectrical = new Ride(u,sds, be, st);
 		rideMecanical = new Ride(u,sds, bm, st);
 		rideElectrical.endRide(eds, et);
@@ -105,9 +114,10 @@ class TestCost {
 		assertEquals(costMecanical, 2.5);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVmaxStationToStreet() throws GeneralException {
+	@Test
+	public void testVmaxStationToStreet() throws GeneralException {
 		rideElectrical = new Ride(u,sds, be, st);
 		rideMecanical = new Ride(u,sds, bm, st);
 		rideElectrical.endRide(new Coordinates(1.520,1.260), et);
@@ -118,9 +128,10 @@ class TestCost {
 		assertEquals(costElectrical, 2.5*1.1);
 		assertEquals(costMecanical, 2.5*1.1);
 	}
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVmaxStreetToStreet() throws GeneralException {
+	@Test
+	public void testVmaxStreetToStreet() throws GeneralException {
 		rideElectrical = new Ride(u, be, st);
 		rideMecanical = new Ride(u, bm, st);
 		rideElectrical.endRide(new Coordinates(1.520,1.260), et);
@@ -132,9 +143,10 @@ class TestCost {
 		assertEquals(costMecanical, 2.5*1.1);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testVmaxStreetToStation() throws GeneralException {
+	@Test
+	public void testVmaxStreetToStation() throws GeneralException {
 		rideElectrical = new Ride(u, be, st);
 		rideMecanical = new Ride(u, bm, st);
 		rideElectrical.endRide(eds, et);
@@ -147,9 +159,10 @@ class TestCost {
 	}
 	
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testNoCardStationToStation() throws GeneralException {
+	@Test
+	public void testNoCardStationToStation() throws GeneralException {
 		rideElectrical = new Ride(u,sds, be, st);
 		rideMecanical = new Ride(u,sds, bm, st);
 		rideElectrical.endRide(eds, et);
@@ -161,9 +174,10 @@ class TestCost {
 		assertEquals(costMecanical, 3.5);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testNoCardStationToStreet() throws GeneralException {
+	@Test
+	public void testNoCardStationToStreet() throws GeneralException {
 		rideElectrical = new Ride(u,sds, be, st);
 		rideMecanical = new Ride(u,sds, bm, st);
 		rideElectrical.endRide(new Coordinates(1.520,1.260), et);
@@ -174,9 +188,10 @@ class TestCost {
 		assertEquals(costElectrical, 2*3.5*1.1);
 		assertEquals(costMecanical, 3.5*1.1);
 	}
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testNoCardStreetToStreet() throws GeneralException {
+	@Test
+	public void testNoCardStreetToStreet() throws GeneralException {
 		rideElectrical = new Ride(u, be, st);
 		rideMecanical = new Ride(u, bm, st);
 		rideElectrical.endRide(new Coordinates(1.520,1.260), et);
@@ -188,9 +203,10 @@ class TestCost {
 		assertEquals(costMecanical, 3.5*1.1);
 	}
 	
-	@Test
+	
 	/**test the cost computing for this specific case with a mecanical and an electrical bike*/
-	void testNoCardStreetToStation() throws GeneralException {
+	@Test
+	public void testNoCardStreetToStation() throws GeneralException {
 		rideElectrical = new Ride(u, be, st);
 		rideMecanical = new Ride(u, bm, st);
 		rideElectrical.endRide(eds, et);

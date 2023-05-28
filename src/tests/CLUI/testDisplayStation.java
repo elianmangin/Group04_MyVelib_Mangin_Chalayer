@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Several tests to test the displayStation command.
  */
-class testDisplayStation {
+public class testDisplayStation {
 	@BeforeEach
 	void setUp() {
 		MyVelibSystem.startProcess();

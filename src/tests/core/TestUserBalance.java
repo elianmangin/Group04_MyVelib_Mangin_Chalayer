@@ -9,7 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
-class TestUserBalance {
+/**
+ * Junit test of the UserBalance methods
+ * @see UserBalance
+ */
+public class TestUserBalance {
 	private MyVelib myVelib;
 	private Renter renter;
 	private User u;
@@ -34,9 +38,10 @@ class TestUserBalance {
 		b = new Bicycle(new Coordinates(1.234,1.546), "mecanical");
 
 	}
-	@Test
+	
 	/** test if the add of a ride is functionnal*/
-	void testAddRide() throws GeneralException {
+	@Test
+	public void testAddRide() throws GeneralException {
 		UserBalance balance = u.getBalance();
 
 		assertEquals(balance.getNumberOfRide(), 0);
@@ -54,9 +59,10 @@ class TestUserBalance {
 		assertEquals(balance.getTotalTimeCredit(), 0);
 	}
 
-	@Test
+	
 	/** test if the add of a ride is functionnal*/
-	void testAddRidePlus() throws GeneralException {
+	@Test
+	public void testAddRidePlus() throws GeneralException {
 		UserBalance balance = u.getBalance();
 
 		assertEquals(balance.getNumberOfRide(), 0);

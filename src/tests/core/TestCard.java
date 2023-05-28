@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
-class TestCard {
+/**
+ * Junit test of the Card methods
+ * @see Card
+ */
+public class TestCard {
 	Card card;
 	User user;
 	
@@ -17,9 +21,10 @@ class TestCard {
 		card = new Card(user);
 	}
 	
-	@Test
+	
 	/**test the getters and setters*/
-	void testSettersGetters() throws GeneralException {
+	@Test
+	public void testSettersGetters() throws GeneralException {
 		assertEquals(card.getBalance(),0);
 		card.addCredit(10);
 		assertEquals(card.getBalance(),10);
@@ -33,9 +38,10 @@ class TestCard {
 		assertEquals(card.getType(), "Vmax");
 	}
 	
-	@Test
+	
 	/**test if an exception is thrown when you try to add or remove money the wrong way*/
-	void testException() throws GeneralException {
+	@Test
+	public void testException() throws GeneralException {
 		assertEquals(card.getBalance(),0);
 		card.addCredit(10);
 		assertThrows(GeneralException.class, () -> {

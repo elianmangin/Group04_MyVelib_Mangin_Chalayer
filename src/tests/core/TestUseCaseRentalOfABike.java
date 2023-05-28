@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import system.core.*;
 
+/**
+ * Junit test of the scenario rental of a bike
+ */
 public class TestUseCaseRentalOfABike {
 	private MyVelib myVelib;
 	private Renter renter;
@@ -29,9 +32,10 @@ public class TestUseCaseRentalOfABike {
 
 	}
 
-	@Test
+	
 	/** Verify that the user is on ride after renting and not on ride after return*/
-	void test() throws GeneralException {
+	@Test
+	public void test() throws GeneralException {
 		renter.connectUser(user1);
 		assertEquals(renter.getUser().getName(), "John");
 		renter.askPlanning(new Coordinates(5,6), "mecanical", "standard");
