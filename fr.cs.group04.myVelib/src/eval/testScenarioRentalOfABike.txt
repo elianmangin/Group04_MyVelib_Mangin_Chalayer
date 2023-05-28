@@ -1,0 +1,15 @@
+setup
+displayStation 1
+addUser John Snow Vmax 100 2.456784 6.344574
+rentBike 1 1 mecanical
+moveUserToStation 1 1
+rentBike 1 1 mecanical
+moveUserToCoord 1 2.34 2.34
+returnBike 1 2.34 2.34 90
+displayUser 1
+addUser John Travolta Vlibre 100 7.124368 4.168354
+moveUserToCoord 2 2.34 2.34
+rentBike 2 1
+moveUserToStation 2 2
+returnBike 2 2 120
+displayUser 2
