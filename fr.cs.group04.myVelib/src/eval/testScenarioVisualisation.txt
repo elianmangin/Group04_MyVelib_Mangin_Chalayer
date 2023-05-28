@@ -1,0 +1,5 @@
+setup
+addUser John Snow Vmax 100 2.456784 6.344574
+displayUser 1
+displayStation 1
+display

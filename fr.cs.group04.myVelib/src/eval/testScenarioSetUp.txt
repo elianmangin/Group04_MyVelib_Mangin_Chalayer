@@ -1,0 +1,5 @@
+setup 10 15 105 10
+addUser John Snow Vmax 100 2.456784 6.344574
+addUser John Carpenter Vlibre 100 5.124323 9.123561
+addUser John Travolta null 100 5.124323 9.123561
+addUser John Lennon none 100 8.137458 1.624970
