@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"system.CLUI"},{"l":"system.core"},{"l":"tests.CLUI"},{"l":"tests.core"}];updateSearchResults();
