@@ -1,3 +1,0 @@
-setup
-addUser John Snow Vmax 100 2.456784 1.427999
-askPlanning 1 1.537677 3.445788 mecanical standard
